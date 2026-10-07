@@ -105,5 +105,3 @@ fetch("notes.json")
         notes = [];
         renderNotes();
     });
-
-lucide.createIcons();
