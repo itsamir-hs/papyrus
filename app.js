@@ -73,11 +73,11 @@ function renderNotes(query = "") {
     notesGrid.innerHTML = "";
 
     if (filtered.length === 0) {
-        emptyState.hidden = false;
+        emptyState.style.display = "flex";
         return;
     }
 
-    emptyState.hidden = false;
+    emptyState.style.display = "none";
 
     filtered.forEach((note) => {
         const card = document.createElement("a");
@@ -105,3 +105,28 @@ fetch("notes.json")
         notes = [];
         renderNotes();
     });
+
+// About modal
+const aboutButton = document.querySelector(".aboutButton");
+const aboutModal = document.querySelector(".aboutModal");
+const aboutCloseButton = document.querySelector(".aboutCloseButton");
+const aboutModalBackdrop = document.querySelector(".aboutModalBackdrop");
+
+function openAboutModal() {
+    aboutModal.classList.add("isOpen");
+    aboutModal.setAttribute("aria-hidden", "false");
+}
+
+function closeAboutModal() {
+    aboutModal.classList.remove("isOpen");
+    aboutModal.setAttribute("aria-hidden", "true");
+}
+
+if (aboutButton && aboutModal) {
+    aboutButton.addEventListener("click", openAboutModal);
+    aboutCloseButton.addEventListener("click", closeAboutModal);
+    aboutModalBackdrop.addEventListener("click", closeAboutModal);
+    document.addEventListener("keydown", (e) => {
+        if (e.key === "Escape") closeAboutModal();
+    });
+}
