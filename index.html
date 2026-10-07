@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl" data-theme="light">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>نوت‌ها</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+</head>
+
+<body>
+
+    <header class="appHeader">
+
+        <div class="appTitle">
+            نوت‌ها
+        </div>
+
+        <div class="headerControls">
+
+            <div class="searchBox">
+                <i data-lucide="search"></i>
+                <input
+                    type="search"
+                    id="searchInput"
+                    placeholder="جستجو در نوت‌ها..."
+                    aria-label="جستجو در نوت‌ها"
+                >
+            </div>
+
+            <div class="themeSwitcher">
+
+                <button
+                    class="themeToggle"
+                    type="button"
+                    aria-label="تغییر تم"
+                    aria-expanded="false"
+                >
+                    <i data-lucide="sun"></i>
+                </button>
+
+                <div class="themeOptions">
+
+                    <button
+                        class="themeButton"
+                        type="button"
+                        data-theme="light"
+                        aria-label="تم روشن"
+                    >
+                        <i data-lucide="sun"></i>
+                    </button>
+
+                    <button
+                        class="themeButton"
+                        type="button"
+                        data-theme="dark"
+                        aria-label="تم تاریک"
+                    >
+                        <i data-lucide="moon"></i>
+                    </button>
+
+                    <button
+                        class="themeButton"
+                        type="button"
+                        data-theme="forest"
+                        aria-label="تم جنگلی"
+                    >
+                        <i data-lucide="trees"></i>
+                    </button>
+
+                    <button
+                        class="themeButton"
+                        type="button"
+                        data-theme="paperLike"
+                        aria-label="تم پیپر لایک"
+                    >
+                        <i data-lucide="file-text"></i>
+                    </button>
+
+                    <button
+                        class="themeButton"
+                        type="button"
+                        data-theme="neon"
+                        aria-label="تم نئون"
+                    >
+                        <i data-lucide="zap"></i>
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </header>
+
+    <main class="notesGrid" id="notesGrid"></main>
+
+    <div class="emptyState" id="emptyState" hidden>
+        <i data-lucide="file-question"></i>
+        <p>نوتی یافت نشد</p>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+
+</html>

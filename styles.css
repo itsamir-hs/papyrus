@@ -1,0 +1,389 @@
+/* =========================================================
+   Note Gallery — Themes (matching note_renderer)
+   ========================================================= */
+
+:root {
+    --pageBackground: #f4f5f7;
+    --surfaceBackground: #ffffff;
+    --surfaceMuted: #f8f9fb;
+    --surfaceSoft: #f1f3f6;
+
+    --textPrimary: #20242a;
+    --textSecondary: #626b76;
+    --textMuted: #8b949e;
+
+    --borderColor: #e1e4e8;
+    --borderStrong: #d2d7dd;
+
+    --accentColor: #3867d6;
+    --accentSoft: #edf3ff;
+
+    --radiusSmall: 8px;
+    --radiusMedium: 12px;
+    --radiusLarge: 16px;
+
+    --shadowSmall: 0 2px 8px rgba(0, 0, 0, 0.04);
+    --shadowMedium: 0 8px 28px rgba(0, 0, 0, 0.08);
+
+    --headerHeight: 64px;
+}
+
+[data-theme="dark"] {
+    --pageBackground: #0f141a;
+    --surfaceBackground: #171e26;
+    --surfaceMuted: #1b232d;
+    --surfaceSoft: #202a35;
+
+    --textPrimary: #e7edf3;
+    --textSecondary: #aab6c2;
+    --textMuted: #788694;
+
+    --borderColor: #303d4a;
+    --borderStrong: #40505f;
+
+    --accentColor: #72aef7;
+    --accentSoft: #1c3048;
+
+    --shadowSmall: 0 2px 8px rgba(0, 0, 0, 0.3);
+    --shadowMedium: 0 8px 28px rgba(0, 0, 0, 0.4);
+}
+
+[data-theme="forest"] {
+    --pageBackground: #10221b;
+    --surfaceBackground: #19352b;
+    --surfaceMuted: #203e32;
+    --surfaceSoft: #29483a;
+
+    --textPrimary: #eee7d5;
+    --textSecondary: #c3c6b8;
+    --textMuted: #89988d;
+
+    --borderColor: #405e4e;
+    --borderStrong: #587564;
+
+    --accentColor: #c8874f;
+    --accentSoft: #3a3025;
+
+    --shadowSmall: 0 2px 8px rgba(0, 0, 0, 0.3);
+    --shadowMedium: 0 8px 28px rgba(0, 0, 0, 0.4);
+}
+
+[data-theme="paperLike"] {
+    --pageBackground: #c0b59f;
+    --surfaceBackground: #f0e2c7;
+    --surfaceMuted: #e8dcc4;
+    --surfaceSoft: #d6cab0;
+
+    --textPrimary: #44382a;
+    --textSecondary: #665a49;
+    --textMuted: #8a7d68;
+
+    --borderColor: #a99d87;
+    --borderStrong: #8f826c;
+
+    --accentColor: #44382a;
+    --accentSoft: #d6cab0;
+
+    --shadowSmall: 0 2px 8px rgba(68, 56, 42, 0.12);
+    --shadowMedium: 0 8px 28px rgba(68, 56, 42, 0.18);
+}
+
+[data-theme="neon"] {
+    --pageBackground: #070B12;
+    --surfaceBackground: #0D1420;
+    --surfaceMuted: #111C2B;
+    --surfaceSoft: #152536;
+
+    --textPrimary: #E6F7FF;
+    --textSecondary: #8FA9BA;
+    --textMuted: #617786;
+
+    --borderColor: #1D3445;
+    --borderStrong: #28506A;
+
+    --accentColor: #00F0FF;
+    --accentSoft: #103743;
+
+    --shadowSmall: 0 2px 8px rgba(0, 240, 255, 0.08);
+    --shadowMedium: 0 8px 28px rgba(0, 240, 255, 0.12);
+}
+
+/* =========================================================
+   Base
+   ========================================================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Vazirmatn, Tahoma, sans-serif;
+    background: var(--pageBackground);
+    color: var(--textPrimary);
+    min-height: 100vh;
+    transition: background 0.25s ease, color 0.25s ease;
+}
+
+/* =========================================================
+   Header
+   ========================================================= */
+
+.appHeader {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    height: var(--headerHeight);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 0 24px;
+    background: var(--surfaceBackground);
+    border-bottom: 1px solid var(--borderColor);
+    box-shadow: var(--shadowSmall);
+}
+
+.appTitle {
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--textPrimary);
+    white-space: nowrap;
+}
+
+.headerControls {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+/* =========================================================
+   Search
+   ========================================================= */
+
+.searchBox {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--surfaceMuted);
+    border: 1px solid var(--borderColor);
+    border-radius: var(--radiusMedium);
+    padding: 8px 14px;
+    min-width: 260px;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.searchBox:focus-within {
+    border-color: var(--accentColor);
+    box-shadow: 0 0 0 3px var(--accentSoft);
+}
+
+.searchBox svg {
+    width: 18px;
+    height: 18px;
+    color: var(--textMuted);
+    flex-shrink: 0;
+}
+
+.searchBox input {
+    flex: 1;
+    border: none;
+    outline: none;
+    background: transparent;
+    color: var(--textPrimary);
+    font-size: 15px;
+    font-family: inherit;
+}
+
+.searchBox input::placeholder {
+    color: var(--textMuted);
+}
+
+/* =========================================================
+   Theme Switcher (identical to note_renderer)
+   ========================================================= */
+
+.themeSwitcher {
+    position: relative;
+}
+
+.themeToggle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border: 1px solid var(--borderColor);
+    border-radius: var(--radiusMedium);
+    background: var(--surfaceMuted);
+    color: var(--textSecondary);
+    cursor: pointer;
+    transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+}
+
+.themeToggle:hover {
+    background: var(--surfaceSoft);
+    color: var(--textPrimary);
+    border-color: var(--borderStrong);
+}
+
+.themeToggle svg {
+    width: 18px;
+    height: 18px;
+}
+
+.themeOptions {
+    position: absolute;
+    top: calc(100% + 8px);
+    left: 0;
+    display: none;
+    flex-direction: column;
+    gap: 4px;
+    padding: 6px;
+    background: var(--surfaceBackground);
+    border: 1px solid var(--borderColor);
+    border-radius: var(--radiusMedium);
+    box-shadow: var(--shadowMedium);
+    z-index: 200;
+}
+
+.themeSwitcher.isOpen .themeOptions {
+    display: flex;
+}
+
+.themeButton {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    border: none;
+    border-radius: var(--radiusSmall);
+    background: transparent;
+    color: var(--textSecondary);
+    cursor: pointer;
+    transition: background 0.15s ease, color 0.15s ease;
+}
+
+.themeButton:hover {
+    background: var(--surfaceMuted);
+    color: var(--textPrimary);
+}
+
+.themeButton[aria-pressed="true"] {
+    background: var(--accentSoft);
+    color: var(--accentColor);
+}
+
+.themeButton svg {
+    width: 16px;
+    height: 16px;
+}
+
+/* =========================================================
+   Notes Grid
+   ========================================================= */
+
+.notesGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 20px;
+    padding: 32px 24px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.noteCard {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding: 20px;
+    background: var(--surfaceBackground);
+    border: 1px solid var(--borderColor);
+    border-radius: var(--radiusLarge);
+    box-shadow: var(--shadowSmall);
+    text-decoration: none;
+    color: inherit;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+    cursor: pointer;
+}
+
+.noteCard:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadowMedium);
+    border-color: var(--accentColor);
+}
+
+.noteCard:focus-visible {
+    outline: 2px solid var(--accentColor);
+    outline-offset: 2px;
+}
+
+.noteCardTitle {
+    font-size: 17px;
+    font-weight: 600;
+    line-height: 1.6;
+    color: var(--textPrimary);
+}
+
+.noteCardPath {
+    font-size: 13px;
+    color: var(--textMuted);
+    direction: ltr;
+    text-align: right;
+    word-break: break-all;
+}
+
+.noteCard mark {
+    background: var(--accentSoft);
+    color: var(--accentColor);
+    border-radius: 3px;
+    padding: 0 2px;
+}
+
+/* =========================================================
+   Empty State
+   ========================================================= */
+
+.emptyState {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    padding: 80px 24px;
+    color: var(--textMuted);
+}
+
+.emptyState svg {
+    width: 48px;
+    height: 48px;
+}
+
+.emptyState p {
+    font-size: 16px;
+}
+
+/* =========================================================
+   Responsive
+   ========================================================= */
+
+@media (max-width: 640px) {
+    .appHeader {
+        padding: 0 16px;
+        flex-wrap: wrap;
+        height: auto;
+        padding-top: 12px;
+        padding-bottom: 12px;
+    }
+
+    .searchBox {
+        min-width: 0;
+        flex: 1;
+    }
+
+    .notesGrid {
+        padding: 20px 16px;
+        grid-template-columns: 1fr;
+    }
+}
