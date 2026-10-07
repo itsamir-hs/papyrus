@@ -1,0 +1,1952 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl" data-theme="light">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>سلول‌های سیستم ایمنی؛ از ایمنی ذاتی تا ایمنی اختصاصی</title>
+
+    <link rel="stylesheet" href="../styles/base.css">
+    <link rel="stylesheet" href="../styles/rtl.css">
+    <link rel="stylesheet" href="../styles/responsive.css">
+
+    <link
+        rel="stylesheet"
+        href="../node_modules/katex/dist/katex.min.css"
+    >
+
+    <link rel="stylesheet" href="../styles/dark.css">
+    <link rel="stylesheet" href="../styles/forest.css">
+    <link rel="stylesheet" href="../styles/paperLike.css">
+    <link rel="stylesheet" href="../styles/neon.css">
+
+    <script src="../node_modules/lucide/dist/umd/lucide.js"></script>
+</head>
+
+<body>
+
+    <header class="appHeader">
+
+        <button
+            class="sidebarToggle"
+            type="button"
+            aria-label="باز کردن فهرست مطالب"
+            aria-expanded="false"
+        >
+            <i data-lucide="panel-left"></i>
+        </button>
+
+
+        <div class="appTitle">
+            ایمنی‌شناسی
+        </div>
+
+
+        <div class="headerControls">
+
+<button
+    class="searchButton"
+    type="button"
+    aria-label="جستجو در جزوه"
+    aria-expanded="false"
+>
+    <i data-lucide="search"></i>
+</button>
+
+<div class="highlightSwitcher">
+
+    <button
+        class="highlightToggle"
+        type="button"
+        aria-label="هایلایت"
+        aria-expanded="false"
+    >
+        <i data-lucide="highlighter"></i>
+    </button>
+
+
+<div
+    class="highlightOptions"
+    aria-hidden="true"
+>
+
+    <button
+        class="highlightPowerToggle"
+        type="button"
+        aria-label="روشن یا خاموش کردن هایلایت"
+        aria-pressed="true"
+    >
+        <i data-lucide="highlighter"></i>
+        <span>هایلایت روشن</span>
+    </button>
+
+        <div class="highlightColors">
+
+            <button
+                class="highlightColor"
+                type="button"
+                data-highlight-color="#fff176"
+                aria-label="هایلایت زرد"
+                style="--highlightColor: #fff176;"
+            ></button>
+
+            <button
+                class="highlightColor"
+                type="button"
+                data-highlight-color="#a5d6a7"
+                aria-label="هایلایت سبز"
+                style="--highlightColor: #a5d6a7;"
+            ></button>
+
+            <button
+                class="highlightColor"
+                type="button"
+                data-highlight-color="#90caf9"
+                aria-label="هایلایت آبی"
+                style="--highlightColor: #90caf9;"
+            ></button>
+
+            <button
+                class="highlightColor"
+                type="button"
+                data-highlight-color="#ce93d8"
+                aria-label="هایلایت بنفش"
+                style="--highlightColor: #ce93d8;"
+            ></button>
+
+            <button
+                class="highlightColor"
+                type="button"
+                data-highlight-color="#ffab91"
+                aria-label="هایلایت نارنجی"
+                style="--highlightColor: #ffab91;"
+            ></button>
+
+            <button
+                class="highlightColor"
+                type="button"
+                data-highlight-color="#ef9a9a"
+                aria-label="هایلایت قرمز"
+                style="--highlightColor: #ef9a9a;"
+            ></button>
+
+            <button
+                class="highlightColor"
+                type="button"
+                data-highlight-color="#f48fb1"
+                aria-label="هایلایت صورتی"
+                style="--highlightColor: #f48fb1;"
+            ></button>
+
+            <button
+                class="highlightColor"
+                type="button"
+                data-highlight-color="#80cbc4"
+                aria-label="هایلایت فیروزه‌ای"
+                style="--highlightColor: #80cbc4;"
+            ></button>
+
+        </div>
+
+
+        <div class="highlightDivider"></div>
+
+
+        <label
+            class="highlightCustomColor"
+            aria-label="انتخاب رنگ دلخواه"
+        >
+            <input
+                class="highlightColorInput"
+                type="color"
+                value="#fff176"
+            >
+
+            <i data-lucide="palette"></i>
+        </label>
+
+
+        <button
+            class="highlightEraser"
+            type="button"
+            aria-label="پاک کردن هایلایت"
+        >
+            <i data-lucide="eraser"></i>
+            <span>پاک‌کن</span>
+        </button>
+
+    </div>
+
+</div>
+
+<div class="stickyNotesSwitcher">
+
+    <button
+        class="stickyNotesToggle"
+        type="button"
+        aria-label="یادداشت‌های چسبان"
+        aria-expanded="false"
+    >
+        <i data-lucide="file-text"></i>
+    </button>
+
+</div>
+
+            <div class="fontSizeSwitcher">
+
+                <button
+                    class="fontSizeControl"
+                    type="button"
+                    data-action="decrease"
+                    aria-label="کاهش اندازه فونت"
+                >
+                    <i data-lucide="minus"></i>
+                </button>
+
+<button
+    type="button"
+    class="fontSizeControl fontSwitchControl"
+    aria-label="تغییر فونت"
+>
+    <i data-lucide="type"></i>
+</button>
+                <button
+                    class="fontSizeControl"
+                    type="button"
+                    data-action="increase"
+                    aria-label="افزایش اندازه فونت"
+                >
+                    <i data-lucide="plus"></i>
+                </button>
+
+            </div>
+
+
+            <div class="themeSwitcher">
+
+                <button
+                    class="themeToggle"
+                    type="button"
+                    aria-label="تغییر تم"
+                    aria-expanded="false"
+                >
+                    <i data-lucide="sun"></i>
+                </button>
+
+<div class="themeOptions">
+
+    <button
+        class="themeButton"
+        type="button"
+        data-theme="light"
+        aria-label="تم روشن"
+    >
+        <i data-lucide="sun"></i>
+    </button>
+
+    <button
+        class="themeButton"
+        type="button"
+        data-theme="dark"
+        aria-label="تم تاریک"
+    >
+        <i data-lucide="moon"></i>
+    </button>
+
+    <button
+        class="themeButton"
+        type="button"
+        data-theme="forest"
+        aria-label="تم جنگلی"
+    >
+        <i data-lucide="trees"></i>
+    </button>
+
+    <button
+        class="themeButton"
+        type="button"
+        data-theme="paperLike"
+        aria-label="تم پیپر لایک"
+    >
+        <i data-lucide="file-text"></i>
+    </button>
+
+<button
+    class="themeButton"
+    type="button"
+    data-theme="neon"
+    aria-label="تم نئون"
+>
+<i data-lucide="zap"></i>
+</button>
+
+
+</div>
+
+            </div>
+
+<button
+    class="printButton"
+    type="button"
+    aria-label="چاپ جزوه"
+>
+    <i data-lucide="printer"></i>
+</button>
+
+
+            <button
+                class="aboutButton"
+                type="button"
+                aria-label="درباره ما"
+            >
+                <i data-lucide="users-round"></i>
+            </button>
+
+        </div>
+
+    </header>
+
+<div
+    class="searchPanel"
+    aria-hidden="true"
+>
+
+    <div class="searchPanelContent">
+
+        <div class="searchInputWrapper">
+
+            <i data-lucide="search"></i>
+
+            <input
+                class="searchInput"
+                type="search"
+                placeholder="جستجو در جزوه..."
+                aria-label="جستجو در جزوه"
+                autocomplete="off"
+            >
+
+            <button
+                class="searchClearButton"
+                type="button"
+                aria-label="پاک کردن جستجو"
+            >
+                <i data-lucide="x"></i>
+            </button>
+
+        </div>
+
+
+        <div class="searchResultsInfo">
+            <span class="searchResultsCount">۰ نتیجه</span>
+
+            <div class="searchNavigation">
+
+                <button
+                    class="searchPreviousButton"
+                    type="button"
+                    aria-label="نتیجه قبلی"
+                    disabled
+                >
+                    <i data-lucide="chevron-up"></i>
+                </button>
+
+                <button
+                    class="searchNextButton"
+                    type="button"
+                    aria-label="نتیجه بعدی"
+                    disabled
+                >
+                    <i data-lucide="chevron-down"></i>
+                </button>
+
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+    <aside
+        class="sidebar"
+        aria-label="فهرست مطالب"
+        aria-hidden="true"
+    >
+
+        <div class="sidebarHeader">
+            <h2>فهرست مطالب</h2>
+        </div>
+
+        <nav
+            class="sidebarContent"
+            aria-label="فهرست مطالب"
+        >
+            
+                <a
+                    class="tocItem tocItemPrimary"
+                    href="#heading-1"
+                >
+                    ۱. مقدمه و کلیات
+                </a>
+            
+                <a
+                    class="tocItem tocItemPrimary"
+                    href="#heading-2"
+                >
+                    ۲. متن اصلی جزوه
+                </a>
+            
+                <a
+                    class="tocItem tocItemSecondary"
+                    href="#heading-3"
+                >
+                    پراکندگی سلول‌های ایمنی
+                </a>
+            
+                <a
+                    class="tocItem tocItemSecondary"
+                    href="#heading-4"
+                >
+                    سلول‌های خون محیطی و شمارش آن‌ها
+                </a>
+            
+                <a
+                    class="tocItem tocItemSecondary"
+                    href="#heading-5"
+                >
+                    منشأ و تمایز سلول‌های خونی
+                </a>
+            
+                <a
+                    class="tocItem tocItemSecondary"
+                    href="#heading-6"
+                >
+                    تنظیم تولید سلول‌های خونی و ارتباط بین سلول‌ها
+                </a>
+            
+                <a
+                    class="tocItem tocItemSecondary"
+                    href="#heading-7"
+                >
+                    ایمنی ذاتی و ایمنی تطبیقی
+                </a>
+            
+                <a
+                    class="tocItem tocItemSecondary"
+                    href="#heading-8"
+                >
+                    Monocyte، macrophage و فاگوسیتوز
+                </a>
+            
+                <a
+                    class="tocItem tocItemSecondary"
+                    href="#heading-9"
+                >
+                    Granulocyteها
+                </a>
+            
+                <a
+                    class="tocItem tocItemSecondary"
+                    href="#heading-10"
+                >
+                    Dendritic cellها
+                </a>
+            
+                <a
+                    class="tocItem tocItemSecondary"
+                    href="#heading-11"
+                >
+                    Lymphocyteها
+                </a>
+            
+                <a
+                    class="tocItem tocItemSecondary"
+                    href="#heading-12"
+                >
+                    ارائهٔ آنتی‌ژن و فعال‌سازی T cell
+                </a>
+            
+                <a
+                    class="tocItem tocItemSecondary"
+                    href="#heading-13"
+                >
+                    Follicular dendritic cellها
+                </a>
+            
+                <a
+                    class="tocItem tocItemSecondary"
+                    href="#heading-14"
+                >
+                    فعالیت‌های خارج از کلاس و جمع‌بندی نقش سلول‌های اصلی
+                </a>
+            
+                <a
+                    class="tocItem tocItemPrimary"
+                    href="#heading-15"
+                >
+                    ۳. جداول مرور سریع
+                </a>
+            
+                <a
+                    class="tocItem tocItemSecondary"
+                    href="#heading-16"
+                >
+                    شمارش و درصد سلول‌های خون محیطی
+                </a>
+            
+                <a
+                    class="tocItem tocItemSecondary"
+                    href="#heading-17"
+                >
+                    منشأ و گروه‌بندی سلول‌ها
+                </a>
+            
+                <a
+                    class="tocItem tocItemSecondary"
+                    href="#heading-18"
+                >
+                    عوامل مؤثر بر تولید و تمایز
+                </a>
+            
+                <a
+                    class="tocItem tocItemSecondary"
+                    href="#heading-19"
+                >
+                    بازوهای ایمنی و سلول‌های ارتباط‌دهنده
+                </a>
+            
+                <a
+                    class="tocItem tocItemSecondary"
+                    href="#heading-20"
+                >
+                    Macrophageهای مقیم بافت
+                </a>
+            
+                <a
+                    class="tocItem tocItemSecondary"
+                    href="#heading-21"
+                >
+                    مراحل فاگوسیتوز
+                </a>
+            
+                <a
+                    class="tocItem tocItemSecondary"
+                    href="#heading-22"
+                >
+                    فعالیت کلاسیک و جایگزین macrophageها
+                </a>
+            
+                <a
+                    class="tocItem tocItemSecondary"
+                    href="#heading-23"
+                >
+                    ویژگی‌های granulocyteها
+                </a>
+            
+                <a
+                    class="tocItem tocItemSecondary"
+                    href="#heading-24"
+                >
+                    Basophil و mast cell
+                </a>
+            
+                <a
+                    class="tocItem tocItemSecondary"
+                    href="#heading-25"
+                >
+                    IgE، eosinophil و basophil در آلرژی
+                </a>
+            
+                <a
+                    class="tocItem tocItemSecondary"
+                    href="#heading-26"
+                >
+                    Dendritic cellها
+                </a>
+            
+                <a
+                    class="tocItem tocItemSecondary"
+                    href="#heading-27"
+                >
+                    Lymphocyteها و زیرگروه‌های B cell
+                </a>
+            
+                <a
+                    class="tocItem tocItemSecondary"
+                    href="#heading-28"
+                >
+                    مولکول‌های سطح B cell
+                </a>
+            
+                <a
+                    class="tocItem tocItemSecondary"
+                    href="#heading-29"
+                >
+                    انواع T cell
+                </a>
+            
+                <a
+                    class="tocItem tocItemSecondary"
+                    href="#heading-30"
+                >
+                    NK cell
+                </a>
+            
+                <a
+                    class="tocItem tocItemSecondary"
+                    href="#heading-31"
+                >
+                    APC و رابطهٔ T cell با MHC
+                </a>
+            
+                <a
+                    class="tocItem tocItemSecondary"
+                    href="#heading-32"
+                >
+                    Follicular dendritic cell و dendritic cell ارائه‌کنندهٔ آنتی‌ژن
+                </a>
+            
+                <a
+                    class="tocItem tocItemSecondary"
+                    href="#heading-33"
+                >
+                    جمع‌بندی نقش سلول‌های اصلی
+                </a>
+            
+                <a
+                    class="tocItem tocItemPrimary"
+                    href="#heading-34"
+                >
+                    ۴. اصطلاحات و تعاریف
+                </a>
+            
+                <a
+                    class="tocItem tocItemPrimary"
+                    href="#heading-35"
+                >
+                    ۵. خود‌ارزیابی
+                </a>
+            
+                <a
+                    class="tocItem tocItemSecondary"
+                    href="#heading-36"
+                >
+                    سوالات تشریحی
+                </a>
+            
+                <a
+                    class="tocItem tocItemSecondary"
+                    href="#heading-37"
+                >
+                    سوالات تستی
+                </a>
+            
+                <a
+                    class="tocItem tocItemPrimary"
+                    href="#heading-38"
+                >
+                    ۶. موارد نیازمند بررسی
+                </a>
+            
+                <a
+                    class="tocItem tocItemPrimary"
+                    href="#heading-39"
+                >
+                    ۷. ادیتور و منابع استفاده‌شده
+                </a>
+            
+                <a
+                    class="tocItem tocItemPrimary"
+                    href="#heading-40"
+                >
+                    ۸. گزارش تکمیل بودن محتوا
+                </a>
+            
+        </nav>
+
+    </aside>
+
+
+    <div class="sidebarBackdrop"></div>
+
+<aside
+    class="stickyNotesPanel"
+    aria-label="یادداشت‌های چسبان"
+    aria-hidden="true"
+>
+
+    <div class="stickyNotesPanelHeader">
+
+        <h2>یادداشت‌های چسبان</h2>
+
+        <button
+            class="addStickyNoteButton"
+            type="button"
+        >
+            <i data-lucide="plus"></i>
+            <span>یادداشت جدید</span>
+        </button>
+
+    </div>
+
+    <div class="stickyNotesPanelContent">
+
+        <div class="stickyNotesEmptyState">
+<i data-lucide="file-text"></i>
+
+            <p>
+                هنوز یادداشتی ایجاد نکرده‌اید.
+            </p>
+
+        </div>
+
+        <div class="stickyNotesList"></div>
+
+    </div>
+
+</aside>
+
+<div class="stickyNotesBackdrop"></div>
+
+
+    <div
+        class="aboutModal"
+        aria-hidden="true"
+    >
+
+        <div class="aboutModalBackdrop"></div>
+
+        <section
+            class="aboutModalContent"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="aboutTitle"
+        >
+
+            <button
+                class="aboutCloseButton"
+                type="button"
+                aria-label="بستن"
+            >
+                <i data-lucide="x"></i>
+            </button>
+
+            <h2 id="aboutTitle">
+                آدم‌هایی که اینجا رو ساختن
+            </h2>
+
+            <p class="aboutIntroduction">
+                ما یک تیم کوچک هستیم که باور داریم یادگیری باید
+                لذت‌بخش، عمیق، و در دسترس باشد. جزوه‌ساز تلاش ماست
+                برای تبدیل ساعت‌های طولانی کلاس به متن‌هایی که واقعاً
+                بتوانی با آن‌ها چیزی یاد بگیری.
+            </p>
+
+
+<div class="developerList">
+
+    <article class="developerCard">
+        <h3>شبنم رضاپور</h3>
+        <p>کسی که PDFها را راضی کرد محتوایشان را بی‌کم‌وکاست لو بدهند.</p>
+    </article>
+
+    <article class="developerCard">
+        <h3>امیر‌حسین شکری‌زاده سعادت‌آباد</h3>
+        <p>صدای کلاس را به متن تبدیل کرد، حتی وقتی استاد وسط جمله با میکروفون قهر می‌کرد.</p>
+    </article>
+
+    <article class="developerCard">
+        <h3>مهراد اسدی</h3>
+        <p>پرامپت‌ها را طوری چید که LLM فکر کرد دارد پایان‌نامه دکتری می‌نویسد.</p>
+    </article>
+
+    <article class="developerCard">
+        <h3>امیرسالار سهام‌پور</h3>
+        <p>مارک‌داون را به HTML تبدیل کرد و به جزوه ظاهری داد که آدم دلش بخواهد بخواندش.</p>
+    </article>
+
+</div>
+
+            <p class="aboutFooter">
+                این پروژه با صبر، چای، و چند شب بی‌خوابی ساخته شد.
+                <br>
+                امیدواریم یادگیریت را لذت‌بخش‌تر کند.
+            </p>
+
+        </section>
+
+    </div>
+
+
+    <div class="quickNavigation">
+        <div class="quickNavigationList"></div>
+    </div>
+
+
+    <main class="noteContainer">
+
+<div class="stickyNotesLayer"></div>
+
+        <section class="noteHeader">
+
+            <div class="noteMetadata">
+
+                <span class="metadataItem">
+                    <span class="metadataLabel">درس</span>
+                    <span class="metadataValue">ایمنی‌شناسی</span>
+                </span>
+
+                <span class="metadataItem">
+                    <span class="metadataLabel">مبحث</span>
+                    <span class="metadataValue">سلول‌های سیستم ایمنی؛ از ایمنی ذاتی تا ایمنی اختصاصی</span>
+                </span>
+
+                <span class="metadataItem">
+                    <span class="metadataLabel">استاد</span>
+                    <span class="metadataValue">Tahereh Kalantari، PhD in Medical Immunology</span>
+                </span>
+
+                <span class="metadataItem">
+                    <span class="metadataLabel">تاریخ جلسه</span>
+                    <span class="metadataValue"></span>
+                </span>
+
+                <span class="metadataItem">
+                    <span class="metadataLabel">تاریخ تولید جزوه</span>
+                    <span class="metadataValue">2026-10-06T21:19:56</span>
+                </span>
+
+            </div>
+
+
+            <div class="aiWarning">
+                <i data-lucide="triangle-alert"></i>
+
+                <p>
+                    این جزوه با استفاده از هوش مصنوعی تولید شده است.
+                    ممکن است شامل خطا یا برداشت نادرست باشد و
+                    نیازمند بررسی و بازبینی مجدد است.
+                </p>
+            </div>
+
+        </section>
+
+
+<section class="noteSection introductionSection">
+    <h2 id="heading-1">۱. مقدمه و کلیات</h2>
+<p>در این جلسهٔ یک‌ساعت‌ونیمه، سلول‌های سیستم ایمنی به‌صورت فشرده و در قالب نکات کلیدی معرفی می‌شوند؛ جزئیات بیشتر در جلسات مربوط به هر موضوع بررسی خواهد شد. موضوعات جلسه شامل پراکندگی و منشأ سلول‌های ایمنی، رده‌های اصلی تمایز، ایمنی ذاتی و تطبیقی، فاگوسیت‌ها، granulocyteها، dendritic cellها، lymphocyteها و ارائهٔ آنتی‌ژن است. جلسهٔ بعد به بافت‌ها و ارگان‌های سیستم ایمنی می‌پردازد؛ آشنایی با سلول‌ها دنبال‌کردن آن موضوع را آسان‌تر می‌کند.</p>
+</section>
+
+<section class="noteSection mainSection">
+    <h2 id="heading-2">۲. متن اصلی جزوه</h2>
+<h3 id="heading-3">پراکندگی سلول‌های ایمنی</h3>
+<p>سلول‌های ایمنی در خون و لنف گردش می‌کنند. بخشی از آن‌ها به‌صورت سازمان‌یافته در اندام‌های لنفاوی حضور دارند و گروهی دیگر به‌طور دائم یا موقت در بافت‌ها مستقر می‌شوند. سیتوکین‌ها (cytokines)، آنتی‌بادی‌ها و کمپلمان (complement) ارتباط و عملکرد این سلول‌ها را تقویت می‌کنند.</p>
+<p><img src="../data/assets/assets/image1.jpg" alt="تصویر 1">
+<em>تصویر ۱</em></p>
+<p><img src="../data/assets/assets/image2.jpg" alt="تصویر 2">
+<em>تصویر ۲</em></p>
+<p><img src="../data/assets/assets/image3.jpg" alt="تصویر 3">
+<em>تصویر ۳</em></p>
+<p><img src="../data/assets/assets/image4.jpg" alt="تصویر 4">
+<em>تصویر ۴</em></p>
+<p><img src="../data/assets/assets/image5.png" alt="تصویر 5">
+<em>تصویر ۵</em></p>
+<h3 id="heading-4">سلول‌های خون محیطی و شمارش آن‌ها</h3>
+<p>پنج نوع اصلی گلبول سفید (white blood cell) یا لکوسیت (leukocyte) در خون محیطی عبارت‌اند از Neutrophil، Eosinophil، Lymphocyte، Monocyte و Basophil. در بررسی CBC، انواع گلبول‌های سفید و شمارش آن‌ها گزارش می‌شود. میانگین تعداد و محدوده‌های طبیعی درج‌شده در اسلاید به‌ازای هر microliter عبارت‌اند از:</p>
+<table>
+<thead>
+<tr>
+<th>سلول</th>
+<th align="right">میانگین تعداد در هر microliter</th>
+<th align="right">محدودهٔ طبیعی در اسلاید</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>White blood cells (leukocytes)</td>
+<td align="right">7400</td>
+<td align="right">4500–11,000</td>
+</tr>
+<tr>
+<td>Neutrophils</td>
+<td align="right">4400</td>
+<td align="right">1800–7700</td>
+</tr>
+<tr>
+<td>Eosinophils</td>
+<td align="right">200</td>
+<td align="right">0–450</td>
+</tr>
+<tr>
+<td>Basophils</td>
+<td align="right">40</td>
+<td align="right">0–200</td>
+</tr>
+<tr>
+<td>Lymphocytes</td>
+<td align="right">2500</td>
+<td align="right">1000–4800</td>
+</tr>
+<tr>
+<td>Monocytes</td>
+<td align="right">300</td>
+<td align="right">0–800</td>
+</tr>
+</tbody></table>
+<p><img src="../data/assets/assets/image6.png" alt="تصویر 6">
+<em>تصویر ۶</em></p>
+<p>درصدهای مطرح‌شده برای سلول‌های خون محیطی عبارت‌اند از:</p>
+<table>
+<thead>
+<tr>
+<th>سلول</th>
+<th>درصدهای مطرح‌شده</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Neutrophil</td>
+<td>معمولاً حدود ۷۰٪؛ گاهی ۷۰ تا ۸۰٪؛ در بیان دیگر ۴۰ تا ۷۰٪ و میانگین نزدیک به ۷۰٪</td>
+</tr>
+<tr>
+<td>Lymphocyte</td>
+<td>معمولاً ۲۰ تا ۴۰٪</td>
+</tr>
+<tr>
+<td>Monocyte</td>
+<td>حدود ۱ تا ۸٪</td>
+</tr>
+<tr>
+<td>Basophil</td>
+<td>در بعضی منابع صفر تا نیم و در بعضی منابع صفر تا یک درصد؛ ممکن است در نمونه دیده نشود</td>
+</tr>
+</tbody></table>
+<p>برای این بحث لازم نیست وارد جزئیاتی مانند band شویم و تمرکز بر سلول‌های اصلی است. بیشترین درصد مربوط به neutrophilهاست؛ پس از آن lymphocyteها، monocyteها و eosinophilها قرار می‌گیرند.</p>
+<p>اگر درصد basophil حدود صفر تا یک باشد، معمولاً به‌تنهایی نگران‌کننده نیست؛ اما افزایش آن می‌تواند نشانهٔ به‌هم‌خوردن تعادل باشد و گاهی با بدخیمی‌های خونی ارتباط دارد. یک استاد هماتولوژی هنگام دیدن basophil در لام خون محیطی، با لحنی طنزآمیز می‌گفت: «یا خدا، چه شوم هماتولوژی!» منظور این بود که افزایش آن باید جلب توجه کند.</p>
+<p>در لام خون محیطی، گلبول‌های سفید، گلبول‌های قرمز و پلاکت‌ها نیز دیده می‌شوند. افزایش basophil همراه با تغییر شمارش‌های دیگر اهمیت بیشتری پیدا می‌کند؛ برای مثال، افزایش white blood cellها تا ۱۴ یا ۱۵ هزار، کاهش پلاکت‌ها تا حدود ۵۰ هزار، یا کاهش red blood cellها از حدود ۵ میلیون به دو یا سه میلیون، در کنار هم می‌تواند نشانهٔ عدم تعادل باشد و باید به آن توجه کرد. جزئیات این موارد در هماتولوژی بررسی می‌شود؛ نکتهٔ اینجا آن است که basophil هنگام ارزیابی لام خون محیطی سلول مهمی است.</p>
+<div class="calloutBox calloutBox--example" data-box="example"><div class="calloutBoxTitle">مثال</div><div class="calloutBoxContent">در لام خون محیطی، افزایش basophil همراه با بالا رفتن white blood cellها تا ۱۴ یا ۱۵ هزار، کاهش پلاکت‌ها تا حدود ۵۰ هزار، یا کاهش red blood cellها از حدود ۵ میلیون به دو یا سه میلیون، نمونه‌ای از تغییر چند شمارش در کنار هم است.</div></div>
+<h3 id="heading-5">منشأ و تمایز سلول‌های خونی</h3>
+<p>تقریباً همهٔ سلول‌های ایمنی از سلول بنیادی خون‌ساز (hematopoietic stem cell) منشأ می‌گیرند. این سلول در مغز استخوان قرار دارد و توان خودنوزایی (self-renewal) و تمایز دارد. چون می‌تواند به انواع مختلفی از سلول‌ها تمایز یابد، multipotential یا چندتوان نامیده می‌شود. از آن دو مسیر اصلی تمایز شکل می‌گیرد: ردهٔ میلوئیدی (myeloid) و ردهٔ لنفوئیدی (lymphoid).</p>
+<p><img src="../data/assets/assets/image7.jpg" alt="تصویر 7">
+<em>تصویر ۷</em></p>
+<p><img src="../data/assets/assets/image8.png" alt="تصویر 8">
+<em>تصویر ۸</em></p>
+<p>سلول‌هایی که از stem cell منشأ می‌گیرند progenitor یا precursor نامیده می‌شوند. این دو واژه کاملاً یکسان نیستند: progenitorها سلول‌های ابتدایی‌تری هستند و به stem cell نزدیک‌ترند؛ هرچه به‌سمت سلول‌های نهایی پیش می‌رویم، به precursorها می‌رسیم. طبق توضیح کلاس، precursorها به سلول نهایی نزدیک‌ترند و دیگر خودشان نمی‌توانند به سلول دیگری تقسیم شوند. بااین‌حال، در کتاب Abbas گاهی این دو اصطلاح تقریباً معادل هم به‌کار می‌روند. در این درس وارد تفاوت دقیق آن‌ها نمی‌شویم؛ تفاوتشان در هماتولوژی بیشتر بررسی می‌شود.</p>
+<p>دو progenitor اصلی عبارت‌اند از common myeloid progenitor و common lymphoid progenitor؛ هرکدام می‌توانند به چند ردهٔ سلولی دیگر تمایز یابند.</p>
+<h4>ردهٔ myeloid</h4>
+<p>از myeloid progenitor، از جمله myeloblastها و سپس neutrophil، eosinophil، basophil و monocyte منشأ می‌گیرند.</p>
+<p>بر اساس وجود گرانول:</p>
+<ul>
+<li>Neutrophil، eosinophil و basophil گرانولوسیت (granulocyte) هستند، چون گرانول‌های واضح سیتوپلاسمی دارند.</li>
+<li>Monocyte ممکن است تعداد بسیار کمی گرانول ریز داشته باشد، اما چون گرانول‌ها واضح نیستند، در گروه agranulocyteها قرار می‌گیرد.</li>
+<li>Monocyte و lymphocyte agranulocyte هستند.</li>
+</ul>
+<p>در رده‌های دیگر نیز erythrocyteها، یا red blood cellها، و megakaryocyteها شکل می‌گیرند؛ megakaryocyte سلول مادری پلاکت‌هاست.</p>
+<p><strong>فعالیت کلاسی:</strong> تعداد پلاکت‌هایی را که از یک megakaryocyte تولید می‌شود بررسی کنید. پاسخ را همان لحظه جست‌وجو نکنید و بعداً به‌عنوان فعالیت ارائه دهید.</p>
+<p><img src="../data/assets/assets/image9.jpg" alt="تصویر 9">
+<em>تصویر ۹</em></p>
+<h4>ردهٔ lymphoid</h4>
+<p>در شاخهٔ lymphoid، تمایز ادامه می‌یابد و سلول‌های T، B و NK از این رده منشأ می‌گیرند. NK cellها، T lymphocyteها و B lymphocyteها را نباید در ردهٔ myeloid قرار داد:</p>
+<ul>
+<li>B و T از اجزای ایمنی اکتسابی یا اختصاصی‌اند.</li>
+<li>NK از اجزای ایمنی ذاتی است.</li>
+</ul>
+<p>از سلول‌های myeloid دارای نقش در ایمنی ذاتی می‌توان basophil، neutrophil، eosinophil، monocyte، macrophage و dendritic cell را نام برد. ردهٔ erythroid و پلاکت‌ها سلول‌های سیستم ایمنی محسوب نمی‌شوند.</p>
+<p>یک نمودار در کتاب Abbas فقط ردهٔ myeloid را با جزئیات نشان می‌دهد و ردهٔ lymphoid را در بر نمی‌گیرد؛ در آن تعداد زیادی سلول و مسیر میانی ترسیم شده است. به همین دلیل، همهٔ رده‌ها در یک اسلاید جمع نشده‌اند.</p>
+<h3 id="heading-6">تنظیم تولید سلول‌های خونی و ارتباط بین سلول‌ها</h3>
+<p>Stem cellها و سلول‌های دیگر با ترشح growth factorها و cytokineها بر تولید، بقا و تمایز سلولی اثر می‌گذارند.</p>
+<div class="calloutBox calloutBox--definition" data-box="definition"><div class="calloutBoxTitle">تعریف</div><div class="calloutBoxContent"><strong>Cytokine</strong>
+مادهٔ شیمیایی‌ای که از سلول آزاد می‌شود.</div></div>
+<p>در گذشته تصور می‌شد monokine فقط از monocyte و lymphokine فقط از lymphocyte تولید می‌شود؛ اما سلول‌های زیادی، از جمله سلول‌های غیرایمنی، cytokine می‌سازند.</p>
+<p>سلول‌ها از راه تماس مستقیم و انتقال سیگنال، و نیز از راه ترشح cytokine و اثرگذاری از فاصله، با یکدیگر ارتباط دارند. برای اثرکردن cytokine، سلول هدف باید receptor مربوط به آن را داشته باشد. در دستگاه عصبی و مغز نیز بین سلول‌ها cross-talk وجود دارد.</p>
+<p>Stem cell factor (SCF) یک cytokine و growth factor مهم است که در تنظیم تولید سلول‌های خونی، بقای سلول و رشد بافت نقش دارد. SCF با اتصال به receptor سطحی c-Kit، که CD117 نیز نامیده می‌شود، اثر می‌گذارد. Flt3L مخفف FMS-like tyrosine kinase 3 ligand است.</p>
+<p><img src="../data/assets/assets/image7.jpg" alt="تصویر 7">
+<em>تصویر ۷</em></p>
+<p><img src="../data/assets/assets/image8.png" alt="تصویر 8">
+<em>تصویر ۸</em></p>
+<h4>نقش برخی cytokineها و growth factorها در تمایز</h4>
+<ul>
+<li><strong>GM-CSF</strong> به معنی granulocyte-monocyte colony-stimulating factor است و بر سلول‌های granulocyte و monocyte اثر می‌گذارد.</li>
+<li><strong>G-CSF</strong> به granulocyte مربوط است؛ در مسیر نشان‌داده‌شده myeloblast و سپس neutrophil دیده می‌شود. نکتهٔ کلیدی این درس آن است که G-CSF بیشتر با تولید neutrophil مرتبط است. در بعضی منابع گفته می‌شود G-CSF بر هر سه ردهٔ granulocyte اثر می‌گذارد. این گفته کاملاً بی‌ارتباط نیست، اما نمودار و کتاب Abbas آن را عمدتاً با تولید neutrophil مرتبط می‌کنند.</li>
+</ul>
+<div class="calloutBox calloutBox--important" data-box="important"><div class="calloutBoxTitle">نکته مهم</div><div class="calloutBoxContent">نکتهٔ کلیدی این درس: G-CSF بیشتر با تولید neutrophil مرتبط است؛ در بعضی منابع اثر آن بر هر سه ردهٔ granulocyte نیز ذکر می‌شود، اما نمودار و کتاب Abbas آن را عمدتاً با تولید neutrophil مرتبط می‌کنند.</div></div>
+<ul>
+<li><strong>M-CSF</strong> با ردهٔ monocyte ارتباط دارد و در نمودار مسیر monoblast و سپس monocyte را پیش می‌برد.</li>
+<li><strong>Flt3L</strong> می‌تواند سلول را به‌سمت dendritic cell ببرد.</li>
+<li><strong>IL-5</strong> در تولید eosinophil نقش دارد.</li>
+<li><strong>Thrombopoietin</strong> و <strong>IL-11</strong> نیز در تولید و تمایز سلول‌هایی که به پلاکت تبدیل می‌شوند نقش مهمی دارند.</li>
+</ul>
+<p>نمودارها همهٔ سلول‌های میانی را نشان نمی‌دهند و بین مراحل ترسیم‌شده سلول‌های زیادی وجود دارد. در شکل، رده‌های مختلف از یک سلول مشترک یا multipotent منشأ می‌گیرند و مسیرهایی به erythrocyte، پلاکت و basophil نشان داده شده است. مسیر eosinophil جداگانه است و IL-5 در آن نقش دارد.</p>
+<p><img src="../data/assets/assets/image9.jpg" alt="تصویر 9">
+<em>تصویر ۹</em></p>
+<h3 id="heading-7">ایمنی ذاتی و ایمنی تطبیقی</h3>
+<p>در سیستم ایمنی دو بازوی اصلی وجود دارد:</p>
+<ul>
+<li>ایمنی ذاتی (innate immunity): پاسخی سریع و از پیش آماده.</li>
+<li>ایمنی تطبیقی یا اکتسابی (adaptive immunity): پاسخی اختصاصی و دارای حافظه.</li>
+</ul>
+<div class="calloutBox calloutBox--definition" data-box="definition"><div class="calloutBoxTitle">تعریف</div><div class="calloutBoxContent"><strong>ایمنی ذاتی (innate immunity) و ایمنی تطبیقی یا اکتسابی (adaptive immunity)</strong>
+ایمنی ذاتی پاسخی سریع و از پیش آماده است؛ ایمنی تطبیقی یا اکتسابی پاسخی اختصاصی و دارای حافظه است.</div></div>
+<p>سلول‌های dendritic و cytokineها ارتباط مهمی میان این دو بازو برقرار می‌کنند.</p>
+<p><img src="../data/assets/assets/image10.png" alt="تصویر 10">
+<em>تصویر ۱۰</em></p>
+<p><img src="../data/assets/assets/image11.jpg" alt="تصویر 11">
+<em>تصویر ۱۱</em></p>
+<p>تصویر آغاز درس سلول‌های مختلف سیستم ایمنی را کنار هم نشان می‌دهد. CD4-positive T cell همان T helper است؛ CD8-positive T cell در ادامه توضیح داده می‌شود. Natural killer T cell یا NKT ویژگی‌هایی از NK و T cell دارد. NKT و γδ T cell را می‌توان تا حدی میان ایمنی ذاتی و تطبیقی در نظر گرفت و آن‌ها را پلی میان این دو بازو دانست.</p>
+<p><img src="../data/assets/assets/image10.png" alt="تصویر 10">
+<em>تصویر ۱۰</em></p>
+<p><img src="../data/assets/assets/image11.jpg" alt="تصویر 11">
+<em>تصویر ۱۱</em></p>
+<h3 id="heading-8">Monocyte، macrophage و فاگوسیتوز</h3>
+<p>Macrophageها از monocyteها منشأ می‌گیرند و از فاگوسیت‌های مهم بافتی در ایمنی ذاتی هستند. وقتی بافتی ملتهب یا دچار عفونت می‌شود، macrophageها از نخستین سلول‌هایی‌اند که در ناحیه حضور پیدا می‌کنند؛ پس از آن، neutrophilهای زیادی به محل می‌آیند. Neutrophil با diapedesis از دیوارهٔ رگ و لایهٔ endothelial cell عبور می‌کند و به محل عامل عفونی می‌رود.</p>
+<p>Neutrophil، macrophage و monocyte فاگوسیتوز می‌کنند؛ یعنی عامل بیگانه را می‌بلعند.</p>
+<div class="calloutBox calloutBox--definition" data-box="definition"><div class="calloutBoxTitle">تعریف</div><div class="calloutBoxContent"><strong>فاگوسیتوز</strong>
+بلعیدن عامل بیگانه به‌وسیلهٔ سلول.</div></div>
+<p>Macrophageها میکروب‌ها، سلول‌های مرده و بقایای بافتی را می‌بلعند و با ترشح cytokine التهاب را آغاز یا تنظیم می‌کنند. برخی macrophageها آنتی‌ژن را به سلول‌های T ارائه می‌کنند.</p>
+<p><img src="../data/assets/assets/image12.jpg" alt="تصویر 12">
+<em>تصویر ۱۲</em></p>
+<p>پس از ورود monocyte به بافت، ممکن است فعال شود و به macrophage فعال تبدیل شود؛ بعضی تغییرات و cytokineها آن را به‌سمت مقابله با عامل میکروبی و فاگوسیتوز می‌برند. مسیر دیگر این است که monocyte بر اساس بافتی که در آن مستقر می‌شود، تمایز یابد و نام اختصاصی همان بافت را بگیرد. این‌ها macrophageهای مقیم بافت هستند.</p>
+<p>نمودار منشأ و مسیر hematopoietic stem cell، monocyte/monoblast، monocyte و macrophage را نشان می‌دهد و شاخه‌ای از common dendritic cell precursor را نیز به plasmacytoid DC می‌رساند. در آن، macrophageهای فعال‌شده و macrophageهای اختصاصی بافتی نیز نشان داده شده‌اند.</p>
+<p><img src="../data/assets/assets/image13.jpg" alt="تصویر 13">
+<em>تصویر ۱۳</em></p>
+<h4>Macrophageهای مقیم بافت</h4>
+<p>Macrophageها در بافت‌های مختلف مستقر می‌شوند و نام متناسب با بافت را می‌گیرند:</p>
+<ul>
+<li>در کبد: Kupffer cells</li>
+<li>در سیستم عصبی مرکزی (CNS): microglia</li>
+<li>در ریه: alveolar macrophages</li>
+<li>در استخوان: osteoclastها، که از دودمان monocyte/macrophage هستند.</li>
+</ul>
+<p>Osteoclastها در تخریب نقش دارند؛ آن‌ها را از osteoblastها که نامشان نیز در درس مطرح می‌شود، متمایز کنید.</p>
+<div class="calloutBox calloutBox--important" data-box="important"><div class="calloutBoxTitle">نکته مهم</div><div class="calloutBoxContent">Osteoclastها در تخریب نقش دارند؛ آن‌ها را از osteoblastها متمایز کنید.</div></div>
+<h4>تمایز dendritic cellها از پیش‌سازها</h4>
+<p>از پیش‌ساز dendritic cell دو گروه اصلی شکل می‌گیرند:</p>
+<ul>
+<li>Conventional یا classic dendritic cell، یعنی نوع کلاسیک یا متداول؛ این گروه بعدها به immature و mature تقسیم می‌شود.</li>
+<li>Plasmacytoid dendritic cell، رده‌ای جداگانه که ارتباط مهمی با واکنش به ویروس‌ها دارد.</li>
+</ul>
+<p><img src="../data/assets/assets/image13.jpg" alt="تصویر 13">
+<em>تصویر ۱۳</em></p>
+<h4>مراحل فاگوسیتوز</h4>
+<p>مراحل فاگوسیتوز را می‌توان به‌ترتیب دنبال کرد:</p>
+<ol>
+<li>میکروب به‌وسیلهٔ receptorهای فاگوسیت شناسایی و به آن متصل می‌شود.</li>
+<li>سلول میکروب را احاطه می‌کند و phagosome تشکیل می‌شود.</li>
+<li>Phagosome با lysosome ادغام می‌شود و phagolysosome به‌وجود می‌آید.</li>
+<li>میکروب تخریب و مواد باقیمانده دفع می‌شوند.</li>
+</ol>
+<p>زوائدی از غشا و بدنهٔ سلول به نام pseudopodia می‌توانند دور عامل میکروبی را بگیرند و receptor نیز ممکن است در اتصال نقش داشته باشد. Lysosome حاوی آنزیم‌هایی است که عامل میکروبی را تخریب می‌کنند. ادغام غشای phagosome و lysosome باعث می‌شود محتویات lysosome در phagolysosome بر میکروب اثر بگذارند.</p>
+<p><img src="../data/assets/assets/image14.jpg" alt="تصویر 14">
+<em>تصویر ۱۴</em></p>
+<p><img src="../data/assets/assets/image15.jpg" alt="تصویر 15">
+<em>تصویر ۱۵</em></p>
+<p>در phagolysosome، افزون بر آنزیم‌های گرانولی، گونه‌های فعال اکسیژن (reactive oxygen species; ROS) نیز در تخریب عامل میکروبی نقش دارند. افزایش سریع مصرف اکسیژن در این فرایند respiratory burst یا oxidative burst نام دارد. در توصیف درج‌شده در اسلاید، respiratory burst آزادسازی سریع ROS، از جمله superoxide anion (O₂⁻) و hydrogen peroxide (H₂O₂)، است. بنابراین آنزیم‌ها و ROS هر دو در تخریب میکروب مشارکت دارند.</p>
+<div class="calloutBox calloutBox--definition" data-box="definition"><div class="calloutBoxTitle">تعریف</div><div class="calloutBoxContent"><strong>Respiratory burst یا oxidative burst</strong>
+افزایش سریع مصرف اکسیژن در این فرایند؛ در توصیف اسلاید، آزادسازی سریع ROS از جمله superoxide anion (O₂⁻) و hydrogen peroxide (H₂O₂) است.</div></div>
+<p><img src="../data/assets/assets/image14.jpg" alt="تصویر 14">
+<em>تصویر ۱۴</em></p>
+<p><img src="../data/assets/assets/image15.jpg" alt="تصویر 15">
+<em>تصویر ۱۵</em></p>
+<h4>فعالیت کلاسیک و جایگزین macrophageها</h4>
+<p>در اسلایدی با عنوان فعالیت کلاسیک و جایگزین macrophageها، Classically activated macrophage (M1) و Alternatively activated macrophage (M2) با پیامدهای متفاوت نشان داده شده‌اند:</p>
+<ul>
+<li><strong>M1:</strong> محرک‌هایی مانند microbial TLR-ligands و IFN-γ آمده‌اند. در سوی فعالیت‌ها ROS، NO و lysosomal enzymes و نیز IL-1، IL-12 و IL-23 درج شده‌اند. پیامدهای نشان‌داده‌شده عبارت‌اند از فعالیت میکروب‌کشی، التهاب، فاگوسیتوز و کشتن بسیاری از باکتری‌ها و قارچ‌ها.</li>
+<li><strong>M2:</strong> IL-13 و عبارتی که در اسلاید به‌شکل IL-14 دیده می‌شود درج شده‌اند. در سوی فعالیت‌ها IL-10، proline، polyamines و TGF-β آمده‌اند و پیامدهای anti-inflammatory و wound healing نیز نشان داده شده‌اند.</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>ویژگی درج‌شده در اسلاید</th>
+<th>M1: Classically activated macrophage</th>
+<th>M2: Alternatively activated macrophage</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>محرک‌ها</td>
+<td>microbial TLR-ligands و IFN-γ</td>
+<td>IL-13 و عبارتی که در اسلاید به‌شکل IL-14 دیده می‌شود</td>
+</tr>
+<tr>
+<td>فعالیت‌ها و موارد درج‌شده</td>
+<td>ROS، NO، lysosomal enzymes، IL-1، IL-12 و IL-23</td>
+<td>IL-10، proline، polyamines و TGF-β</td>
+</tr>
+<tr>
+<td>پیامدهای نشان‌داده‌شده</td>
+<td>فعالیت میکروب‌کشی، التهاب، فاگوسیتوز و کشتن بسیاری از باکتری‌ها و قارچ‌ها</td>
+<td>anti-inflammatory و wound healing</td>
+</tr>
+</tbody></table>
+<div class="calloutBox calloutBox--review" data-box="review"><div class="calloutBoxTitle">نیازمند بررسی</div><div class="calloutBoxContent"><strong>عبارت‌های نمودار M1/M2</strong>
+در متن قابل‌استخراج اسلاید، بخشی از نام cytokineها و اتصال آن‌ها به شاخه‌های نمودار روشن نیست؛ به‌ویژه «IL-14» و جایگاه برخی موارد مانند IL-10 باید با تصویر اصلی بررسی شود.
+<strong>وضعیت:</strong> نیازمند بررسی</div></div>
+<p><img src="../data/assets/assets/image38.jpg" alt="تصویر 38">
+<em>تصویر ۳۸</em></p>
+<h3 id="heading-9">Granulocyteها</h3>
+<p>سه گروه اصلی granulocyte عبارت‌اند از neutrophil، eosinophil و basophil. نوع گرانول، شکل هسته و عملکرد دفاعی در این سه گروه متفاوت است.</p>
+<h4>Neutrophil</h4>
+<p>Neutrophilها فراوان‌ترین leukocyteهای خون محیطی انسان‌اند. هستهٔ چندقسمتی دارند؛ معمولاً سه تا پنج لوب دارد و در تصویر حدود پنج لوب دیده می‌شود. Neutrophilها در التهاب حاد و عفونت‌های باکتریایی از نخستین سلول‌های مهاجر به محل هستند و از مهم‌ترین فاگوسیت‌های ایمنی ذاتی به شمار می‌روند. گرانول‌های اولیه و اختصاصی یا ثانویهٔ آن‌ها مواد میکروب‌کش دارند و پس از فاگوسیتوز به تخریب عامل میکروبی کمک می‌کنند.</p>
+<p><img src="../data/assets/assets/image16.png" alt="تصویر 16">
+<em>تصویر ۱۶</em></p>
+<p><img src="../data/assets/assets/image17.jpg" alt="تصویر 17">
+<em>تصویر ۱۷</em></p>
+<h4>Eosinophil</h4>
+<p>Eosinophilها معمولاً هستهٔ دولوبی (bilobed) دارند و گرانول‌های اختصاصی درشت و نارنجی‌ـ‌قرمز مشخصهٔ مهم مورفولوژیک آن‌هاست. Major basic protein (MBP) از اجزای مهم گرانول‌های eosinophil است.</p>
+<p>Eosinophilها حدود ۲ تا ۵ درصد white blood cellها را تشکیل می‌دهند و در دفاع علیه انگل‌های بزرگ، مانند کرم‌ها، و نیز در واکنش‌های آلرژیک اهمیت دارند. منظور در این بحث عمدتاً انگل‌های بزرگ است، نه تک‌یاخته‌ها. افزایش شمار eosinophil در بعضی بیماری‌های انگلی و آلرژیک دیده می‌شود. در بیماری آلرژیک، شمار آن ممکن است مثلاً به‌جای حدود پنج درصد به هفت، هشت یا نه درصد برسد؛ اما افزایش آن به‌تنهایی تشخیص قطعی نیست و بیماری انگلی را نیز باید در نظر گرفت.</p>
+<div class="calloutBox calloutBox--example" data-box="example"><div class="calloutBoxTitle">مثال</div><div class="calloutBoxContent">در بیماری آلرژیک، شمار eosinophil ممکن است به‌جای حدود پنج درصد به هفت، هشت یا نه درصد برسد؛ بااین‌حال افزایش آن به‌تنهایی تشخیص قطعی نیست و بیماری انگلی نیز باید در نظر گرفته شود.</div></div>
+<p>افزایش eosinophil در خون eosinophilia نام دارد. به‌طور کلی، پسوند -philia در نام سلول به افزایش آن اشاره می‌کند؛ برای نمونه، neutrophilia یعنی افزایش neutrophil در خون. Neutropenia به کاهش neutrophil گفته می‌شود.</p>
+<div class="calloutBox calloutBox--definition" data-box="definition"><div class="calloutBoxTitle">تعریف</div><div class="calloutBoxContent"><strong>Eosinophilia، neutrophilia و neutropenia</strong>
+Eosinophilia یعنی افزایش eosinophil در خون؛ به‌طور کلی پسوند -philia در نام سلول به افزایش آن اشاره می‌کند. Neutrophilia یعنی افزایش neutrophil در خون و neutropenia به کاهش neutrophil گفته می‌شود.</div></div>
+<p><img src="../data/assets/assets/image18.png" alt="تصویر 18">
+<em>تصویر ۱۸</em></p>
+<p><img src="../data/assets/assets/image19.jpg" alt="تصویر 19">
+<em>تصویر ۱۹</em></p>
+<h4>Basophil</h4>
+<p>Basophilها از کم‌تعدادترین leukocyteهای خون محیطی هستند. گرانول‌های تیرهٔ آن‌ها حاوی histamine و میانجی‌های التهابی دیگرند. این سلول‌ها در پاسخ‌های آلرژیک و واکنش‌های وابسته به IgE نقش دارند؛ گرانول‌های آزروفیلیک نیز در تصویر مطرح شده‌اند.</p>
+<p>Basophil از نظر ظاهر ممکن است به mast cell شبیه باشد. در basophil گرانول‌های درشت و تیره گاهی هسته را می‌پوشانند؛ در mast cell، در بسیاری از موارد، گرانول‌های درشت در اطراف هسته قرار می‌گیرند و هسته واضح‌تر دیده می‌شود. برای به‌خاطرماندن شکل mast cell، آن را به فردی تشبیه کرده‌اند که وسط سرش کچل و موها دور سرش است: بخش وسط را هسته و اطراف را گرانول‌ها در نظر بگیرید. این تشبیه به‌تنهایی برای تشخیص قطعی کافی نیست و ظاهر basophil نیز می‌تواند متفاوت باشد.</p>
+<p><img src="../data/assets/assets/image20.jpg" alt="تصویر 20">
+<em>تصویر ۲۰</em></p>
+<h4>IgE و آلرژی</h4>
+<p>در آلرژی، IgE اهمیت دارد. از پنج نوع آنتی‌بادی، IgE کمترین درصد را در خون دارد؛ اما در بیماری آلرژیک مقدار آن می‌تواند بسیار زیاد شود، حتی حدود صد برابر. افزایش IgE می‌تواند نشانه‌ای از بیماری آلرژیک باشد.</p>
+<p>افزایش basophil، افزایش eosinophil و افزایش IgE هر سه در بحث آلرژی مطرح‌اند؛ بااین‌حال، در این بحث افزایش IgE و eosinophil دو مورد مهم‌تر هستند. افزایش basophil هم اهمیت دارد، اما این دو مورد بیشتر مورد توجه‌اند.</p>
+<p><img src="../data/assets/assets/image20.jpg" alt="تصویر 20">
+<em>تصویر ۲۰</em></p>
+<h3 id="heading-10">Dendritic cellها</h3>
+<p>Dendritic cellها از مهم‌ترین سلول‌های ارائه‌کنندهٔ آنتی‌ژن (antigen-presenting cells; APCs) هستند و پلی مهم میان ایمنی ذاتی و تطبیقی به شمار می‌روند. آن‌ها در بافت آنتی‌ژن را دریافت و پردازش می‌کنند؛ سپس به اندام لنفاوی مهاجرت می‌کنند و سلول‌های T نابالغ را فعال می‌کنند.</p>
+<p>Dendritic cellهای conventional یا classic به immature dendritic cell (iDC) و mature dendritic cell (mDC) تقسیم می‌شوند. Langerhans cell (LC) در پوست در گروه immature آمده است. Plasmacytoid DC جداگانه در نظر گرفته می‌شود و با ویروس‌ها ارتباط دارد.</p>
+<p><img src="../data/assets/assets/image21.jpg" alt="تصویر 21">
+<em>تصویر ۲۱</em></p>
+<h4>Immature و mature dendritic cell</h4>
+<p>در immature dendritic cell، زوائد ممکن است کمتر و نامنظم باشند و ظاهری شبیه pseudopod داشته باشند؛ این سلول توان فاگوسیتوز دارد. پس از برخورد با عامل بیگانه و بلعیدن آن، از محل مهاجرت می‌کند.</p>
+<p>Mature dendritic cell زوائد بیشتری دارد که بلندتر و منظم‌ترند و ظاهری شبیه خورشید با پرتوهای فراوان پیدا می‌کنند. پس از بلوغ، dendritic cell برای فاگوسیتوز آماده نیست و کار ارائهٔ آنتی‌ژن را انجام می‌دهد. اختصارهای iDC و mDC در بعضی نسخه‌های اسلاید ممکن است جابه‌جا نوشته شده باشند؛ هنگام استفاده از فایل باید به این نکته توجه کرد.</p>
+<h4>مهاجرت dendritic cell از بافت به غدهٔ لنفاوی</h4>
+<p>برای نمونه، اگر پوست دست هنگام کار در باغ خراش بردارد، سد دفاعی پوست از بین می‌رود و عامل میکروبی می‌تواند وارد شود. پوست و مخاط از سدهای نخست ایمنی ذاتی‌اند؛ زیر پوست نیز macrophageها و dendritic cellها در خط دفاعی بعدی حضور دارند.</p>
+<div class="calloutBox calloutBox--example" data-box="example"><div class="calloutBoxTitle">مثال</div><div class="calloutBoxContent">خراش پوست دست هنگام کار در باغ می‌تواند سد دفاعی پوست را از بین ببرد و امکان ورود عامل میکروبی را فراهم کند.</div></div>
+<p>Dendritic cell از نخستین سلول‌هایی است که با عامل بیگانه مواجه می‌شود و از سلول‌های فاگوسیت‌کننده است. پس از بلعیدن عامل میکروبی، در محل باقی نمی‌ماند، بلکه از مسیر لنفی به نزدیک‌ترین غدهٔ لنفاوی می‌رود؛ برای خراش دست، غدهٔ لنفاوی زیر بغل می‌تواند نزدیک‌ترین غده باشد. در مسیر لنف ممکن است با T cell یا B cell برخورد کند، اما در غدهٔ لنفاوی تراکم این سلول‌ها بیشتر است و فرصت زیادی برای تماس وجود دارد. Dendritic cell در آنجا آنتی‌ژن را ارائه می‌کند. پس از مهاجرت و بلوغ، خاصیت فاگوسیتوزی‌اش را از دست می‌دهد و در نقش antigen-presenting cell عمل می‌کند.</p>
+<h3 id="heading-11">Lymphocyteها</h3>
+<p>Lymphocyteها سه گروه‌اند: B cell، T cell و Natural killer cell (NK cell). B و T پایهٔ اختصاصیت ایمنی اکتسابی را می‌سازند. NK از نظر شکل lymphocyte است، اما جزو ایمنی ذاتی محسوب می‌شود. این سلول‌ها میان خون، لنف و اندام‌های لنفاوی جابه‌جا می‌شوند.</p>
+<p><img src="../data/assets/assets/image22.jpg" alt="تصویر 22">
+<em>تصویر ۲۲</em></p>
+<p><img src="../data/assets/assets/image23.png" alt="تصویر 23">
+<em>تصویر ۲۳</em></p>
+<h4>B cell</h4>
+<p>B cell جزء اصلی ایمنی هومورال (humoral immunity) است. مراحل اصلی تکامل B cell در پستانداران در مغز استخوان انجام می‌شود و B cell با گیرندهٔ خود، B-cell receptor (BCR)، آنتی‌ژن را مستقیماً شناسایی می‌کند. BCR به آنتی‌بادی غشایی شباهت دارد. آنتی‌بادی را immunoglobulin نیز می‌نامند؛ توضیح بیشتر دربارهٔ این نام در بخش آنتی‌بادی‌ها ارائه می‌شود.</p>
+<p>یک دسته آنتی‌بادی غشایی و یک دسته آنتی‌بادی ترشحی داریم؛ آنتی‌بادی ترشحی را plasma cell تولید می‌کند. B cell می‌تواند به plasma cell و memory B cell تمایز یابد. Memory B cell ممکن است سال‌ها در بدن بماند و هنگام مواجههٔ دوباره با همان عامل میکروبی، پاسخ سریع‌تر و شدیدتری ایجاد کند.</p>
+<div class="calloutBox calloutBox--definition" data-box="definition"><div class="calloutBoxTitle">تعریف</div><div class="calloutBoxContent"><strong>B-cell receptor (BCR)</strong>
+گیرندهٔ B cell که آنتی‌ژن را مستقیماً شناسایی می‌کند و به آنتی‌بادی غشایی شباهت دارد.</div></div>
+<p>چهار مولکول مهم سطح B cell عبارت‌اند از CD19، CD21، CD40 و MHC class II:</p>
+<ul>
+<li>CD19 و CD21 در تقویت سیگنال فعال‌سازی B cell نقش دارند.</li>
+<li>CD19 به‌عنوان pan marker سلول B در نظر گرفته می‌شود.</li>
+<li>CD40 روی B cell با CD40L روی T helper تعامل می‌کند.</li>
+<li>MHC class II برای ارائهٔ آنتی‌ژن به T helper ضروری است.</li>
+</ul>
+<p><img src="../data/assets/assets/image24.jpg" alt="تصویر 24">
+<em>تصویر ۲۴</em></p>
+<p><img src="../data/assets/assets/image25.jpg" alt="تصویر 25">
+<em>تصویر ۲۵</em></p>
+<p><img src="../data/assets/assets/image26.jpg" alt="تصویر 26">
+<em>تصویر ۲۶</em></p>
+<p><img src="../data/assets/assets/image27.png" alt="تصویر 27">
+<em>تصویر ۲۷</em></p>
+<p><img src="../data/assets/assets/image28.jpg" alt="تصویر 28">
+<em>تصویر ۲۸</em></p>
+<h5>زیرگروه‌های B cell</h5>
+<p>اسلاید B lymphocyte subsets رده‌های B-1 و B-2 را نشان می‌دهد. بیشتر B cellهایی که از stem cellهای منشأگرفته از کبد جنینی به‌وجود می‌آیند، به ردهٔ B-1 تمایز می‌یابند. B lymphocyteهایی که پس از تولد از پیش‌سازهای مغز استخوان منشأ می‌گیرند، ردهٔ B-2 را ایجاد می‌کنند.</p>
+<p>دو زیرگروه اصلی از پیش‌سازهای B-2 شکل می‌گیرند:</p>
+<ul>
+<li><strong>Follicular B cell:</strong> این سلول‌ها lymphocyteهای در حال recirculation هستند.</li>
+<li><strong>Marginal zone B cell:</strong> در جوندگان در طحال فراوان‌اند و در انسان نیز در گره‌های لنفاوی یافت می‌شوند.</li>
+</ul>
+<p>شکل همچنین مراحل Pre-B، immature B cell، transitional B cell و B-2 B cell را نشان می‌دهد.</p>
+<p><strong>فعالیت خارج از کلاس:</strong> دربارهٔ انواع B cell و هر subtype توضیح بنویسید؛ برای هر subtype دست‌کم پنج خط در نظر بگیرید.</p>
+<p><img src="../data/assets/assets/image39.jpg" alt="تصویر 39">
+<em>تصویر ۳۹</em></p>
+<h4>T cell</h4>
+<p>T cellها از پیش‌سازهای مغز استخوان منشأ می‌گیرند، اما در thymus بالغ می‌شوند. گیرندهٔ آن‌ها T-cell receptor (TCR) است؛ TCR پپتید آنتی‌ژنی را در قالب MHC شناسایی می‌کند. T cellها از اجزای اصلی ایمنی سلولی (cell-mediated immunity) هستند و CD3، pan marker سلول T است.</p>
+<p><img src="../data/assets/assets/image29.jpg" alt="تصویر 29">
+<em>تصویر ۲۹</em></p>
+<p>TCR معمولاً از زنجیره‌های alpha و beta تشکیل می‌شود. γδ T cellها به‌جای آن زنجیره‌های gamma و delta دارند و معمولاً نشانگرهای CD4 و CD8 را ندارند. در دوران جنینی γδ T cellها بیشترند؛ پس از تولد تعدادشان کمتر می‌شود. این سلول‌ها حدود ۴ تا ۵ درصد T cellهای خون محیطی را تشکیل می‌دهند؛ مقدار نزدیک به ۴ درصد نیز در اسلاید ذکر شده است. بیشتر T cellهای بدن alpha-beta هستند و حدود ۹۵ تا ۹۶ درصد را تشکیل می‌دهند. γδ T cellها تا حدی میان ایمنی ذاتی و تطبیقی قرار می‌گیرند و در عملکرد معمول ایمنی اکتسابی نقش پررنگی ندارند.</p>
+<p>انواع اصلی alpha-beta T cell عبارت‌اند از:</p>
+<ul>
+<li><strong>T helper یا CD4-positive T cell:</strong> پاسخ ایمنی را هدایت می‌کند.</li>
+<li><strong>T cytotoxic یا CD8-positive T cell:</strong> سلول‌های آلوده و توموری را از بین می‌برد.</li>
+<li><strong>Regulatory T (Treg):</strong> پیش‌تر T suppressor نیز نامیده می‌شد؛ پاسخ بیش‌ازحد را مهار می‌کند و به حفظ تحمل ایمنی کمک می‌کند. اگر پاسخ ایمنی کنترل نشود، ممکن است به بیماری خودایمنی یا آسیب به سلول‌های خودی بینجامد.</li>
+<li><strong>Memory T:</strong> در مواجههٔ مجدد پاسخ سریع‌تری ایجاد می‌کند.</li>
+</ul>
+<p>NKT cellها ویژگی‌هایی از T و NK دارند و گیرندهٔ T آن‌ها عمدتاً آنتی‌ژن‌های گلیکولیپیدی ارائه‌شده به‌وسیلهٔ CD1 را شناسایی می‌کند.</p>
+<p><img src="../data/assets/assets/image29.jpg" alt="تصویر 29">
+<em>تصویر ۲۹</em></p>
+<p><img src="../data/assets/assets/image30.jpg" alt="تصویر 30">
+<em>تصویر ۳۰</em></p>
+<h5>عملکرد T cytotoxic در ویدیو</h5>
+<p>در ویدیویی دربارهٔ T cytotoxic، یک سلول T cytotoxic در بالا و یک سلول آلوده در پایین دیده می‌شود. میان این دو سلول یک پل سیتوپلاسمی تشکیل می‌شود و Serine proteases، از جمله موادی مانند granzymes، آزاد و وارد سلول آلوده می‌شوند. سلول آلوده شروع به جمع‌شدن می‌کند؛ در توصیف ویدیو، آنزیم‌ها در غشای سطحی سوراخ‌هایی ایجاد می‌کنند، محتویات سلول بیرون می‌ریزد و T cell می‌تواند سراغ سلول دیگری برود. در بدن نیز فرایندهای طبیعی‌ای در جریان‌اند که به پاک‌سازی پاتوژن‌ها کمک می‌کنند. ویدیو با زیرنویس هوش مصنوعی عرضه شده است؛ زیرنویس ممکن است بعضی واژه‌ها، مانند T cell یا cytotoxic، را جابه‌جا نشان دهد.</p>
+<div class="calloutBox calloutBox--review" data-box="review"><div class="calloutBoxTitle">نیازمند بررسی</div><div class="calloutBoxContent"><strong>نام مؤسسه و تهیه‌کنندهٔ ویدیو</strong>
+در گفتار، نام به‌صورت «Mike Oldstone» و «Mike Goldstone» و نام مؤسسه به‌صورت «SCPS» شنیده می‌شود؛ از متن اسلاید قابل تأیید نیست.
+<strong>وضعیت:</strong> نیازمند بررسی</div></div>
+<div class="calloutBox calloutBox--review" data-box="review"><div class="calloutBoxTitle">نیازمند بررسی</div><div class="calloutBoxContent"><strong>توصیف سوراخ‌شدن غشای سلول آلوده در ویدیو</strong>
+گفتار این کار را به آنزیم‌ها نسبت می‌دهد، درحالی‌که اسلاید دربارهٔ نقش Perforin و granzymes در القای apoptosis می‌گوید؛ هر دو بیان حفظ شده‌اند و نسبت دقیق اجزا در منبع حاضر روشن نیست.
+<strong>وضعیت:</strong> نیازمند بررسی</div></div>
+<p>برای آشنایی بیشتر با T cytotoxic، ویدیو پس از پایان صحبت‌ها پیشنهاد شده است. این سلول یکی از انواع T cell است که در این جلسه معرفی می‌شود و در جلسات بعد جزئیات بیشتری درباره‌اش گفته خواهد شد. نام تهیه‌کننده و مؤسسه مطابق گفتار بالا نیازمند بررسی است.</p>
+<h4>NK cell</h4>
+<p>NK cellها lymphocyteهای ایمنی ذاتی‌اند و برای شناسایی هدف به گیرندهٔ اختصاصی مانند BCR یا TCR وابسته نیستند. آن‌ها در کنترل زودهنگام عفونت‌های ویروسی و برخی تومورها نقش دارند و IFN-γ یکی از cytokineهای مهم تولیدشده به‌وسیلهٔ آن‌هاست. NK cellها markerهای CD16 و CD56 دارند. Perforin و granzymes در القای apoptosis سلول هدف نقش دارند.</p>
+<p>تعادل میان سیگنال‌های receptorهای فعال‌کننده و مهارکننده فعالیت NK را تعیین می‌کند و کاهش MHC class I می‌تواند حساسیت سلول هدف به NK را افزایش دهد.</p>
+<p><img src="../data/assets/assets/image34.jpg" alt="تصویر 34">
+<em>تصویر ۳۴</em></p>
+<p><img src="../data/assets/assets/image35.jpg" alt="تصویر 35">
+<em>تصویر ۳۵</em></p>
+<h3 id="heading-12">ارائهٔ آنتی‌ژن و فعال‌سازی T cell</h3>
+<p>APC یا antigen-presenting cell آنتی‌ژن را ارائه می‌کند؛ در این درس منظور ارائهٔ آنتی‌ژن به T cell است.</p>
+<div class="calloutBox calloutBox--definition" data-box="definition"><div class="calloutBoxTitle">تعریف</div><div class="calloutBoxContent"><strong>APC یا antigen-presenting cell</strong>
+سلولی که آنتی‌ژن را ارائه می‌کند؛ در این درس منظور ارائهٔ آنتی‌ژن به T cell است.</div></div>
+<p>سه professional APC عبارت‌اند از dendritic cell، macrophage و B cell. Professional یعنی ارائهٔ آنتی‌ژن از کارهای اصلی و حرفه‌ای این سلول‌هاست؛ در مقابل، برای سلولی که این کار وظیفهٔ اصلی‌اش نیست، از non-professional استفاده می‌شود. در اسلاید، همهٔ سلول‌های هسته‌دار دارای MHC class I و professional APCها دارای MHC class II و costimulatory molecules معرفی شده‌اند.</p>
+<p><img src="../data/assets/assets/image30.jpg" alt="تصویر 30">
+<em>تصویر ۳۰</em></p>
+<p><img src="../data/assets/assets/image31.jpg" alt="تصویر 31">
+<em>تصویر ۳۱</em></p>
+<p><img src="../data/assets/assets/image32.jpg" alt="تصویر 32">
+<em>تصویر ۳۲</em></p>
+<p><img src="../data/assets/assets/image33.jpg" alt="تصویر 33">
+<em>تصویر ۳۳</em></p>
+<p>APC پپتید را روی MHC نمایش می‌دهد:</p>
+<ul>
+<li>CD4-positive T helper عمدتاً آنتی‌ژن ارائه‌شده روی MHC class II را می‌شناسد.</li>
+<li>CD8-positive cytotoxic T عمدتاً آنتی‌ژن ارائه‌شده روی MHC class I را می‌شناسد.</li>
+</ul>
+<p>فعال‌شدن T cell به سیگنال‌های آنتی‌ژنی و کمک‌تحریکی نیاز دارد؛ cytokineها نیز نوع و شدت پاسخ بعدی را هدایت می‌کنند. پس از شناسایی آنتی‌ژن و دریافت سیگنال‌های لازم، T cell پاسخ بعدی را پیش می‌برد.</p>
+<p><img src="../data/assets/assets/image42.jpg" alt="تصویر 42">
+<em>تصویر ۴۲</em></p>
+<p><img src="../data/assets/assets/image43.jpg" alt="تصویر 43">
+<em>تصویر ۴۳</em></p>
+<h3 id="heading-13">Follicular dendritic cellها</h3>
+<p>Follicular dendritic cellها (FDCs) را با dendritic cellهایی که آنتی‌ژن را به T lymphocyte ارائه می‌کنند یکی نگیرید؛ منشأ و عملکرد این دو متفاوت است. FDCها سلول‌هایی دارای زوائد غشایی‌اند که در germinal centerهای فولیکول‌های لنفاوی گره‌های لنفاوی، طحال و بافت‌های لنفاوی مخاطی دیده می‌شوند. آن‌ها از bone marrow precursorها منشأ نمی‌گیرند و با antigen-presenting dendritic cellهایی که آنتی‌ژن را به T cell ارائه می‌کنند، ارتباطی ندارند.</p>
+<p>FDC آنتی‌ژن‌هایی را که به antibodyها یا complement products متصل شده‌اند به دام می‌اندازد و روی سطح خود نگه می‌دارد تا B lymphocyteها آن‌ها را شناسایی کنند. توضیح اسلاید دربارهٔ FDC برای امتحان مهم است.</p>
+<div class="calloutBox calloutBox--important" data-box="important"><div class="calloutBoxTitle">نکته مهم</div><div class="calloutBoxContent">توضیح اسلاید دربارهٔ FDC برای امتحان مهم است: FDCها از bone marrow precursorها منشأ نمی‌گیرند و با antigen-presenting dendritic cellهایی که آنتی‌ژن را به T cell ارائه می‌کنند متفاوت‌اند. آن‌ها آنتی‌ژن‌های متصل به antibodyها یا complement products را به دام می‌اندازند و روی سطح خود نگه می‌دارند تا B lymphocyteها آن‌ها را شناسایی کنند.</div></div>
+<p><img src="../data/assets/assets/image40.jpg" alt="تصویر 40">
+<em>تصویر ۴۰</em></p>
+<h3 id="heading-14">فعالیت‌های خارج از کلاس و جمع‌بندی نقش سلول‌های اصلی</h3>
+<p>فعالیت خارج از کلاس: دربارهٔ انواع macrophage پس از فعال‌شدن و نوع فعالیت مربوط به هرکدام توضیح دهید.</p>
+<p>در جمع‌بندی نقش‌ها:</p>
+<ul>
+<li>Neutrophil و macrophage با فاگوسیتوز میکروب‌ها را از بین می‌برند.</li>
+<li>Dendritic cell آنتی‌ژن را ارائه می‌کند و پاسخ T را آغاز می‌کند.</li>
+<li>B cell آنتی‌بادی تولید می‌کند و حافظهٔ هومورال ایجاد می‌کند.</li>
+<li>T cell و NK cell در نابودی سلول‌های هدف نقش دارند.</li>
+</ul>
+<p>ایمنی مؤثر حاصل همکاری سلول‌های ذاتی و تطبیقی است. هر سلول ساختار و وظیفهٔ تخصصی دارد، اما عملکرد سلول‌ها به یکدیگر وابسته است. Cytokineها و تماس‌های سلولی شبکهٔ ارتباطی این مجموعه را می‌سازند و هدف نهایی، حذف عامل خطر با حداقل آسیب به بافت خودی است.</p>
+<p><img src="../data/assets/assets/image38.jpg" alt="تصویر 38">
+<em>تصویر ۳۸</em></p>
+<p><img src="../data/assets/assets/image39.jpg" alt="تصویر 39">
+<em>تصویر ۳۹</em></p>
+<p><img src="../data/assets/assets/image36.png" alt="تصویر 36">
+<em>تصویر ۳۶</em></p>
+<p><img src="../data/assets/assets/image37.png" alt="تصویر 37">
+<em>تصویر ۳۷</em></p>
+<p><img src="../data/assets/assets/image41.jpg" alt="تصویر 41">
+<em>تصویر ۴۱</em></p>
+</section>
+
+<section class="noteSection quickTablesSection">
+    <h2 id="heading-15">۳. جداول مرور سریع</h2>
+<h3 id="heading-16">شمارش و درصد سلول‌های خون محیطی</h3>
+<table>
+<thead>
+<tr>
+<th>سلول</th>
+<th align="right">میانگین تعداد در هر microliter</th>
+<th align="right">محدودهٔ طبیعی در اسلاید</th>
+<th>درصدهای مطرح‌شده</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>White blood cells (leukocytes)</td>
+<td align="right">7400</td>
+<td align="right">4500–11,000</td>
+<td>—</td>
+</tr>
+<tr>
+<td>Neutrophils</td>
+<td align="right">4400</td>
+<td align="right">1800–7700</td>
+<td>معمولاً حدود ۷۰٪؛ گاهی ۷۰ تا ۸۰٪؛ در بیان دیگر ۴۰ تا ۷۰٪ و میانگین نزدیک به ۷۰٪</td>
+</tr>
+<tr>
+<td>Eosinophils</td>
+<td align="right">200</td>
+<td align="right">0–450</td>
+<td>—</td>
+</tr>
+<tr>
+<td>Basophils</td>
+<td align="right">40</td>
+<td align="right">0–200</td>
+<td>صفر تا نیم یا صفر تا یک درصد؛ ممکن است در نمونه دیده نشود</td>
+</tr>
+<tr>
+<td>Lymphocytes</td>
+<td align="right">2500</td>
+<td align="right">1000–4800</td>
+<td>معمولاً ۲۰ تا ۴۰٪</td>
+</tr>
+<tr>
+<td>Monocytes</td>
+<td align="right">300</td>
+<td align="right">0–800</td>
+<td>حدود ۱ تا ۸٪</td>
+</tr>
+</tbody></table>
+<h3 id="heading-17">منشأ و گروه‌بندی سلول‌ها</h3>
+<table>
+<thead>
+<tr>
+<th>رده یا گروه</th>
+<th>سلول‌ها و ویژگی ذکرشده در درس</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Hematopoietic stem cell</td>
+<td>در مغز استخوان قرار دارد؛ توان self-renewal و تمایز دارد و multipotential است.</td>
+</tr>
+<tr>
+<td>Myeloid</td>
+<td>یکی از دو مسیر اصلی تمایز؛ از آن، از جمله، neutrophil، eosinophil، basophil و monocyte منشأ می‌گیرند.</td>
+</tr>
+<tr>
+<td>Lymphoid</td>
+<td>مسیر اصلی دیگر؛ سلول‌های T، B و NK از آن منشأ می‌گیرند. B و T اجزای ایمنی اکتسابی یا اختصاصی‌اند؛ NK جزئی از ایمنی ذاتی است.</td>
+</tr>
+<tr>
+<td>Myeloid با نقش در ایمنی ذاتی</td>
+<td>Basophil، neutrophil، eosinophil، monocyte، macrophage و dendritic cell</td>
+</tr>
+<tr>
+<td>Erythroid و پلاکت‌ها</td>
+<td>سلول‌های سیستم ایمنی محسوب نمی‌شوند؛ megakaryocyte سلول مادری پلاکت‌هاست.</td>
+</tr>
+<tr>
+<td>Granulocyte</td>
+<td>Neutrophil، eosinophil و basophil؛ گرانول‌های واضح سیتوپلاسمی دارند.</td>
+</tr>
+<tr>
+<td>Agranulocyte</td>
+<td>Monocyte و lymphocyte؛ در monocyte ممکن است گرانول‌های ریز و اندکی وجود داشته باشد، اما واضح نیستند.</td>
+</tr>
+<tr>
+<td>Progenitor و precursor</td>
+<td>Progenitor ابتدایی‌تر و نزدیک‌تر به stem cell است؛ precursor به سلول نهایی نزدیک‌تر است. در کتاب Abbas گاهی تقریباً معادل به‌کار می‌روند.</td>
+</tr>
+</tbody></table>
+<h3 id="heading-18">عوامل مؤثر بر تولید و تمایز</h3>
+<table>
+<thead>
+<tr>
+<th>عامل</th>
+<th>نقش یا ارتباط ذکرشده در درس</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>GM-CSF</td>
+<td>بر سلول‌های granulocyte و monocyte اثر می‌گذارد.</td>
+</tr>
+<tr>
+<td>G-CSF</td>
+<td>عمدتاً با تولید neutrophil مرتبط است؛ در بعضی منابع اثر بر هر سه ردهٔ granulocyte ذکر شده است.</td>
+</tr>
+<tr>
+<td>M-CSF</td>
+<td>با ردهٔ monocyte ارتباط دارد؛ مسیر monoblast و سپس monocyte را پیش می‌برد.</td>
+</tr>
+<tr>
+<td>Flt3L</td>
+<td>می‌تواند سلول را به‌سمت dendritic cell ببرد؛ مخفف FMS-like tyrosine kinase 3 ligand است.</td>
+</tr>
+<tr>
+<td>IL-5</td>
+<td>در تولید eosinophil نقش دارد.</td>
+</tr>
+<tr>
+<td>Thrombopoietin و IL-11</td>
+<td>در تولید و تمایز سلول‌هایی که به پلاکت تبدیل می‌شوند نقش دارند.</td>
+</tr>
+<tr>
+<td>SCF</td>
+<td>Cytokine و growth factor مهم در تنظیم تولید سلول‌های خونی، بقای سلول و رشد بافت؛ با اتصال به c-Kit/CD117 اثر می‌گذارد.</td>
+</tr>
+</tbody></table>
+<h3 id="heading-19">بازوهای ایمنی و سلول‌های ارتباط‌دهنده</h3>
+<table>
+<thead>
+<tr>
+<th>بازوی ایمنی یا گروه</th>
+<th>ویژگی و ارتباط ذکرشده در درس</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Innate immunity</td>
+<td>پاسخ سریع و از پیش آماده؛ NK از اجزای این بازو است.</td>
+</tr>
+<tr>
+<td>Adaptive immunity</td>
+<td>پاسخ اختصاصی و دارای حافظه؛ B و T از اجزای این بازو هستند.</td>
+</tr>
+<tr>
+<td>ارتباط دو بازو</td>
+<td>Dendritic cellها و cytokineها ارتباط مهمی برقرار می‌کنند.</td>
+</tr>
+<tr>
+<td>NKT و γδ T cell</td>
+<td>تا حدی میان ایمنی ذاتی و تطبیقی قرار می‌گیرند و می‌توان آن‌ها را پلی میان دو بازو دانست.</td>
+</tr>
+</tbody></table>
+<h3 id="heading-20">Macrophageهای مقیم بافت</h3>
+<table>
+<thead>
+<tr>
+<th>محل</th>
+<th>Macrophage مقیم بافت</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>کبد</td>
+<td>Kupffer cells</td>
+</tr>
+<tr>
+<td>سیستم عصبی مرکزی (CNS)</td>
+<td>microglia</td>
+</tr>
+<tr>
+<td>ریه</td>
+<td>alveolar macrophages</td>
+</tr>
+<tr>
+<td>استخوان</td>
+<td>osteoclastها؛ از دودمان monocyte/macrophage هستند و در تخریب نقش دارند.</td>
+</tr>
+</tbody></table>
+<h3 id="heading-21">مراحل فاگوسیتوز</h3>
+<table>
+<thead>
+<tr>
+<th>مرحله</th>
+<th>رویداد</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>۱</td>
+<td>شناسایی و اتصال میکروب به receptorهای فاگوسیت</td>
+</tr>
+<tr>
+<td>۲</td>
+<td>احاطه‌شدن میکروب و تشکیل phagosome</td>
+</tr>
+<tr>
+<td>۳</td>
+<td>ادغام phagosome با lysosome و تشکیل phagolysosome</td>
+</tr>
+<tr>
+<td>۴</td>
+<td>تخریب میکروب و دفع مواد باقیمانده</td>
+</tr>
+</tbody></table>
+<h3 id="heading-22">فعالیت کلاسیک و جایگزین macrophageها</h3>
+<table>
+<thead>
+<tr>
+<th>ویژگی درج‌شده در اسلاید</th>
+<th>M1: Classically activated macrophage</th>
+<th>M2: Alternatively activated macrophage</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>محرک‌ها</td>
+<td>microbial TLR-ligands و IFN-γ</td>
+<td>IL-13 و عبارتی که در اسلاید به‌شکل IL-14 دیده می‌شود</td>
+</tr>
+<tr>
+<td>فعالیت‌ها و موارد درج‌شده</td>
+<td>ROS، NO، lysosomal enzymes، IL-1، IL-12 و IL-23</td>
+<td>IL-10، proline، polyamines و TGF-β</td>
+</tr>
+<tr>
+<td>پیامدهای نشان‌داده‌شده</td>
+<td>فعالیت میکروب‌کشی، التهاب، فاگوسیتوز و کشتن بسیاری از باکتری‌ها و قارچ‌ها</td>
+<td>anti-inflammatory و wound healing</td>
+</tr>
+</tbody></table>
+<h3 id="heading-23">ویژگی‌های granulocyteها</h3>
+<table>
+<thead>
+<tr>
+<th>Granulocyte</th>
+<th>ویژگی‌های ذکرشده در درس</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Neutrophil</td>
+<td>فراوان‌ترین leukocyte خون محیطی؛ هستهٔ چندقسمتی، معمولاً سه تا پنج لوب؛ مهم در التهاب حاد، عفونت باکتریایی و فاگوسیتوز؛ گرانول‌های اولیه و اختصاصی یا ثانویه مواد میکروب‌کش دارند.</td>
+</tr>
+<tr>
+<td>Eosinophil</td>
+<td>معمولاً هستهٔ دولوبی؛ گرانول‌های اختصاصی درشت نارنجی‌ـ‌قرمز؛ MBP از اجزای مهم گرانول؛ حدود ۲ تا ۵٪ white blood cellها؛ مهم در دفاع علیه انگل‌های بزرگ و واکنش‌های آلرژیک.</td>
+</tr>
+<tr>
+<td>Basophil</td>
+<td>از کم‌تعدادترین leukocyteهای خون محیطی؛ گرانول‌های تیره حاوی histamine و میانجی‌های التهابی؛ نقش در پاسخ‌های آلرژیک و واکنش‌های وابسته به IgE.</td>
+</tr>
+</tbody></table>
+<h3 id="heading-24">Basophil و mast cell</h3>
+<table>
+<thead>
+<tr>
+<th>ویژگی ظاهری</th>
+<th>Basophil</th>
+<th>Mast cell</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>گرانول‌ها و هسته</td>
+<td>گرانول‌های درشت و تیره گاهی هسته را می‌پوشانند.</td>
+<td>در بسیاری از موارد گرانول‌های درشت در اطراف هسته قرار می‌گیرند و هسته واضح‌تر دیده می‌شود.</td>
+</tr>
+<tr>
+<td>یادآوری مورفولوژی</td>
+<td>ظاهر می‌تواند متفاوت باشد.</td>
+<td>تشبیه به فردی که وسط سرش کچل و موها دور سرش است: بخش وسط هسته و اطراف گرانول‌هاست؛ این تشبیه به‌تنهایی تشخیص قطعی نیست.</td>
+</tr>
+</tbody></table>
+<h3 id="heading-25">IgE، eosinophil و basophil در آلرژی</h3>
+<table>
+<thead>
+<tr>
+<th>مورد مطرح‌شده در آلرژی</th>
+<th>توضیح ذکرشده در درس</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>IgE</td>
+<td>از پنج نوع آنتی‌بادی کمترین درصد را در خون دارد؛ در بیماری آلرژیک مقدار آن می‌تواند حتی حدود صد برابر شود.</td>
+</tr>
+<tr>
+<td>Eosinophil</td>
+<td>شمار آن ممکن است در بیماری آلرژیک بالا برود؛ افزایش آن به‌تنهایی تشخیص قطعی نیست و بیماری انگلی نیز باید در نظر گرفته شود.</td>
+</tr>
+<tr>
+<td>Basophil</td>
+<td>افزایش آن نیز مطرح است، اما در این بحث افزایش IgE و eosinophil بیشتر مورد توجه‌اند.</td>
+</tr>
+</tbody></table>
+<h3 id="heading-26">Dendritic cellها</h3>
+<table>
+<thead>
+<tr>
+<th>گروه یا مرحله</th>
+<th>ویژگی ذکرشده در درس</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Conventional یا classic dendritic cell</td>
+<td>به immature و mature تقسیم می‌شود.</td>
+</tr>
+<tr>
+<td>Langerhans cell (LC)</td>
+<td>در پوست و در گروه immature آمده است.</td>
+</tr>
+<tr>
+<td>Plasmacytoid DC</td>
+<td>رده‌ای جداگانه و مرتبط با ویروس‌هاست.</td>
+</tr>
+<tr>
+<td>Immature dendritic cell (iDC)</td>
+<td>زوائد ممکن است کمتر و نامنظم، شبیه pseudopod، باشند؛ توان فاگوسیتوز دارد و پس از برخورد با عامل بیگانه و بلعیدن آن مهاجرت می‌کند.</td>
+</tr>
+<tr>
+<td>Mature dendritic cell (mDC)</td>
+<td>زوائد بیشتر، بلندتر و منظم‌ترند؛ پس از بلوغ برای فاگوسیتوز آماده نیست و آنتی‌ژن را ارائه می‌کند.</td>
+</tr>
+</tbody></table>
+<h3 id="heading-27">Lymphocyteها و زیرگروه‌های B cell</h3>
+<table>
+<thead>
+<tr>
+<th>نوع یا زیرگروه</th>
+<th>جایگاه، منشأ یا ویژگی ذکرشده در درس</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>B cell</td>
+<td>از پایه‌های اختصاصیت ایمنی اکتسابی؛ جزء اصلی ایمنی هومورال؛ آنتی‌ژن را با BCR مستقیماً شناسایی می‌کند.</td>
+</tr>
+<tr>
+<td>T cell</td>
+<td>از پایه‌های اختصاصیت ایمنی اکتسابی؛ از پیش‌ساز مغز استخوان منشأ می‌گیرد و در thymus بالغ می‌شود.</td>
+</tr>
+<tr>
+<td>NK cell</td>
+<td>از نظر شکل lymphocyte است، اما جزو ایمنی ذاتی محسوب می‌شود.</td>
+</tr>
+<tr>
+<td>B-1</td>
+<td>بیشتر B cellهای حاصل از stem cellهای منشأگرفته از کبد جنینی به این رده تمایز می‌یابند.</td>
+</tr>
+<tr>
+<td>B-2</td>
+<td>از B lymphocyteهایی ایجاد می‌شود که پس از تولد از پیش‌سازهای مغز استخوان منشأ می‌گیرند.</td>
+</tr>
+<tr>
+<td>Follicular B cell</td>
+<td>از زیرگروه‌های اصلی حاصل از پیش‌سازهای B-2؛ lymphocyteهای در حال recirculation هستند.</td>
+</tr>
+<tr>
+<td>Marginal zone B cell</td>
+<td>از زیرگروه‌های اصلی حاصل از پیش‌سازهای B-2؛ در جوندگان در طحال فراوان و در انسان در گره‌های لنفاوی یافت می‌شود.</td>
+</tr>
+<tr>
+<td>مراحل نشان‌داده‌شده در شکل</td>
+<td>Pre-B، immature B cell، transitional B cell و B-2 B cell</td>
+</tr>
+</tbody></table>
+<h3 id="heading-28">مولکول‌های سطح B cell</h3>
+<table>
+<thead>
+<tr>
+<th>مولکول</th>
+<th>نقش یا ارتباط ذکرشده در درس</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>CD19</td>
+<td>همراه با CD21 در تقویت سیگنال فعال‌سازی B cell نقش دارد؛ pan marker سلول B است.</td>
+</tr>
+<tr>
+<td>CD21</td>
+<td>همراه با CD19 در تقویت سیگنال فعال‌سازی B cell نقش دارد.</td>
+</tr>
+<tr>
+<td>CD40</td>
+<td>روی B cell با CD40L روی T helper تعامل می‌کند.</td>
+</tr>
+<tr>
+<td>MHC class II</td>
+<td>برای ارائهٔ آنتی‌ژن به T helper ضروری است.</td>
+</tr>
+</tbody></table>
+<h3 id="heading-29">انواع T cell</h3>
+<table>
+<thead>
+<tr>
+<th>نوع T cell</th>
+<th>ویژگی یا عملکرد ذکرشده در درس</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>T helper یا CD4-positive T cell</td>
+<td>پاسخ ایمنی را هدایت می‌کند.</td>
+</tr>
+<tr>
+<td>T cytotoxic یا CD8-positive T cell</td>
+<td>سلول‌های آلوده و توموری را از بین می‌برد.</td>
+</tr>
+<tr>
+<td>Regulatory T (Treg)</td>
+<td>پاسخ بیش‌ازحد را مهار و به حفظ تحمل ایمنی کمک می‌کند؛ پیش‌تر T suppressor نیز نامیده می‌شد.</td>
+</tr>
+<tr>
+<td>Memory T</td>
+<td>در مواجههٔ مجدد پاسخ سریع‌تری ایجاد می‌کند.</td>
+</tr>
+<tr>
+<td>γδ T cell</td>
+<td>زنجیره‌های gamma و delta دارد، معمولاً CD4 و CD8 ندارد؛ در دوران جنینی بیشتر است و پس از تولد تعدادش کمتر می‌شود؛ حدود ۴ تا ۵٪ T cellهای خون محیطی را تشکیل می‌دهد، درحالی‌که در اسلاید مقدار نزدیک به ۴٪ نیز آمده است. بیشتر T cellها alpha-beta و حدود ۹۵ تا ۹۶٪ هستند.</td>
+</tr>
+<tr>
+<td>NKT cell</td>
+<td>ویژگی‌هایی از T و NK دارد؛ گیرندهٔ T آن عمدتاً آنتی‌ژن‌های گلیکولیپیدی ارائه‌شده به‌وسیلهٔ CD1 را شناسایی می‌کند.</td>
+</tr>
+</tbody></table>
+<h3 id="heading-30">NK cell</h3>
+<table>
+<thead>
+<tr>
+<th>ویژگی NK cell</th>
+<th>توضیح</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>جایگاه ایمنی</td>
+<td>Lymphocyte ایمنی ذاتی</td>
+</tr>
+<tr>
+<td>شناسایی هدف</td>
+<td>برای شناسایی هدف به گیرندهٔ اختصاصی مانند BCR یا TCR وابسته نیست.</td>
+</tr>
+<tr>
+<td>نقش‌ها</td>
+<td>کنترل زودهنگام عفونت‌های ویروسی و برخی تومورها</td>
+</tr>
+<tr>
+<td>Cytokine مطرح‌شده</td>
+<td>IFN-γ</td>
+</tr>
+<tr>
+<td>Markerها</td>
+<td>CD16 و CD56</td>
+</tr>
+<tr>
+<td>Perforin و granzymes</td>
+<td>در القای apoptosis سلول هدف نقش دارند.</td>
+</tr>
+<tr>
+<td>تنظیم فعالیت</td>
+<td>تعادل سیگنال‌های receptorهای فعال‌کننده و مهارکننده</td>
+</tr>
+<tr>
+<td>MHC class I</td>
+<td>کاهش آن می‌تواند حساسیت سلول هدف به NK را افزایش دهد.</td>
+</tr>
+</tbody></table>
+<h3 id="heading-31">APC و رابطهٔ T cell با MHC</h3>
+<table>
+<thead>
+<tr>
+<th>نوع سلول یا گروه</th>
+<th>مولکول‌ها یا ویژگی ذکرشده در درس</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>همهٔ سلول‌های هسته‌دار</td>
+<td>دارای MHC class I</td>
+</tr>
+<tr>
+<td>Professional APCها</td>
+<td>Dendritic cell، macrophage و B cell؛ دارای MHC class II و costimulatory molecules</td>
+</tr>
+<tr>
+<td>Non-professional</td>
+<td>ارائهٔ آنتی‌ژن وظیفهٔ اصلی آن سلول نیست.</td>
+</tr>
+</tbody></table>
+<table>
+<thead>
+<tr>
+<th>T cell</th>
+<th>MHC ارائه‌کنندهٔ پپتید که عمدتاً شناسایی می‌شود</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>CD4-positive T helper</td>
+<td>MHC class II</td>
+</tr>
+<tr>
+<td>CD8-positive cytotoxic T</td>
+<td>MHC class I</td>
+</tr>
+</tbody></table>
+<h3 id="heading-32">Follicular dendritic cell و dendritic cell ارائه‌کنندهٔ آنتی‌ژن</h3>
+<table>
+<thead>
+<tr>
+<th>ویژگی</th>
+<th>Follicular dendritic cell (FDC)</th>
+<th>Antigen-presenting dendritic cell مطرح‌شده در درس</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>منشأ</td>
+<td>از bone marrow precursorها منشأ نمی‌گیرد.</td>
+<td>در این درس در چارچوب ارائهٔ آنتی‌ژن به T cell مطرح می‌شود.</td>
+</tr>
+<tr>
+<td>محل یا ارتباط مکانی</td>
+<td>Germinal centerهای فولیکول‌های لنفاوی گره‌های لنفاوی، طحال و بافت‌های لنفاوی مخاطی</td>
+<td>در بافت آنتی‌ژن را دریافت و پردازش می‌کند و سپس به اندام لنفاوی مهاجرت می‌کند.</td>
+</tr>
+<tr>
+<td>کارکرد ذکرشده</td>
+<td>آنتی‌ژن‌های متصل به antibodyها یا complement products را نگه می‌دارد تا B lymphocyteها شناسایی کنند.</td>
+<td>آنتی‌ژن را به T cell ارائه می‌کند.</td>
+</tr>
+</tbody></table>
+<h3 id="heading-33">جمع‌بندی نقش سلول‌های اصلی</h3>
+<table>
+<thead>
+<tr>
+<th>سلول</th>
+<th>نقش جمع‌بندی‌شده</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Neutrophil و macrophage</td>
+<td>با فاگوسیتوز میکروب‌ها را از بین می‌برند.</td>
+</tr>
+<tr>
+<td>Dendritic cell</td>
+<td>آنتی‌ژن را ارائه می‌کند و پاسخ T را آغاز می‌کند.</td>
+</tr>
+<tr>
+<td>B cell</td>
+<td>آنتی‌بادی تولید می‌کند و حافظهٔ هومورال ایجاد می‌کند.</td>
+</tr>
+<tr>
+<td>T cell و NK cell</td>
+<td>در نابودی سلول‌های هدف نقش دارند.</td>
+</tr>
+</tbody></table>
+</section>
+
+<section class="noteSection keyTermsSection">
+    <h2 id="heading-34">۴. اصطلاحات و تعاریف</h2>
+<div class="calloutBox calloutBox--definition" data-box="definition"><div class="calloutBoxTitle">تعریف</div><div class="calloutBoxContent"><strong>Cytokine</strong>
+مادهٔ شیمیایی‌ای که از سلول آزاد می‌شود.</div></div>
+<div class="calloutBox calloutBox--definition" data-box="definition"><div class="calloutBoxTitle">تعریف</div><div class="calloutBoxContent"><strong>ایمنی ذاتی (innate immunity) و ایمنی تطبیقی یا اکتسابی (adaptive immunity)</strong>
+ایمنی ذاتی پاسخی سریع و از پیش آماده است؛ ایمنی تطبیقی یا اکتسابی پاسخی اختصاصی و دارای حافظه است.</div></div>
+<div class="calloutBox calloutBox--definition" data-box="definition"><div class="calloutBoxTitle">تعریف</div><div class="calloutBoxContent"><strong>فاگوسیتوز</strong>
+بلعیدن عامل بیگانه به‌وسیلهٔ سلول.</div></div>
+<div class="calloutBox calloutBox--definition" data-box="definition"><div class="calloutBoxTitle">تعریف</div><div class="calloutBoxContent"><strong>Respiratory burst یا oxidative burst</strong>
+افزایش سریع مصرف اکسیژن در این فرایند؛ در توصیف اسلاید، آزادسازی سریع ROS از جمله superoxide anion (O₂⁻) و hydrogen peroxide (H₂O₂) است.</div></div>
+<div class="calloutBox calloutBox--definition" data-box="definition"><div class="calloutBoxTitle">تعریف</div><div class="calloutBoxContent"><strong>Eosinophilia، neutrophilia و neutropenia</strong>
+Eosinophilia یعنی افزایش eosinophil در خون؛ به‌طور کلی پسوند -philia در نام سلول به افزایش آن اشاره می‌کند. Neutrophilia یعنی افزایش neutrophil در خون و neutropenia به کاهش neutrophil گفته می‌شود.</div></div>
+<div class="calloutBox calloutBox--definition" data-box="definition"><div class="calloutBoxTitle">تعریف</div><div class="calloutBoxContent"><strong>B-cell receptor (BCR)</strong>
+گیرندهٔ B cell که آنتی‌ژن را مستقیماً شناسایی می‌کند و به آنتی‌بادی غشایی شباهت دارد.</div></div>
+<div class="calloutBox calloutBox--definition" data-box="definition"><div class="calloutBoxTitle">تعریف</div><div class="calloutBoxContent"><strong>APC یا antigen-presenting cell</strong>
+سلولی که آنتی‌ژن را ارائه می‌کند؛ در این درس منظور ارائهٔ آنتی‌ژن به T cell است.</div></div>
+</section>
+
+<section class="noteSection selfAssessmentSection">
+    <h2 id="heading-35">۵. خود‌ارزیابی</h2>
+<h3 id="heading-36">سوالات تشریحی</h3>
+<div class="questionBox questionBox--essay" data-question="essay" data-question-number="1"><div class="questionBoxHeader">سؤال 1</div><div class="questionBoxPrompt"><p>دو مسیر اصلی تمایز hematopoietic stem cell را نام ببرید و توضیح دهید هر مسیر چه جایگاهی در منشأ سلول‌های ایمنی مطرح‌شده در درس دارد.</p></div><div class="questionBoxAnswer questionBoxAnswer--hidden" hidden=""><p>دو مسیر اصلی myeloid و lymphoid هستند. از ردهٔ lymphoid سلول‌های T، B و NK منشأ می‌گیرند؛ از سلول‌های myeloid دارای نقش در ایمنی ذاتی می‌توان basophil، neutrophil، eosinophil، monocyte، macrophage و dendritic cell را نام برد.</p></div><button type="button" class="questionAnswerToggle" aria-expanded="false">نمایش پاسخ</button></div>
+<div class="questionBox questionBox--essay" data-question="essay" data-question-number="2"><div class="questionBoxHeader">سؤال 2</div><div class="questionBoxPrompt"><p>مراحل فاگوسیتوز را به‌ترتیب توضیح دهید و نقش phagosome، lysosome و phagolysosome را بیان کنید.</p></div><div class="questionBoxAnswer questionBoxAnswer--hidden" hidden=""><p>ابتدا میکروب به‌وسیلهٔ receptorهای فاگوسیت شناسایی و متصل می‌شود. سلول آن را احاطه می‌کند و phagosome تشکیل می‌شود. سپس phagosome با lysosome ادغام شده و phagolysosome به‌وجود می‌آید؛ در آنجا عامل میکروبی تخریب و مواد باقیمانده دفع می‌شوند.</p></div><button type="button" class="questionAnswerToggle" aria-expanded="false">نمایش پاسخ</button></div>
+<div class="questionBox questionBox--essay" data-question="essay" data-question-number="3"><div class="questionBoxHeader">سؤال 3</div><div class="questionBoxPrompt"><p>Immature و mature dendritic cell را از نظر زوائد و عملکرد فاگوسیتوز و ارائهٔ آنتی‌ژن مقایسه کنید.</p></div><div class="questionBoxAnswer questionBoxAnswer--hidden" hidden=""><p>Immature dendritic cell ممکن است زوائد کمتر و نامنظم، شبیه pseudopod، داشته باشد و توان فاگوسیتوز دارد؛ پس از برخورد با عامل بیگانه و بلعیدن آن از محل مهاجرت می‌کند. Mature dendritic cell زوائد بیشتر، بلندتر و منظم‌تر دارد؛ پس از بلوغ برای فاگوسیتوز آماده نیست و کار ارائهٔ آنتی‌ژن را انجام می‌دهد.</p></div><button type="button" class="questionAnswerToggle" aria-expanded="false">نمایش پاسخ</button></div>
+<div class="questionBox questionBox--essay" data-question="essay" data-question-number="4"><div class="questionBoxHeader">سؤال 4</div><div class="questionBoxPrompt"><p>چهار مولکول مهم سطح B cell را نام ببرید و نقش یا ارتباط هرکدام را شرح دهید.</p></div><div class="questionBoxAnswer questionBoxAnswer--hidden" hidden=""><p>CD19 و CD21 در تقویت سیگنال فعال‌سازی B cell نقش دارند و CD19 pan marker سلول B است. CD40 روی B cell با CD40L روی T helper تعامل می‌کند. MHC class II برای ارائهٔ آنتی‌ژن به T helper ضروری است.</p></div><button type="button" class="questionAnswerToggle" aria-expanded="false">نمایش پاسخ</button></div>
+<div class="questionBox questionBox--essay" data-question="essay" data-question-number="5"><div class="questionBoxHeader">سؤال 5</div><div class="questionBoxPrompt"><p>سه professional APC را نام ببرید و رابطهٔ MHC class I و MHC class II با شناسایی آنتی‌ژن به‌وسیلهٔ T cellها را شرح دهید.</p></div><div class="questionBoxAnswer questionBoxAnswer--hidden" hidden=""><p>سه professional APC عبارت‌اند از dendritic cell، macrophage و B cell. در اسلاید، همهٔ سلول‌های هسته‌دار دارای MHC class I و professional APCها دارای MHC class II و costimulatory molecules معرفی شده‌اند. CD4-positive T helper عمدتاً آنتی‌ژن ارائه‌شده روی MHC class II را می‌شناسد و CD8-positive cytotoxic T عمدتاً آنتی‌ژن ارائه‌شده روی MHC class I را می‌شناسد.</p></div><button type="button" class="questionAnswerToggle" aria-expanded="false">نمایش پاسخ</button></div>
+<h3 id="heading-37">سوالات تستی</h3>
+<div class="questionBox questionBox--mcq" data-question="mcq" data-question-number="1"><div class="questionBoxHeader">سؤال 1</div><div class="questionBoxPrompt"><p>کدام گزینه دو ردهٔ اصلی تمایز hematopoietic stem cell را درست نشان می‌دهد؟</p></div><button type="button" class="questionOption" data-option="A"><span class="questionOptionLetter">A</span><span class="questionOptionText">Myeloid و lymphoid</span></button><button type="button" class="questionOption" data-option="B"><span class="questionOptionLetter">B</span><span class="questionOptionText">Erythroid و platelet</span></button><button type="button" class="questionOption" data-option="C"><span class="questionOptionLetter">C</span><span class="questionOptionText">B-1 و B-2</span></button><button type="button" class="questionOption" data-option="D"><span class="questionOptionLetter">D</span><span class="questionOptionText">Immature و mature</span></button><div class="questionBoxAnswer questionBoxAnswer--hidden" hidden=""><p>دو مسیر اصلی تمایز hematopoietic stem cell، ردهٔ myeloid و ردهٔ lymphoid هستند.</p><div class="questionCorrect" data-correct="A"><span class="questionCorrectLabel">پاسخ صحیح:</span><strong>A</strong></div></div></div>
+<div class="questionBox questionBox--mcq" data-question="mcq" data-question-number="2"><div class="questionBoxHeader">سؤال 2</div><div class="questionBoxPrompt"><p>کدام گزینه دربارهٔ granulocyteها مطابق درس است؟</p></div><button type="button" class="questionOption" data-option="A"><span class="questionOptionLetter">A</span><span class="questionOptionText">Monocyte، eosinophil و lymphocyte</span></button><button type="button" class="questionOption" data-option="B"><span class="questionOptionLetter">B</span><span class="questionOptionText">Neutrophil، eosinophil و basophil</span></button><button type="button" class="questionOption" data-option="C"><span class="questionOptionLetter">C</span><span class="questionOptionText">Basophil، monocyte و macrophage</span></button><button type="button" class="questionOption" data-option="D"><span class="questionOptionLetter">D</span><span class="questionOptionText">Lymphocyte، neutrophil و monocyte</span></button><div class="questionBoxAnswer questionBoxAnswer--hidden" hidden=""><p>Neutrophil، eosinophil و basophil به‌دلیل داشتن گرانول‌های واضح سیتوپلاسمی granulocyte هستند.</p><div class="questionCorrect" data-correct="B"><span class="questionCorrectLabel">پاسخ صحیح:</span><strong>B</strong></div></div></div>
+<div class="questionBox questionBox--mcq" data-question="mcq" data-question-number="3"><div class="questionBoxHeader">سؤال 3</div><div class="questionBoxPrompt"><p>کدام cytokine در تولید eosinophil نقش دارد؟</p></div><button type="button" class="questionOption" data-option="A"><span class="questionOptionLetter">A</span><span class="questionOptionText">IL-5</span></button><button type="button" class="questionOption" data-option="B"><span class="questionOptionLetter">B</span><span class="questionOptionText">M-CSF</span></button><button type="button" class="questionOption" data-option="C"><span class="questionOptionLetter">C</span><span class="questionOptionText">G-CSF</span></button><button type="button" class="questionOption" data-option="D"><span class="questionOptionLetter">D</span><span class="questionOptionText">IL-11</span></button><div class="questionBoxAnswer questionBoxAnswer--hidden" hidden=""><p>IL-5 در تولید eosinophil نقش دارد.</p><div class="questionCorrect" data-correct="A"><span class="questionCorrectLabel">پاسخ صحیح:</span><strong>A</strong></div></div></div>
+<div class="questionBox questionBox--mcq" data-question="mcq" data-question-number="4"><div class="questionBoxHeader">سؤال 4</div><div class="questionBoxPrompt"><p>در مسیر فاگوسیتوز، ادغام phagosome با lysosome چه ساختاری ایجاد می‌کند؟</p></div><button type="button" class="questionOption" data-option="A"><span class="questionOptionLetter">A</span><span class="questionOptionText">Pseudopodia</span></button><button type="button" class="questionOption" data-option="B"><span class="questionOptionLetter">B</span><span class="questionOptionText">Phagolysosome</span></button><button type="button" class="questionOption" data-option="C"><span class="questionOptionLetter">C</span><span class="questionOptionText">Germinal center</span></button><button type="button" class="questionOption" data-option="D"><span class="questionOptionLetter">D</span><span class="questionOptionText">c-Kit</span></button><div class="questionBoxAnswer questionBoxAnswer--hidden" hidden=""><p>Phagosome با lysosome ادغام می‌شود و phagolysosome به‌وجود می‌آید.</p><div class="questionCorrect" data-correct="B"><span class="questionCorrectLabel">پاسخ صحیح:</span><strong>B</strong></div></div></div>
+<div class="questionBox questionBox--mcq" data-question="mcq" data-question-number="5"><div class="questionBoxHeader">سؤال 5</div><div class="questionBoxPrompt"><p>کدام نام برای macrophage مقیم کبد به‌کار می‌رود؟</p></div><button type="button" class="questionOption" data-option="A"><span class="questionOptionLetter">A</span><span class="questionOptionText">Microglia</span></button><button type="button" class="questionOption" data-option="B"><span class="questionOptionLetter">B</span><span class="questionOptionText">Kupffer cells</span></button><button type="button" class="questionOption" data-option="C"><span class="questionOptionLetter">C</span><span class="questionOptionText">Alveolar macrophages</span></button><button type="button" class="questionOption" data-option="D"><span class="questionOptionLetter">D</span><span class="questionOptionText">Osteoclastها</span></button><div class="questionBoxAnswer questionBoxAnswer--hidden" hidden=""><p>Macrophageهای مقیم کبد Kupffer cells نامیده می‌شوند.</p><div class="questionCorrect" data-correct="B"><span class="questionCorrectLabel">پاسخ صحیح:</span><strong>B</strong></div></div></div>
+<div class="questionBox questionBox--mcq" data-question="mcq" data-question-number="6"><div class="questionBoxHeader">سؤال 6</div><div class="questionBoxPrompt"><p>کدام عبارت دربارهٔ BCR درست است؟</p></div><button type="button" class="questionOption" data-option="A"><span class="questionOptionLetter">A</span><span class="questionOptionText">پپتید آنتی‌ژنی را در قالب MHC شناسایی می‌کند.</span></button><button type="button" class="questionOption" data-option="B"><span class="questionOptionLetter">B</span><span class="questionOptionText">آنتی‌ژن را مستقیماً شناسایی می‌کند و به آنتی‌بادی غشایی شباهت دارد.</span></button><button type="button" class="questionOption" data-option="C"><span class="questionOptionLetter">C</span><span class="questionOptionText">فقط روی NK cell وجود دارد.</span></button><button type="button" class="questionOption" data-option="D"><span class="questionOptionLetter">D</span><span class="questionOptionText">برای ارائهٔ آنتی‌ژن به T helper ضروری است.</span></button><div class="questionBoxAnswer questionBoxAnswer--hidden" hidden=""><p>B cell با BCR آنتی‌ژن را مستقیماً شناسایی می‌کند و BCR به آنتی‌بادی غشایی شباهت دارد.</p><div class="questionCorrect" data-correct="B"><span class="questionCorrectLabel">پاسخ صحیح:</span><strong>B</strong></div></div></div>
+<div class="questionBox questionBox--mcq" data-question="mcq" data-question-number="7"><div class="questionBoxHeader">سؤال 7</div><div class="questionBoxPrompt"><p>کدام مولکول به‌عنوان pan marker سلول T معرفی شده است؟</p></div><button type="button" class="questionOption" data-option="A"><span class="questionOptionLetter">A</span><span class="questionOptionText">CD19</span></button><button type="button" class="questionOption" data-option="B"><span class="questionOptionLetter">B</span><span class="questionOptionText">CD21</span></button><button type="button" class="questionOption" data-option="C"><span class="questionOptionLetter">C</span><span class="questionOptionText">CD3</span></button><button type="button" class="questionOption" data-option="D"><span class="questionOptionLetter">D</span><span class="questionOptionText">CD117</span></button><div class="questionBoxAnswer questionBoxAnswer--hidden" hidden=""><p>CD3 به‌عنوان pan marker سلول T معرفی شده است.</p><div class="questionCorrect" data-correct="C"><span class="questionCorrectLabel">پاسخ صحیح:</span><strong>C</strong></div></div></div>
+<div class="questionBox questionBox--mcq" data-question="mcq" data-question-number="8"><div class="questionBoxHeader">سؤال 8</div><div class="questionBoxPrompt"><p>کدام جفت، رابطهٔ T cell و MHC را مطابق درس درست نشان می‌دهد؟</p></div><button type="button" class="questionOption" data-option="A"><span class="questionOptionLetter">A</span><span class="questionOptionText">CD4-positive T helper — MHC class II</span></button><button type="button" class="questionOption" data-option="B"><span class="questionOptionLetter">B</span><span class="questionOptionText">CD4-positive T helper — MHC class I</span></button><button type="button" class="questionOption" data-option="C"><span class="questionOptionLetter">C</span><span class="questionOptionText">CD8-positive cytotoxic T — MHC class II</span></button><button type="button" class="questionOption" data-option="D"><span class="questionOptionLetter">D</span><span class="questionOptionText">CD8-positive cytotoxic T — CD40L</span></button><div class="questionBoxAnswer questionBoxAnswer--hidden" hidden=""><p>CD4-positive T helper عمدتاً آنتی‌ژن ارائه‌شده روی MHC class II را می‌شناسد؛ CD8-positive cytotoxic T عمدتاً MHC class I را می‌شناسد.</p><div class="questionCorrect" data-correct="A"><span class="questionCorrectLabel">پاسخ صحیح:</span><strong>A</strong></div></div></div>
+<div class="questionBox questionBox--mcq" data-question="mcq" data-question-number="9"><div class="questionBoxHeader">سؤال 9</div><div class="questionBoxPrompt"><p>کدام گزینه دربارهٔ NK cell درست است؟</p></div><button type="button" class="questionOption" data-option="A"><span class="questionOptionLetter">A</span><span class="questionOptionText">برای شناسایی هدف به BCR وابسته است.</span></button><button type="button" class="questionOption" data-option="B"><span class="questionOptionLetter">B</span><span class="questionOptionText">جزو ایمنی تطبیقی است و marker آن CD19 است.</span></button><button type="button" class="questionOption" data-option="C"><span class="questionOptionLetter">C</span><span class="questionOptionText">lymphocyte ایمنی ذاتی است و markerهای CD16 و CD56 دارد.</span></button><button type="button" class="questionOption" data-option="D"><span class="questionOptionLetter">D</span><span class="questionOptionText">تنها در مغز استخوان حضور دارد و MHC class II را ارائه می‌کند.</span></button><div class="questionBoxAnswer questionBoxAnswer--hidden" hidden=""><p>NK cell lymphocyte ایمنی ذاتی است و CD16 و CD56 دارد؛ برای شناسایی هدف به گیرندهٔ اختصاصی مانند BCR یا TCR وابسته نیست.</p><div class="questionCorrect" data-correct="C"><span class="questionCorrectLabel">پاسخ صحیح:</span><strong>C</strong></div></div></div>
+<div class="questionBox questionBox--mcq" data-question="mcq" data-question-number="10"><div class="questionBoxHeader">سؤال 10</div><div class="questionBoxPrompt"><p>کدام گزینه عملکرد Follicular dendritic cell (FDC) را مطابق درس بیان می‌کند؟</p></div><button type="button" class="questionOption" data-option="A"><span class="questionOptionLetter">A</span><span class="questionOptionText">آنتی‌ژن متصل به antibodyها یا complement products را نگه می‌دارد تا B lymphocyteها شناسایی کنند.</span></button><button type="button" class="questionOption" data-option="B"><span class="questionOptionLetter">B</span><span class="questionOptionText">از bone marrow precursorها منشأ می‌گیرد و آنتی‌ژن را به T cell ارائه می‌کند.</span></button><button type="button" class="questionOption" data-option="C"><span class="questionOptionLetter">C</span><span class="questionOptionText">با فاگوسیتوز میکروب‌ها به phagolysosome تبدیل می‌شود.</span></button><button type="button" class="questionOption" data-option="D"><span class="questionOptionLetter">D</span><span class="questionOptionText">سلول آلوده را با Perforin و granzymes از بین می‌برد.</span></button><div class="questionBoxAnswer questionBoxAnswer--hidden" hidden=""><p>FDC آنتی‌ژن‌های متصل به antibodyها یا complement products را به دام می‌اندازد و روی سطح خود نگه می‌دارد تا B lymphocyteها آن‌ها را شناسایی کنند.</p><div class="questionCorrect" data-correct="A"><span class="questionCorrectLabel">پاسخ صحیح:</span><strong>A</strong></div></div></div>
+</section>
+
+<section class="noteSection reviewSection">
+    <h2 id="heading-38">۶. موارد نیازمند بررسی</h2>
+<div class="calloutBox calloutBox--review" data-box="review"><div class="calloutBoxTitle">نیازمند بررسی</div><div class="calloutBoxContent"><strong>عبارت‌های نمودار M1/M2</strong>
+در متن قابل‌استخراج اسلاید، بخشی از نام cytokineها و اتصال آن‌ها به شاخه‌های نمودار روشن نیست؛ به‌ویژه «IL-14» و جایگاه برخی موارد مانند IL-10 باید با تصویر اصلی بررسی شود.
+<strong>وضعیت:</strong> نیازمند بررسی</div></div>
+<div class="calloutBox calloutBox--review" data-box="review"><div class="calloutBoxTitle">نیازمند بررسی</div><div class="calloutBoxContent"><strong>نام مؤسسه و تهیه‌کنندهٔ ویدیو</strong>
+در گفتار، نام به‌صورت «Mike Oldstone» و «Mike Goldstone» و نام مؤسسه به‌صورت «SCPS» شنیده می‌شود؛ از متن اسلاید قابل تأیید نیست.
+<strong>وضعیت:</strong> نیازمند بررسی</div></div>
+<div class="calloutBox calloutBox--review" data-box="review"><div class="calloutBoxTitle">نیازمند بررسی</div><div class="calloutBoxContent"><strong>توصیف سوراخ‌شدن غشای سلول آلوده در ویدیو</strong>
+گفتار این کار را به آنزیم‌ها نسبت می‌دهد، درحالی‌که اسلاید دربارهٔ نقش Perforin و granzymes در القای apoptosis می‌گوید؛ هر دو بیان حفظ شده‌اند و نسبت دقیق اجزا در منبع حاضر روشن نیست.
+<strong>وضعیت:</strong> نیازمند بررسی</div></div>
+</section>
+
+<section class="noteSection editorAndSourcesSection">
+    <h2 id="heading-39">۷. ادیتور و منابع استفاده‌شده</h2>
+<p><strong>ادیتور:</strong> ویرایش آکادمیک خودکار (Layer 5)</p>
+<p><strong>منابع استفاده‌شده:</strong></p>
+<ul>
+<li>صوت درس</li>
+</ul>
+</section>
+
+<section class="noteSection completionSection">
+    <h2 id="heading-40">۸. گزارش تکمیل بودن محتوا</h2>
+<p><strong>برآورد تقریبی تکمیل محتوا:</strong> حدود ۹۵٪</p>
+<ul>
+<li>✓ پوشش اسلایدها: محتوای آموزشی و تصاویرِ ارجاع‌شده در متن بازسازی‌شده‌اند.</li>
+<li>✓ پوشش صوت درس: توضیحات، مثال‌ها، فعالیت‌ها و تأکیدهای آموزشیِ موجود در متن حفظ شده‌اند.</li>
+<li>⚠ موارد حل‌نشده: عبارت‌های نمودار M1/M2، نام مؤسسه و تهیه‌کنندهٔ ویدیو، و توصیف دقیق سوراخ‌شدن غشای سلول آلوده نیازمند بررسی‌اند.</li>
+</ul>
+</section>
+
+    </main>
+
+
+    <button
+        class="backToTop"
+        type="button"
+        aria-label="بازگشت به ابتدای صفحه"
+    >
+        <i data-lucide="arrow-up"></i>
+    </button>
+
+
+    <script src="../src/themeSwitcher.js"></script>
+    <script src="../src/fontSizeSwitcher.js"></script>
+    <script src="../src/aboutModal.js"></script>
+    <script src="../src/quickNavigation.js"></script>
+    <script src="../src/print.js"></script>
+    <script src="../src/search.js"></script>
+    <script src="../src/highlight.js"></script>
+    <script src="../src/stickyNotes.js"></script>
+    <script src="../src/viewPersistence.js"></script>
+    <script src="../src/questionInteractions.js"></script>
+    <script src="../src/fontSwitcher.js"></script>
+    <script>
+        lucide.createIcons();
+    </script>
+
+<script>
+    const sidebar = document.querySelector(".sidebar");
+    const sidebarToggle = document.querySelector(".sidebarToggle");
+    const sidebarBackdrop = document.querySelector(".sidebarBackdrop");
+
+    function openSidebar() {
+        if (!sidebar || !sidebarToggle || !sidebarBackdrop) {
+            return;
+        }
+
+        sidebar.classList.add("isOpen");
+        sidebarBackdrop.classList.add("isVisible");
+
+        sidebarToggle.setAttribute("aria-expanded", "true");
+        sidebar.setAttribute("aria-hidden", "false");
+    }
+
+    function closeSidebar() {
+        if (!sidebar || !sidebarToggle || !sidebarBackdrop) {
+            return;
+        }
+
+        sidebar.classList.remove("isOpen");
+        sidebarBackdrop.classList.remove("isVisible");
+
+        sidebarToggle.setAttribute("aria-expanded", "false");
+        sidebar.setAttribute("aria-hidden", "true");
+    }
+
+    if (sidebarToggle) {
+        sidebarToggle.addEventListener("click", () => {
+            if (sidebar.classList.contains("isOpen")) {
+                closeSidebar();
+            } else {
+                openSidebar();
+            }
+        });
+    }
+
+    if (sidebarBackdrop) {
+        sidebarBackdrop.addEventListener("click", closeSidebar);
+    }
+
+    document.addEventListener("keydown", (event) => {
+        if (event.key === "Escape") {
+            closeSidebar();
+        }
+    });
+
+    document.querySelectorAll(".tocItem").forEach((item) => {
+        item.addEventListener("click", closeSidebar);
+    });
+</script>
+
+</body>
+
+</html>
