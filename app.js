@@ -77,7 +77,7 @@ function renderNotes(query = "") {
         return;
     }
 
-    emptyState.hidden = true;
+    emptyState.hidden = false;
 
     filtered.forEach((note) => {
         const card = document.createElement("a");
