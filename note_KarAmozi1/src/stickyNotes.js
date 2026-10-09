@@ -34,18 +34,8 @@ const stickyNoteContainer = document.querySelector(
     ".noteContainer"
 );
 
-const stickyNotesGeneratedDateElement =
-    document.querySelector(
-        ".metadataValue"
-    );
-
-const stickyNotesGeneratedDate =
-    stickyNotesGeneratedDateElement?.textContent.trim();
-
 const stickyNotesStorageKey =
-    stickyNotesGeneratedDate
-        ? `stickyNotes:${stickyNotesGeneratedDate}`
-        : "stickyNotes";
+    "stickyNotes";
 
 let stickyNotes = [];
 
@@ -215,103 +205,93 @@ function refreshIcons() {
    ========================================================= */
 
 function clampStickyNotePosition(
-stickyNote,
-noteElement = null
+    stickyNote,
+    noteElement = null
 ) {
-if (
-!stickyNoteContainer ||
-!stickyNotesLayer
-) {
-return false;
+    if (
+        !stickyNoteContainer ||
+        !stickyNotesLayer
+    ) {
+        return false;
+    }
+
+    const noteWidth =
+        noteElement?.offsetWidth ||
+        stickyNote.width ||
+        240;
+
+    const noteHeight =
+        noteElement?.offsetHeight ||
+        stickyNote.height ||
+        180;
+
+    const layerRect =
+        stickyNotesLayer.getBoundingClientRect();
+
+    const layerWidth =
+        Math.max(
+            0,
+            Math.round(layerRect.width)
+        );
+
+    const layerHeight =
+        Math.max(
+            0,
+            Math.round(layerRect.height)
+        );
+
+    const maxX =
+        Math.max(
+            0,
+            layerWidth - noteWidth
+        );
+
+    const maxY =
+        Math.max(
+            0,
+            layerHeight - noteHeight
+        );
+
+    const oldX =
+        Number(stickyNote.x) || 0;
+
+    const oldY =
+        Number(stickyNote.y) || 0;
+
+    const newX =
+        Math.max(
+            0,
+            Math.min(
+                oldX,
+                maxX
+            )
+        );
+
+    const newY =
+        Math.max(
+            0,
+            Math.min(
+                oldY,
+                maxY
+            )
+        );
+
+    stickyNote.x = newX;
+    stickyNote.y = newY;
+
+    if (noteElement) {
+        noteElement.style.left =
+            `${newX}px`;
+
+        noteElement.style.top =
+            `${newY}px`;
+    }
+
+    return (
+        oldX !== newX ||
+        oldY !== newY
+    );
 }
-
-const noteWidth =
-    noteElement?.offsetWidth ||
-    stickyNote.width ||
-    240;
-
-const noteHeight =
-    noteElement?.offsetHeight ||
-    stickyNote.height ||
-    180;
-
-const layerRect =
-    stickyNotesLayer.getBoundingClientRect();
-
-const header =
-    document.querySelector(".appHeader");
-
-const headerBottom =
-    header
-        ? header.getBoundingClientRect().bottom
-        : 0;
-
-const minY =
-    Math.max(
-        0,
-        headerBottom - layerRect.top
-    );
-
-const layerWidth =
-    Math.max(
-        0,
-        Math.round(layerRect.width)
-    );
-
-const layerHeight =
-    Math.max(
-        0,
-        Math.round(layerRect.height)
-    );
-
-const maxX =
-    Math.max(
-        0,
-        layerWidth - noteWidth
-    );
-
-const maxY =
-    Math.max(
-        minY,
-        layerHeight - noteHeight
-    );
-
-const oldX =
-    Number(stickyNote.x) || 0;
-
-const oldY =
-    Number(stickyNote.y) || 0;
-
-const newX =
-    Math.max(
-        0,
-        Math.min(oldX, maxX)
-    );
-
-const newY =
-    Math.max(
-        minY,
-        Math.min(oldY, maxY)
-    );
-
-stickyNote.x = newX;
-stickyNote.y = newY;
-
-if (noteElement) {
-    noteElement.style.left =
-        `${newX}px`;
-
-    noteElement.style.top =
-        `${newY}px`;
-}
-
-return (
-    oldX !== newX ||
-    oldY !== newY
-);
-
-}
-
 
 function clampAllStickyNotes() {
     if (!stickyNoteContainer) {
