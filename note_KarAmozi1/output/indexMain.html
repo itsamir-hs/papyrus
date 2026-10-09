@@ -1,0 +1,1478 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl" data-theme="light">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>فصل ۲: اصول کلی حفاظت و پیشگیری از آلودگی کارکنان و محیط آزمایشگاه</title>
+
+    <link rel="stylesheet" href="../styles/base.css">
+    <link rel="stylesheet" href="../styles/rtl.css">
+    <link rel="stylesheet" href="../styles/responsive.css">
+
+    <link
+        rel="stylesheet"
+        href="../node_modules/katex/dist/katex.min.css"
+    >
+
+    <link rel="stylesheet" href="../styles/dark.css">
+    <link rel="stylesheet" href="../styles/forest.css">
+    <link rel="stylesheet" href="../styles/paperLike.css">
+    <link rel="stylesheet" href="../styles/neon.css">
+
+    <script src="../node_modules/lucide/dist/umd/lucide.js"></script>
+</head>
+
+<body>
+
+    <header class="appHeader">
+
+        <button
+            class="sidebarToggle"
+            type="button"
+            aria-label="باز کردن فهرست مطالب"
+            aria-expanded="false"
+        >
+            <i data-lucide="panel-left"></i>
+        </button>
+
+
+        <div class="appTitle">
+            پاپیروس
+        </div>
+
+
+        <div class="headerControls">
+
+<button
+    class="searchButton"
+    type="button"
+    aria-label="جستجو در جزوه"
+    aria-expanded="false"
+>
+    <i data-lucide="search"></i>
+</button>
+
+<div class="highlightSwitcher">
+
+    <button
+        class="highlightToggle"
+        type="button"
+        aria-label="هایلایت"
+        aria-expanded="false"
+    >
+        <i data-lucide="highlighter"></i>
+    </button>
+
+
+<div
+    class="highlightOptions"
+    aria-hidden="true"
+>
+
+    <button
+        class="highlightPowerToggle"
+        type="button"
+        aria-label="روشن یا خاموش کردن هایلایت"
+        aria-pressed="true"
+    >
+        <i data-lucide="highlighter"></i>
+        <span>هایلایت روشن</span>
+    </button>
+
+        <div class="highlightColors">
+
+            <button
+                class="highlightColor"
+                type="button"
+                data-highlight-color="#fff176"
+                aria-label="هایلایت زرد"
+                style="--highlightColor: #fff176;"
+            ></button>
+
+            <button
+                class="highlightColor"
+                type="button"
+                data-highlight-color="#a5d6a7"
+                aria-label="هایلایت سبز"
+                style="--highlightColor: #a5d6a7;"
+            ></button>
+
+            <button
+                class="highlightColor"
+                type="button"
+                data-highlight-color="#90caf9"
+                aria-label="هایلایت آبی"
+                style="--highlightColor: #90caf9;"
+            ></button>
+
+            <button
+                class="highlightColor"
+                type="button"
+                data-highlight-color="#ce93d8"
+                aria-label="هایلایت بنفش"
+                style="--highlightColor: #ce93d8;"
+            ></button>
+
+            <button
+                class="highlightColor"
+                type="button"
+                data-highlight-color="#ffab91"
+                aria-label="هایلایت نارنجی"
+                style="--highlightColor: #ffab91;"
+            ></button>
+
+            <button
+                class="highlightColor"
+                type="button"
+                data-highlight-color="#ef9a9a"
+                aria-label="هایلایت قرمز"
+                style="--highlightColor: #ef9a9a;"
+            ></button>
+
+            <button
+                class="highlightColor"
+                type="button"
+                data-highlight-color="#f48fb1"
+                aria-label="هایلایت صورتی"
+                style="--highlightColor: #f48fb1;"
+            ></button>
+
+            <button
+                class="highlightColor"
+                type="button"
+                data-highlight-color="#80cbc4"
+                aria-label="هایلایت فیروزه‌ای"
+                style="--highlightColor: #80cbc4;"
+            ></button>
+
+        </div>
+
+
+        <div class="highlightDivider"></div>
+
+
+        <label
+            class="highlightCustomColor"
+            aria-label="انتخاب رنگ دلخواه"
+        >
+            <input
+                class="highlightColorInput"
+                type="color"
+                value="#fff176"
+            >
+
+            <i data-lucide="palette"></i>
+        </label>
+
+
+        <button
+            class="highlightEraser"
+            type="button"
+            aria-label="پاک کردن هایلایت"
+        >
+            <i data-lucide="eraser"></i>
+            <span>پاک‌کن</span>
+        </button>
+
+    </div>
+
+</div>
+
+<div class="stickyNotesSwitcher">
+
+    <button
+        class="stickyNotesToggle"
+        type="button"
+        aria-label="یادداشت‌های چسبان"
+        aria-expanded="false"
+    >
+        <i data-lucide="notebook-pen"></i>
+    </button>
+
+</div>
+
+            <div class="fontSizeSwitcher">
+
+                <button
+                    class="fontSizeControl"
+                    type="button"
+                    data-action="decrease"
+                    aria-label="کاهش اندازه فونت"
+                >
+                    <i data-lucide="minus"></i>
+                </button>
+
+<button
+    type="button"
+    class="fontSizeControl fontSwitchControl"
+    aria-label="تغییر فونت"
+>
+    <i data-lucide="type"></i>
+</button>
+                <button
+                    class="fontSizeControl"
+                    type="button"
+                    data-action="increase"
+                    aria-label="افزایش اندازه فونت"
+                >
+                    <i data-lucide="plus"></i>
+                </button>
+
+            </div>
+
+
+            <div class="themeSwitcher">
+
+                <button
+                    class="themeToggle"
+                    type="button"
+                    aria-label="تغییر تم"
+                    aria-expanded="false"
+                >
+                    <i data-lucide="sun"></i>
+                </button>
+
+<div class="themeOptions">
+
+    <button
+        class="themeButton"
+        type="button"
+        data-theme="light"
+        aria-label="تم روشن"
+    >
+        <i data-lucide="sun"></i>
+    </button>
+
+    <button
+        class="themeButton"
+        type="button"
+        data-theme="dark"
+        aria-label="تم تاریک"
+    >
+        <i data-lucide="moon"></i>
+    </button>
+
+    <button
+        class="themeButton"
+        type="button"
+        data-theme="forest"
+        aria-label="تم جنگلی"
+    >
+        <i data-lucide="trees"></i>
+    </button>
+
+    <button
+        class="themeButton"
+        type="button"
+        data-theme="paperLike"
+        aria-label="تم پیپر لایک"
+    >
+        <i data-lucide="notebook-pen"></i>
+    </button>
+
+<button
+    class="themeButton"
+    type="button"
+    data-theme="neon"
+    aria-label="تم نئون"
+>
+<i data-lucide="zap"></i>
+</button>
+
+
+</div>
+
+            </div>
+
+<button
+    class="printButton"
+    type="button"
+    aria-label="چاپ جزوه"
+>
+    <i data-lucide="printer"></i>
+</button>
+
+
+            <button
+                class="aboutButton"
+                type="button"
+                aria-label="درباره ما"
+            >
+                <i data-lucide="users-round"></i>
+            </button>
+
+        </div>
+
+    </header>
+
+<div
+    class="searchPanel"
+    aria-hidden="true"
+>
+
+    <div class="searchPanelContent">
+
+        <div class="searchInputWrapper">
+
+            <i data-lucide="search"></i>
+
+            <input
+                class="searchInput"
+                type="search"
+                placeholder="جستجو در جزوه..."
+                aria-label="جستجو در جزوه"
+                autocomplete="off"
+            >
+
+            <button
+                class="searchClearButton"
+                type="button"
+                aria-label="پاک کردن جستجو"
+            >
+                <i data-lucide="x"></i>
+            </button>
+
+        </div>
+
+
+        <div class="searchResultsInfo">
+            <span class="searchResultsCount">۰ نتیجه</span>
+
+            <div class="searchNavigation">
+
+                <button
+                    class="searchPreviousButton"
+                    type="button"
+                    aria-label="نتیجه قبلی"
+                    disabled
+                >
+                    <i data-lucide="chevron-up"></i>
+                </button>
+
+                <button
+                    class="searchNextButton"
+                    type="button"
+                    aria-label="نتیجه بعدی"
+                    disabled
+                >
+                    <i data-lucide="chevron-down"></i>
+                </button>
+
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+    <aside
+        class="sidebar"
+        aria-label="فهرست مطالب"
+        aria-hidden="true"
+    >
+
+        <div class="sidebarHeader">
+            <h2>فهرست مطالب</h2>
+        </div>
+
+        <nav
+            class="sidebarContent"
+            aria-label="فهرست مطالب"
+        >
+            
+                <a
+                    class="tocItem tocItemPrimary"
+                    href="#heading-1"
+                >
+                    ۱. مقدمه و کلیات
+                </a>
+            
+                <a
+                    class="tocItem tocItemPrimary"
+                    href="#heading-2"
+                >
+                    ۲. متن اصلی جزوه
+                </a>
+            
+                <a
+                    class="tocItem tocItemSecondary"
+                    href="#heading-3"
+                >
+                    خطرات آزمایشگاه و اصول کلی حفاظت
+                </a>
+            
+                <a
+                    class="tocItem tocItemSecondary"
+                    href="#heading-4"
+                >
+                    طراحی و جداسازی فضاهای آزمایشگاه
+                </a>
+            
+                <a
+                    class="tocItem tocItemSecondary"
+                    href="#heading-5"
+                >
+                    رفتارهای ممنوع و پیشگیری از انتقال آلودگی
+                </a>
+            
+                <a
+                    class="tocItem tocItemSecondary"
+                    href="#heading-6"
+                >
+                    استفاده از دستکش
+                </a>
+            
+                <a
+                    class="tocItem tocItemSecondary"
+                    href="#heading-7"
+                >
+                    سرسوزن و پیپت
+                </a>
+            
+                <a
+                    class="tocItem tocItemSecondary"
+                    href="#heading-8"
+                >
+                    شست‌وشوی دست
+                </a>
+            
+                <a
+                    class="tocItem tocItemSecondary"
+                    href="#heading-9"
+                >
+                    شست‌وشوی چشم
+                </a>
+            
+                <a
+                    class="tocItem tocItemSecondary"
+                    href="#heading-10"
+                >
+                    محافظت از چشم و صورت
+                </a>
+            
+                <a
+                    class="tocItem tocItemSecondary"
+                    href="#heading-11"
+                >
+                    لباس کارکنان
+                </a>
+            
+                <a
+                    class="tocItem tocItemPrimary"
+                    href="#heading-12"
+                >
+                    ۳. جداول مرور سریع
+                </a>
+            
+                <a
+                    class="tocItem tocItemSecondary"
+                    href="#heading-13"
+                >
+                    خطرات آزمایشگاه
+                </a>
+            
+                <a
+                    class="tocItem tocItemSecondary"
+                    href="#heading-14"
+                >
+                    اصول طراحی و جداسازی فضاها
+                </a>
+            
+                <a
+                    class="tocItem tocItemSecondary"
+                    href="#heading-15"
+                >
+                    رفتارها و پیشگیری از انتقال آلودگی
+                </a>
+            
+                <a
+                    class="tocItem tocItemSecondary"
+                    href="#heading-16"
+                >
+                    انواع دستکش و کاربرد آن‌ها
+                </a>
+            
+                <a
+                    class="tocItem tocItemSecondary"
+                    href="#heading-17"
+                >
+                    موقعیت‌های استفاده و تعویض دستکش
+                </a>
+            
+                <a
+                    class="tocItem tocItemSecondary"
+                    href="#heading-18"
+                >
+                    استفاده مجدد و بررسی دستکش‌ها
+                </a>
+            
+                <a
+                    class="tocItem tocItemSecondary"
+                    href="#heading-19"
+                >
+                    حساسیت به لاتکس
+                </a>
+            
+                <a
+                    class="tocItem tocItemSecondary"
+                    href="#heading-20"
+                >
+                    سرسوزن و پیپت
+                </a>
+            
+                <a
+                    class="tocItem tocItemSecondary"
+                    href="#heading-21"
+                >
+                    شست‌وشوی دست
+                </a>
+            
+                <a
+                    class="tocItem tocItemSecondary"
+                    href="#heading-22"
+                >
+                    شست‌وشوی چشم
+                </a>
+            
+                <a
+                    class="tocItem tocItemSecondary"
+                    href="#heading-23"
+                >
+                    محافظت از چشم و صورت
+                </a>
+            
+                <a
+                    class="tocItem tocItemSecondary"
+                    href="#heading-24"
+                >
+                    لباس کارکنان
+                </a>
+            
+                <a
+                    class="tocItem tocItemPrimary"
+                    href="#heading-25"
+                >
+                    ۴. اصطلاحات و تعاریف
+                </a>
+            
+                <a
+                    class="tocItem tocItemPrimary"
+                    href="#heading-26"
+                >
+                    ۵. خود‌ارزیابی
+                </a>
+            
+                <a
+                    class="tocItem tocItemSecondary"
+                    href="#heading-27"
+                >
+                    سوالات تشریحی
+                </a>
+            
+                <a
+                    class="tocItem tocItemSecondary"
+                    href="#heading-28"
+                >
+                    سوالات تستی
+                </a>
+            
+                <a
+                    class="tocItem tocItemPrimary"
+                    href="#heading-29"
+                >
+                    ۶. موارد نیازمند بررسی
+                </a>
+            
+                <a
+                    class="tocItem tocItemPrimary"
+                    href="#heading-30"
+                >
+                    ۷. ادیتور و منابع استفاده‌شده
+                </a>
+            
+                <a
+                    class="tocItem tocItemPrimary"
+                    href="#heading-31"
+                >
+                    ۸. گزارش تکمیل بودن محتوا
+                </a>
+            
+        </nav>
+
+    </aside>
+
+
+    <div class="sidebarBackdrop"></div>
+
+<aside
+    class="stickyNotesPanel"
+    aria-label="یادداشت‌های چسبان"
+    aria-hidden="true"
+>
+
+    <div class="stickyNotesPanelHeader">
+
+        <h2>یادداشت‌های چسبان</h2>
+
+        <button
+            class="addStickyNoteButton"
+            type="button"
+        >
+            <i data-lucide="plus"></i>
+            <span>یادداشت جدید</span>
+        </button>
+
+    </div>
+
+    <div class="stickyNotesPanelContent">
+
+        <div class="stickyNotesEmptyState">
+<i data-lucide="notebook-pen"></i>
+
+            <p>
+                هنوز یادداشتی ایجاد نکرده‌اید.
+            </p>
+
+        </div>
+
+        <div class="stickyNotesList"></div>
+
+    </div>
+
+</aside>
+
+<div class="stickyNotesBackdrop"></div>
+
+
+    <div
+        class="aboutModal"
+        aria-hidden="true"
+    >
+
+        <div class="aboutModalBackdrop"></div>
+
+        <section
+            class="aboutModalContent"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="aboutTitle"
+        >
+
+            <button
+                class="aboutCloseButton"
+                type="button"
+                aria-label="بستن"
+            >
+                <i data-lucide="x"></i>
+            </button>
+
+            <h2 id="aboutTitle">
+                آدم‌هایی که اینجا رو ساختن
+            </h2>
+
+            <p class="aboutIntroduction">
+                ما یک تیم کوچک هستیم که باور داریم یادگیری باید
+                لذت‌بخش، عمیق، و در دسترس باشد. جزوه‌ساز تلاش ماست
+                برای تبدیل ساعت‌های طولانی کلاس به متن‌هایی که واقعاً
+                بتوانی با آن‌ها چیزی یاد بگیری.
+            </p>
+
+
+<div class="developerList">
+
+    <article class="developerCard">
+        <h3>شبنم رضاپور</h3>
+        <p>کسی که PDFها را راضی کرد محتوایشان را بی‌کم‌وکاست لو بدهند.</p>
+    </article>
+
+    <article class="developerCard">
+        <h3>امیر‌حسین شکری‌زاده سعادت‌آباد</h3>
+        <p>صدای کلاس را به متن تبدیل کرد، حتی وقتی استاد وسط جمله با میکروفون قهر می‌کرد.</p>
+    </article>
+
+    <article class="developerCard">
+        <h3>مهراد اسدی</h3>
+        <p>پرامپت‌ها را طوری چید که LLM فکر کرد دارد پایان‌نامه دکتری می‌نویسد.</p>
+    </article>
+
+    <article class="developerCard">
+        <h3>امیرسالار سهام‌پور</h3>
+        <p>مارک‌داون را به HTML تبدیل کرد و به جزوه ظاهری داد که آدم دلش بخواهد بخواندش.</p>
+    </article>
+
+</div>
+
+            <p class="aboutFooter">
+                این پروژه با صبر، چای، و چند شب بی‌خوابی ساخته شد.
+                <br>
+                امیدواریم یادگیریت را لذت‌بخش‌تر کند.
+            </p>
+
+        </section>
+
+    </div>
+
+
+    <div class="quickNavigation">
+        <div class="quickNavigationList"></div>
+    </div>
+
+
+    <main class="noteContainer">
+
+<div class="stickyNotesLayer"></div>
+
+        <section class="noteHeader">
+
+            <div class="noteMetadata">
+
+                <span class="metadataItem">
+                    <span class="metadataLabel">درس</span>
+                    <span class="metadataValue">حفاظت و ایمنی آزمایشگاه</span>
+                </span>
+
+                <span class="metadataItem">
+                    <span class="metadataLabel">مبحث</span>
+                    <span class="metadataValue">اصول کلی حفاظت و پیشگیری از آلودگی کارکنان و محیط آزمایشگاه</span>
+                </span>
+
+                <span class="metadataItem">
+                    <span class="metadataLabel">استاد</span>
+                    <span class="metadataValue"></span>
+                </span>
+
+                <span class="metadataItem">
+                    <span class="metadataLabel">تاریخ جلسه</span>
+                    <span class="metadataValue"></span>
+                </span>
+
+                <span class="metadataItem">
+                    <span class="metadataLabel">تاریخ تولید جزوه</span>
+                    <span class="metadataValue generatedDate">2026-10-09T00:49:28</span>
+                </span>
+
+            </div>
+
+
+            <div class="aiWarning">
+                <i data-lucide="triangle-alert"></i>
+
+                <p>
+                    این جزوه با استفاده از جزوه‌ساز پاپیروس و به صورت خودکار تولید شده است.
+                    ممکن است شامل خطا یا برداشت نادرست باشد و
+                    نیازمند بررسی و بازبینی مجدد است.
+                </p>
+            </div>
+
+        </section>
+
+
+<section class="noteSection introductionSection">
+    <h2 id="heading-1">۱. مقدمه و کلیات</h2>
+<p>این فصل به خطرات آزمایشگاه و اصول حفاظت، طراحی و جداسازی فضاها، رفتارهای پیشگیرانه، استفاده از دستکش و پوشش کارکنان، شست‌وشوی دست و چشم و محافظت از چشم و صورت می‌پردازد.</p>
+</section>
+
+<section class="noteSection mainSection">
+    <h2 id="heading-2">۲. متن اصلی جزوه</h2>
+<h3 id="heading-3">خطرات آزمایشگاه و اصول کلی حفاظت</h3>
+<p>در آزمایشگاه، انواع عوامل بیماری‌زای بیولوژیک با منشأ خون، مایعات بدن و منابع دیگر وجود دارند. محیط آزمایشگاه همچنین ممکن است خطراتی مانند مواد عفونی، مواد رادیواکتیو، مواد شیمیایی، جریان الکتریسیته، وسایل مکانیکی، مواد آتش‌زا، مواد سرطان‌زا و پسماندهای خطرناک داشته باشد. رعایت‌نکردن اصول ایمنی می‌تواند سلامت را تهدید کند؛ بنابراین اجرای برنامه‌های حفاظت و پیشگیری اهمیت ویژه‌ای دارد.</p>
+<p>کارکنان باید همه نمونه‌های ارسالی را آلوده به ویروس HIV یا دیگر عوامل بیماری‌زای دارای منشأ خونی فرض کنند.</p>
+<h3 id="heading-4">طراحی و جداسازی فضاهای آزمایشگاه</h3>
+<p>در طراحی فضای آزمایشگاه، افزون بر وسعت کاری، تعداد و ابعاد تجهیزات و نیروی کاری موردنیاز، باید محیط کاری ایمنی در ارتباط با فضاهای اداری و عمومی ایجاد شود تا خطر سرایت عوامل بیماری‌زا به اجتماع محدود بماند.</p>
+<p>آزمایشگاه‌ها ممکن است در بیمارستان، دانشگاه یا مرکز تحقیقاتی قرار داشته باشند و دانشجویان، محققان و دیگران به آن‌ها مراجعه کنند. بنابراین، بخش‌های اداری باید کاملاً از بخش‌های آزمایشگاهی جدا باشند. مسیر دسترسی افراد نباید آن‌ها را ناچار به عبور از بخش‌های دیگر آزمایشگاه کند. محل پذیرش و نمونه‌گیری باید فضای کاملاً جداگانه‌ای داشته باشد و آبدارخانه باید با فاصله مناسب از قسمت‌های آزمایشگاهی قرار گیرد.</p>
+<h3 id="heading-5">رفتارهای ممنوع و پیشگیری از انتقال آلودگی</h3>
+<h4>استعمال دخانیات</h4>
+<p>استعمال دخانیات، از جمله سیگار و پیپ، در تمام بخش‌های آزمایشگاه ممنوع است. دخانیات در مجاورت حلال‌های قابل‌اشتعال می‌توانند عامل مهمی در ایجاد آتش‌سوزی باشند. همچنین انتقال مواد دخانی از میز کار به دهان ممکن است موجب انتقال میکروارگانیسم‌ها و توکسین‌ها شود.</p>
+<div class="calloutBox calloutBox--example" data-box="example"><div class="calloutBoxTitle">مثال</div><div class="calloutBoxContent">سیگار و پیپ از موارد دخانیات‌اند که استعمال آن‌ها در تمام بخش‌های آزمایشگاه ممنوع است.</div></div>
+<h4>تماس دست با صورت</h4>
+<p>باید از تماس دست با صورت، چشم، گوش و بینی خودداری کرد. همچنین نباید قلم را در دهان فرو برد، ناخن جوید یا آدامس جوید.</p>
+<h4>خوردن و آشامیدن</h4>
+<p>در تمام بخش‌هایی که پوشیدن روپوش الزامی است، باید از خوردن و آشامیدن و نیز هر کاری که باعث تماس دست با دهان می‌شود، پرهیز کرد.</p>
+<div class="calloutBox calloutBox--example" data-box="example"><div class="calloutBoxTitle">مثال</div><div class="calloutBoxContent">نمونه‌هایی مانند خون، ادرار، مدفوع و خلط می‌توانند حامل عوامل بیماری‌زای فراوانی باشند.</div></div>
+<p>این نمونه‌ها هر روز در بخش‌های مختلف آزمایشگاه جابه‌جا می‌شوند و گاهی در یخچال‌های آزمایشگاه نگهداری می‌شوند؛ بنابراین منبع مهمی برای آلودگی مواد غذایی و آشامیدنی به شمار می‌روند. مواد غذایی را نباید در یخچال‌های بخش‌های آزمایشگاه نگهداری کرد. یخچال مخصوص مواد غذایی باید در فضای آبدارخانه قرار گیرد تا مواد غذایی و نمونه‌های آزمایشگاهی در یک یخچال نگهداری نشوند.</p>
+<h3 id="heading-6">استفاده از دستکش</h3>
+<h4>انواع دستکش و دسترسی به آن‌ها</h4>
+<p>دستکش‌هایی با اندازه‌های مختلف و از مواد مناسب و مرغوب باید در تمام بخش‌ها در دسترس باشند. دستکش‌های لاتکس (latex)، نیتریل (nitrile) یا وینیل (vinyl) محافظت کافی فراهم می‌کنند. دستکش‌های لاتکس یا وینیل نازک‌شده در برابر سوراخ‌شدن با وسایل تیز محافظت کافی ندارند. دستکش‌هایی با اندازه‌های تا مچ، آرنج و شانه نیز باید در دسترس باشند.</p>
+<p>برای هدف‌های مختلف از دستکش‌های متفاوت استفاده می‌شود:</p>
+<ul>
+<li>دستکش‌های الاستیکی یا چرمی برای کارهای سنگین، کار با وسایل داغ یا خالی‌کردن محفظه‌های حاوی مواد خطرناک به کار می‌روند.</li>
+<li>دستکش‌های خانگی برای تمیزکردن، شستن وسایل شیشه‌ای و ضدعفونی‌کردن استفاده می‌شوند.</li>
+<li>دستکش‌های جراحی (لاتکس) هنگام کار با خون و مواد خطرناک و موارد مشابه استفاده می‌شوند.</li>
+<li>دستکش‌های پلاستیکی یک‌بارمصرف در مواقع اضطراری به کار می‌روند. در متن اسلاید آمده است که این دستکش‌ها در برابر میکروارگانیسم‌ها نقش حفاظتی ندارند.</li>
+</ul>
+<div class="calloutBox calloutBox--review" data-box="review"><div class="calloutBoxTitle">نیازمند بررسی</div><div class="calloutBoxContent"><strong>نقش حفاظتی دستکش‌های پلاستیکی یک‌بارمصرف</strong>
+اسلاید این دستکش‌ها را فاقد نقش حفاظتی در برابر میکروارگانیسم‌ها معرفی می‌کند؛ درستی این بیان یا منظور دقیق از نوع دستکش مشخص نیست.
+<strong>وضعیت:</strong> نیازمند بررسی</div></div>
+<h4>زمان استفاده و تعویض دستکش</h4>
+<p>به‌طور معمول، دستکش‌ها را هنگام انجام کار تعویض نمی‌کنند، بلکه پس از پایان کار این کار را انجام می‌دهند؛ مگر آنکه دستکش آسیب ببیند. کارکنان هنگام کار با دستکش‌های آلوده باید اقدام‌های حفاظتی لازم را برای جلوگیری از آلودگی محیط و پوست انجام دهند.</p>
+<p>استفاده از دستکش در موارد زیر الزامی است:</p>
+<ul>
+<li>هنگام نمونه‌گیری، جابه‌جایی نمونه‌ها و انجام مراحل آزمایش؛</li>
+<li>هرگاه دست‌ها با مواد، سطوح یا وسایل آلوده تماس داشته باشند؛</li>
+<li>هنگام تماس با بافت، خون، سرم، پلاسما، مایع آمنیوتیک، مایع نخاعی، مایع حاصل از پریتوان، مایع پریکارد، شیر پستان یا دیگر مایعات بدنی که ممکن است به خون آلوده باشند.</li>
+</ul>
+<p>طبق توصیه CDC، هنگام تماس با نواحی از بدن بیمار که به‌طور طبیعی استریل هستند، باید از دستکش استریل استفاده شود. در تماس با مخاط یا در فعالیت‌های آزمایشگاهی، استفاده از دستکش استریل ضروری نیست. هنگام جابه‌جایی بین بیماران جدید نیز باید دستکش‌ها تعویض شوند.</p>
+<h4>استفاده مجدد، آسیب و بررسی دستکش‌ها</h4>
+<p>دستکش‌ها را نباید شست و دوباره استفاده کرد، زیرا کیفیت و میزان حفاظت آن‌ها کاهش می‌یابد. شستن دستکش برای استفاده مجدد با مواد شوینده ممکن است نفوذ مایعات را از سوراخ‌های نامرئی افزایش دهد و مواد ضدعفونی‌کننده نیز ممکن است به دستکش آسیب برسانند. حلال‌های آلی به‌سرعت به دستکش‌های لاتکس آسیب می‌زنند و بعضی حلال‌ها دستکش‌های وینیل را حل می‌کنند.</p>
+<p>با این حال، دستکش‌هایی مانند دستکش‌های خانگی که کاربرد عمومی دارند و ممکن است با خون تماس داشته باشند یا برای تمیزکردن و آلودگی‌زدایی به کار بروند، ممکن است ضدعفونی و دوباره استفاده شوند. اگر بریدگی، سوراخ یا تغییر رنگ در آن‌ها دیده شود، باید دور انداخته شوند. پس از پوشیدن و پیش از شروع کار، دستکش‌ها باید از نظر نقص‌های قابل‌مشاهده بررسی شوند.</p>
+<h4>حساسیت به لاتکس</h4>
+<p>با وجود استفاده گسترده کارکنان آزمایشگاه از دستکش‌های لاتکس، حدود ۶ تا ۱۷ درصد افراد ممکن است به لاتکس حساسیت داشته باشند. درماتیت تماسی آلرژیک می‌تواند در نتیجه مواد شیمیایی به‌کاررفته در فرایند تولید لاتکس یا مواد دیگر دستکش ایجاد شود.</p>
+<p>استفاده از دستکش‌های نخی یا دستکش‌های فاقد مواد شیمیایی معمولاً از بروز درماتیت آلرژیک جلوگیری می‌کند. برای پیشگیری از تماس با پروتئین‌های لاتکس، باید از دستکش‌های کم‌پروتئین، بدون پودر یا ساخته‌شده از نیتریل، پلی‌اتیلن یا مواد دیگر استفاده کرد.</p>
+<h3 id="heading-7">سرسوزن و پیپت</h3>
+<p>نباید با دست، سوزن استفاده‌شده را از سرنگ یک‌بارمصرف جدا کرد یا درپوش سرسوزن را دوباره روی آن گذاشت. اگر انجام این کار ناگزیر باشد، باید درپوش را روی سطحی قرار داد و کار را با کمک دست انجام داد.</p>
+<p>برداشت مایعات با پیپت را هرگز نباید با دهان انجام داد؛ برای این کار، بسته به هدف، وسایل متفاوتی وجود دارد. همچنین نباید قطرات انتهایی نمونه را با فشار زیاد خارج کرد، زیرا ممکن است قطرات بسیار ریز یا آئروسل ایجاد شوند.</p>
+<h3 id="heading-8">شست‌وشوی دست</h3>
+<div class="calloutBox calloutBox--important" data-box="important"><div class="calloutBoxTitle">نکته مهم</div><div class="calloutBoxContent">مهم‌ترین اقدام پیشگیرانه و ایمنی، شست‌وشوی مکرر دست‌هاست.</div></div>
+<p>صابون، ترجیحاً صابون مایع، و مواد ضدعفونی‌کننده برای تمیزکردن پوست باید همواره در دسترس کارکنان باشند.</p>
+<p>پس از تماس اتفاقی پوست با خون، مایعات بدن یا بافت، دست‌ها یا ناحیه دیگر پوست باید فوراً ضدعفونی و شسته شود. اگر آلودگی در اثر پاره‌شدن دستکش رخ دهد، باید دستکش‌ها را بلافاصله بیرون آورد و دست‌ها را کاملاً شست.</p>
+<p>شست‌وشوی دست‌ها در زمان‌های زیر الزامی است:</p>
+<ul>
+<li>پیش و پس از تماس با بیماران یا نمونه‌های آزمایشگاهی؛</li>
+<li>پس از پایان کار و پیش از ترک آزمایشگاه؛</li>
+<li>پس از درآوردن دستکش‌ها و پیش از پوشیدن دستکش جدید؛</li>
+<li>پیش از خوردن، آشامیدن، سیگارکشیدن، آرایش‌کردن یا تعویض لنزهای تماسی چشم؛</li>
+<li>پیش و پس از رفتن به توالت؛</li>
+<li>پیش از هر فعالیتی که در آن دست با مخاط چشم یا خراش‌های پوستی تماس پیدا می‌کند.</li>
+</ul>
+<p>شستن دست با آب جاری و صابون توصیه می‌شود و استفاده از هر ماده شوینده استانداردی قابل‌قبول است. در مکان‌هایی که دسترسی به آب ممکن نیست، می‌توان از ژل مایع با پایه الکل استفاده کرد. همچنین می‌توان دست‌ها را با دستمال کاغذی تمیز کرد و سپس از کف‌های پاک‌کننده استفاده کرد. نباید از محصولات صابونی‌ای استفاده کرد که ممکن است سلامت پوست را به خطر بیندازند. استفاده از کرم مرطوب‌کننده دست می‌تواند التهاب ناشی از شست‌وشوی مکرر را کاهش دهد.</p>
+<p>بریدگی‌ها، زخم‌ها و ضایعات پوستی مانند اگزما باید با پانسمان غیرقابل‌نفوذ به آب پوشانده شوند.</p>
+<div class="calloutBox calloutBox--example" data-box="example"><div class="calloutBoxTitle">مثال</div><div class="calloutBoxContent">اگزما از نمونه‌های ضایعات پوستی است که باید با پانسمان غیرقابل‌نفوذ به آب پوشانده شود.</div></div>
+<h3 id="heading-9">شست‌وشوی چشم</h3>
+<p>به‌ویژه در بخش‌هایی که از اسیدها، مواد سوزاننده، مواد خورنده یا دیگر مواد شیمیایی استفاده می‌شود، باید جایگاه ثابتی برای شست‌وشوی چشم در نظر گرفت. افزون بر واحدهای ثابتِ فراهم‌کننده اقدامات فوری، می‌توان از سیستم‌های قابل‌حمل شست‌وشوی چشم نیز استفاده کرد.</p>
+<p>عملکرد این وسایل باید هر هفته بررسی شود تا از کارکرد درست آن‌ها و پاشش آب اطمینان حاصل شود. همچنین محتوای آن‌ها باید به‌طور مرتب از نظر خلوص شیمیایی و بیولوژیک بررسی شود.</p>
+<h3 id="heading-10">محافظت از چشم و صورت</h3>
+<p>هنگام کار با مواد سوزاننده، مواد شیمیایی و بیولوژیک خطرناک، در صورت احتمال ترشح یا پاشیدن خون و مایعات بدن و نیز هنگام تخلیه اتوکلاو، باید از عینک‌های محافظِ حفاظ‌دار یا محافظ‌های چشم و صورت استفاده کرد. هنگام کار با مواد شیمیایی خطرناک، عینک‌های حفاظ‌دار به عینک‌های محافظی که روی عینک معمولی قرار می‌گیرند ترجیح داده می‌شوند.</p>
+<p>استفاده از ماسک‌ها و محافظ‌های پلاستیکی شفاف، مانند ماسک‌های جوشکاری که تمام صورت و گردن را می‌پوشانند، توصیه می‌شود. این ماسک‌ها برای استفاده طولانی‌مدت، مانند اتوپسی، نیز مناسب‌اند و به‌راحتی آلودگی‌زدایی می‌شوند.</p>
+<div class="calloutBox calloutBox--example" data-box="example"><div class="calloutBoxTitle">مثال</div><div class="calloutBoxContent">ماسک‌های جوشکاری از نمونه‌های ماسک‌ها و محافظ‌های پلاستیکی شفافی هستند که تمام صورت و گردن را می‌پوشانند.</div></div>
+<p>لنزهای تماسی، به‌خصوص لنزهای نرم (soft)، ممکن است حلال‌ها و بخار مواد را جذب کنند. لنزها می‌توانند باعث تجمع این مواد در محل قرنیه شوند و هم‌زمان مانع خروج اشک شوند؛ درحالی‌که اشک با شست‌وشو مواد را از چشم خارج می‌کند. بنابراین به کارکنان توصیه می‌شود در این بخش‌ها از لنز تماسی استفاده نکنند، مگر اینکه عینک حفاظ‌دار یا محافظ صورت به کار ببرند.</p>
+<h3 id="heading-11">لباس کارکنان</h3>
+<h4>نوع و ویژگی‌های پوشش</h4>
+<p>معمولاً مسئول آزمایشگاه پوشش مشخصی برای کارکنان تعیین می‌کند. این لباس باید تمیز، مرتب و دارای کیفیت مناسب باشد و برای محافظت از لباس‌های دیگر در برابر آلودگی و کثیفی پوشیده شود. این پوشش می‌تواند شامل گان، کت آزمایشگاهی، پیش‌بند، شنل یا لباس مشابه باشد.</p>
+<p>هنگام کار در آزمایشگاه، همه کارکنان باید دست‌کم یکی از پوشش‌های زیر را بپوشند:</p>
+<ul>
+<li>روپوش آستین‌بلندی که جلوی آن کاملاً بسته شود؛</li>
+<li>کت آزمایشگاهی بلند و آستین‌بلندی که سرآستین‌های آن کاملاً بسته باشد.</li>
+</ul>
+<p>هنگام کار با مواد بسیار خطرناک و آلوده، می‌توان از پیش‌بند پلاستیکی یک‌بارمصرف یا روپوش یک‌بارمصرفِ غیرقابل‌نفوذ به مایعات استفاده کرد تا حفاظت کافی در برابر ترشح خون و مواد شیمیایی فراهم شود. در صورت استفاده از این پیش‌بندها، می‌توان محافظ‌های آستین‌دار نیز برای حفاظت از بازو به کار برد.</p>
+<div class="calloutBox calloutBox--example" data-box="example"><div class="calloutBoxTitle">مثال</div><div class="calloutBoxContent">گان، کت آزمایشگاهی، پیش‌بند و شنل از نمونه‌های پوشش‌هایی هستند که می‌توانند برای کارکنان آزمایشگاه در نظر گرفته شوند.</div></div>
+<h4>استفاده و نگهداری از لباس</h4>
+<p>پوشیدن روپوش آزمایشگاهی هنگام نمونه‌گیری و خون‌گیری الزامی است. کارکنانی که وظایفی در خارج از آزمایشگاه دارند، از جمله کار با بیماران، ممکن است بسته به نوع کار به کت، روپوش آزمایشگاهی یا پوشش دیگری نیاز داشته باشند.</p>
+<p>هنگام ترک محل‌های فنی، به‌ویژه هنگام رفتن به فضاهای عمومی مانند آبدارخانه، باید روپوش را از تن خارج کرد. روپوش‌ها باید در فاصله‌های زمانی مناسب تعویض شوند. اگر لباس با مواد خطرناک آلوده شود، باید بلافاصله تعویض شود.</p>
+<p>کت‌های آزمایشگاهی، گان‌ها و پوشش‌های آلوده را باید در کیسه‌های مشخص و مناسبِ غیرقابل‌نفوذ قرار داد و سپس برای مدتی کافی و در دمای مناسب شست تا از رفع آلودگی اطمینان حاصل شود. پوشش‌های یک‌بارمصرف باید بلافاصله پس از استفاده تعویض شوند. این لباس‌ها را نباید برای شست‌وشو از آزمایشگاه خارج کرد؛ از جمله نباید آن‌ها را به منزل یا خشک‌شویی برد. لباس‌های بیرونی باید در کمدهای شخصی مخصوص، بیرون از نواحی آزمایشگاه، قرار داده شوند.</p>
+</section>
+
+<section class="noteSection quickTablesSection">
+    <h2 id="heading-12">۳. جداول مرور سریع</h2>
+<h3 id="heading-13">خطرات آزمایشگاه</h3>
+<table>
+<thead>
+<tr>
+<th>گروه خطر</th>
+<th>موارد ذکرشده</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>عوامل بیولوژیک</td>
+<td>عوامل بیماری‌زای با منشأ خون، مایعات بدن و منابع دیگر؛ مواد عفونی</td>
+</tr>
+<tr>
+<td>خطرات فیزیکی و مکانیکی</td>
+<td>جریان الکتریسیته، وسایل مکانیکی</td>
+</tr>
+<tr>
+<td>مواد خطرناک</td>
+<td>مواد رادیواکتیو، مواد شیمیایی، مواد آتش‌زا، مواد سرطان‌زا</td>
+</tr>
+<tr>
+<td>پسماند</td>
+<td>پسماندهای خطرناک</td>
+</tr>
+</tbody></table>
+<h3 id="heading-14">اصول طراحی و جداسازی فضاها</h3>
+<table>
+<thead>
+<tr>
+<th>بخش یا عامل طراحی</th>
+<th>اصل ذکرشده</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>طراحی کلی</td>
+<td>توجه به وسعت کاری، تعداد و ابعاد تجهیزات و نیروی کاری موردنیاز؛ ایجاد محیط کاری ایمن در ارتباط با فضاهای اداری و عمومی</td>
+</tr>
+<tr>
+<td>بخش‌های اداری</td>
+<td>جداسازی کامل از بخش‌های آزمایشگاهی</td>
+</tr>
+<tr>
+<td>مسیر دسترسی افراد</td>
+<td>نباید عبور از بخش‌های دیگر آزمایشگاه را ضروری کند</td>
+</tr>
+<tr>
+<td>پذیرش و نمونه‌گیری</td>
+<td>اختصاص فضای کاملاً جداگانه</td>
+</tr>
+<tr>
+<td>آبدارخانه</td>
+<td>قرارگیری با فاصله مناسب از قسمت‌های آزمایشگاهی</td>
+</tr>
+</tbody></table>
+<h3 id="heading-15">رفتارها و پیشگیری از انتقال آلودگی</h3>
+<table>
+<thead>
+<tr>
+<th>رفتار یا وضعیت</th>
+<th>اقدام پیشگیرانه یا دلیل ذکرشده</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>استعمال دخانیات</td>
+<td>در تمام بخش‌های آزمایشگاه ممنوع است؛ مجاورت با حلال‌های قابل‌اشتعال می‌تواند عامل آتش‌سوزی باشد و انتقال مواد دخانی از میز کار به دهان ممکن است میکروارگانیسم‌ها و توکسین‌ها را منتقل کند</td>
+</tr>
+<tr>
+<td>تماس دست با صورت، چشم، گوش و بینی</td>
+<td>باید از آن خودداری کرد</td>
+</tr>
+<tr>
+<td>فروبردن قلم در دهان، جویدن ناخن یا آدامس</td>
+<td>نباید انجام شود</td>
+</tr>
+<tr>
+<td>خوردن و آشامیدن در بخش‌های دارای الزام پوشیدن روپوش</td>
+<td>باید از آن پرهیز کرد؛ همچنین از هر کاری که موجب تماس دست با دهان می‌شود</td>
+</tr>
+<tr>
+<td>نمونه‌های آزمایشگاهی</td>
+<td>خون، ادرار، مدفوع و خلط می‌توانند حامل عوامل بیماری‌زای فراوانی باشند؛ جابه‌جایی روزانه و نگهداری گاه‌به‌گاه آن‌ها در یخچال‌های آزمایشگاه خطر آلودگی مواد غذایی و آشامیدنی را ایجاد می‌کند</td>
+</tr>
+<tr>
+<td>نگهداری مواد غذایی</td>
+<td>نباید در یخچال‌های بخش‌های آزمایشگاه نگهداری شوند؛ یخچال مواد غذایی باید در آبدارخانه باشد</td>
+</tr>
+</tbody></table>
+<h3 id="heading-16">انواع دستکش و کاربرد آن‌ها</h3>
+<table>
+<thead>
+<tr>
+<th>نوع یا ویژگی دستکش</th>
+<th>کاربرد یا نکته ذکرشده</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>لاتکس (latex)، نیتریل (nitrile)، وینیل (vinyl)</td>
+<td>محافظت کافی فراهم می‌کنند</td>
+</tr>
+<tr>
+<td>لاتکس یا وینیل نازک‌شده</td>
+<td>در برابر سوراخ‌شدن با وسایل تیز محافظت کافی ندارند</td>
+</tr>
+<tr>
+<td>اندازه‌های تا مچ، آرنج و شانه</td>
+<td>باید در دسترس باشند</td>
+</tr>
+<tr>
+<td>الاستیکی یا چرمی</td>
+<td>کارهای سنگین، کار با وسایل داغ یا خالی‌کردن محفظه‌های حاوی مواد خطرناک</td>
+</tr>
+<tr>
+<td>خانگی</td>
+<td>تمیزکردن، شستن وسایل شیشه‌ای و ضدعفونی‌کردن</td>
+</tr>
+<tr>
+<td>جراحی (لاتکس)</td>
+<td>کار با خون و مواد خطرناک و موارد مشابه</td>
+</tr>
+<tr>
+<td>پلاستیکی یک‌بارمصرف</td>
+<td>استفاده در مواقع اضطراری؛ درباره نقش حفاظتی آن‌ها در برابر میکروارگانیسم‌ها، مورد نیازمند بررسی است</td>
+</tr>
+</tbody></table>
+<h3 id="heading-17">موقعیت‌های استفاده و تعویض دستکش</h3>
+<table>
+<thead>
+<tr>
+<th>موقعیت</th>
+<th>دستکش یا اقدام موردنیاز</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>نمونه‌گیری، جابه‌جایی نمونه‌ها و انجام مراحل آزمایش</td>
+<td>استفاده از دستکش الزامی است</td>
+</tr>
+<tr>
+<td>تماس دست با مواد، سطوح یا وسایل آلوده</td>
+<td>استفاده از دستکش الزامی است</td>
+</tr>
+<tr>
+<td>تماس با بافت، خون، سرم، پلاسما، مایع آمنیوتیک، مایع نخاعی، مایع حاصل از پریتوان، مایع پریکارد، شیر پستان یا دیگر مایعات بدنی که ممکن است به خون آلوده باشند</td>
+<td>استفاده از دستکش الزامی است</td>
+</tr>
+<tr>
+<td>تماس با نواحی از بدن بیمار که به‌طور طبیعی استریل هستند</td>
+<td>طبق توصیه CDC، دستکش استریل لازم است</td>
+</tr>
+<tr>
+<td>تماس با مخاط یا فعالیت‌های آزمایشگاهی</td>
+<td>دستکش استریل ضروری نیست</td>
+</tr>
+<tr>
+<td>جابه‌جایی بین بیماران جدید</td>
+<td>دستکش‌ها باید تعویض شوند</td>
+</tr>
+<tr>
+<td>پایان کار یا آسیب‌دیدن دستکش</td>
+<td>معمولاً تعویض پس از پایان کار انجام می‌شود؛ در صورت آسیب‌دیدن، دستکش تعویض می‌شود</td>
+</tr>
+</tbody></table>
+<h3 id="heading-18">استفاده مجدد و بررسی دستکش‌ها</h3>
+<table>
+<thead>
+<tr>
+<th>وضعیت یا نوع دستکش</th>
+<th>دستور یا نکته</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>دستکش‌ها به‌طور کلی</td>
+<td>نباید شسته و دوباره استفاده شوند؛ کیفیت و میزان حفاظت کاهش می‌یابد</td>
+</tr>
+<tr>
+<td>شستن با مواد شوینده</td>
+<td>ممکن است نفوذ مایعات از سوراخ‌های نامرئی را افزایش دهد</td>
+</tr>
+<tr>
+<td>مواد ضدعفونی‌کننده</td>
+<td>ممکن است به دستکش آسیب برسانند</td>
+</tr>
+<tr>
+<td>حلال‌های آلی و دستکش لاتکس</td>
+<td>حلال‌های آلی به‌سرعت به دستکش‌های لاتکس آسیب می‌زنند</td>
+</tr>
+<tr>
+<td>بعضی حلال‌ها و دستکش وینیل</td>
+<td>بعضی حلال‌ها دستکش‌های وینیل را حل می‌کنند</td>
+</tr>
+<tr>
+<td>دستکش‌های خانگیِ کاربرد عمومی</td>
+<td>اگر با خون تماس داشته باشند یا برای تمیزکردن و آلودگی‌زدایی به کار بروند، ممکن است ضدعفونی و دوباره استفاده شوند</td>
+</tr>
+<tr>
+<td>دستکش دارای بریدگی، سوراخ یا تغییر رنگ</td>
+<td>باید دور انداخته شود</td>
+</tr>
+<tr>
+<td>پیش از شروع کار</td>
+<td>پس از پوشیدن، دستکش‌ها از نظر نقص‌های قابل‌مشاهده بررسی شوند</td>
+</tr>
+</tbody></table>
+<h3 id="heading-19">حساسیت به لاتکس</h3>
+<table>
+<thead>
+<tr>
+<th>موضوع</th>
+<th>اطلاعات ذکرشده</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>میزان احتمالی حساسیت به لاتکس</td>
+<td>حدود ۶ تا ۱۷ درصد افراد</td>
+</tr>
+<tr>
+<td>عامل احتمالی درماتیت تماسی آلرژیک</td>
+<td>مواد شیمیایی به‌کاررفته در فرایند تولید لاتکس یا مواد دیگر دستکش</td>
+</tr>
+<tr>
+<td>دستکش‌های نام‌برده برای کمک به پیشگیری از درماتیت آلرژیک</td>
+<td>دستکش‌های نخی یا دستکش‌های فاقد مواد شیمیایی</td>
+</tr>
+<tr>
+<td>دستکش‌های نام‌برده برای پیشگیری از تماس با پروتئین‌های لاتکس</td>
+<td>کم‌پروتئین، بدون پودر، نیتریل، پلی‌اتیلن یا مواد دیگر</td>
+</tr>
+</tbody></table>
+<h3 id="heading-20">سرسوزن و پیپت</h3>
+<table>
+<thead>
+<tr>
+<th>کار</th>
+<th>دستور یا دلیل ذکرشده</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>جداکردن سوزن استفاده‌شده از سرنگ یک‌بارمصرف با دست</td>
+<td>نباید انجام شود</td>
+</tr>
+<tr>
+<td>گذاشتن دوباره درپوش روی سرسوزن</td>
+<td>نباید انجام شود؛ اگر ناگزیر باشد، درپوش روی سطح قرار داده می‌شود و کار با کمک دست انجام می‌شود</td>
+</tr>
+<tr>
+<td>برداشت مایعات با پیپت</td>
+<td>هرگز نباید با دهان انجام شود؛ بسته به هدف، از وسایل متفاوت استفاده می‌شود</td>
+</tr>
+<tr>
+<td>خارج‌کردن قطرات انتهایی نمونه با فشار زیاد</td>
+<td>نباید انجام شود، زیرا ممکن است قطرات بسیار ریز یا آئروسل ایجاد شوند</td>
+</tr>
+</tbody></table>
+<h3 id="heading-21">شست‌وشوی دست</h3>
+<table>
+<thead>
+<tr>
+<th>زمان یا وضعیت</th>
+<th>اقدام مربوط به شست‌وشوی دست</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>پیش و پس از تماس با بیماران یا نمونه‌های آزمایشگاهی</td>
+<td>شست‌وشوی دست الزامی است</td>
+</tr>
+<tr>
+<td>پس از پایان کار و پیش از ترک آزمایشگاه</td>
+<td>شست‌وشوی دست الزامی است</td>
+</tr>
+<tr>
+<td>پس از درآوردن دستکش و پیش از پوشیدن دستکش جدید</td>
+<td>شست‌وشوی دست الزامی است</td>
+</tr>
+<tr>
+<td>پیش از خوردن، آشامیدن، سیگارکشیدن، آرایش‌کردن یا تعویض لنزهای تماسی چشم</td>
+<td>شست‌وشوی دست الزامی است</td>
+</tr>
+<tr>
+<td>پیش و پس از رفتن به توالت</td>
+<td>شست‌وشوی دست الزامی است</td>
+</tr>
+<tr>
+<td>پیش از فعالیتی که در آن دست با مخاط چشم یا خراش‌های پوستی تماس می‌یابد</td>
+<td>شست‌وشوی دست الزامی است</td>
+</tr>
+<tr>
+<td>تماس اتفاقی پوست با خون، مایعات بدن یا بافت</td>
+<td>ضدعفونی و شست‌وشوی فوری دست‌ها یا ناحیه دیگر پوست</td>
+</tr>
+<tr>
+<td>آلودگی در اثر پاره‌شدن دستکش</td>
+<td>دستکش‌ها بلافاصله بیرون آورده شوند و دست‌ها کاملاً شسته شوند</td>
+</tr>
+</tbody></table>
+<table>
+<thead>
+<tr>
+<th>روش یا ماده</th>
+<th>نکته ذکرشده</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>آب جاری و صابون</td>
+<td>روش توصیه‌شده برای شستن دست</td>
+</tr>
+<tr>
+<td>ماده شوینده استاندارد</td>
+<td>استفاده از هر ماده شوینده استانداردی قابل‌قبول است</td>
+</tr>
+<tr>
+<td>ژل مایع با پایه الکل</td>
+<td>در مکان‌های فاقد دسترسی به آب قابل‌استفاده است</td>
+</tr>
+<tr>
+<td>دستمال کاغذی تمیز و سپس کف‌های پاک‌کننده</td>
+<td>روش دیگری که برای تمیزکردن دست‌ها ذکر شده است</td>
+</tr>
+<tr>
+<td>محصولات صابونیِ تهدیدکننده سلامت پوست</td>
+<td>نباید استفاده شوند</td>
+</tr>
+<tr>
+<td>کرم مرطوب‌کننده دست</td>
+<td>می‌تواند التهاب ناشی از شست‌وشوی مکرر را کاهش دهد</td>
+</tr>
+<tr>
+<td>بریدگی‌ها، زخم‌ها و ضایعات پوستی</td>
+<td>باید با پانسمان غیرقابل‌نفوذ به آب پوشانده شوند</td>
+</tr>
+</tbody></table>
+<h3 id="heading-22">شست‌وشوی چشم</h3>
+<table>
+<thead>
+<tr>
+<th>جنبه</th>
+<th>دستور ذکرشده</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>محل استفاده</td>
+<td>به‌ویژه بخش‌های دارای اسیدها، مواد سوزاننده، مواد خورنده یا دیگر مواد شیمیایی</td>
+</tr>
+<tr>
+<td>نوع وسیله</td>
+<td>جایگاه ثابت؛ افزون بر آن، می‌توان از سیستم‌های قابل‌حمل نیز استفاده کرد</td>
+</tr>
+<tr>
+<td>بررسی عملکرد</td>
+<td>هر هفته، برای اطمینان از کارکرد درست و پاشش آب</td>
+</tr>
+<tr>
+<td>بررسی محتوا</td>
+<td>به‌طور مرتب از نظر خلوص شیمیایی و بیولوژیک</td>
+</tr>
+</tbody></table>
+<h3 id="heading-23">محافظت از چشم و صورت</h3>
+<table>
+<thead>
+<tr>
+<th>موقعیت یا وسیله</th>
+<th>نکته ذکرشده</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>کار با مواد سوزاننده، مواد شیمیایی و بیولوژیک خطرناک</td>
+<td>استفاده از عینک‌های محافظِ حفاظ‌دار یا محافظ‌های چشم و صورت</td>
+</tr>
+<tr>
+<td>احتمال ترشح یا پاشیدن خون و مایعات بدن</td>
+<td>استفاده از عینک‌های محافظِ حفاظ‌دار یا محافظ‌های چشم و صورت</td>
+</tr>
+<tr>
+<td>تخلیه اتوکلاو</td>
+<td>استفاده از عینک‌های محافظِ حفاظ‌دار یا محافظ‌های چشم و صورت</td>
+</tr>
+<tr>
+<td>کار با مواد شیمیایی خطرناک</td>
+<td>عینک‌های حفاظ‌دار به عینک‌هایی که روی عینک معمولی قرار می‌گیرند ترجیح داده می‌شوند</td>
+</tr>
+<tr>
+<td>ماسک‌ها و محافظ‌های پلاستیکی شفاف</td>
+<td>پوشش تمام صورت و گردن؛ مناسب استفاده طولانی‌مدت مانند اتوپسی و قابل آلودگی‌زدایی آسان</td>
+</tr>
+<tr>
+<td>لنزهای تماسی، به‌خصوص لنزهای نرم (soft)</td>
+<td>ممکن است حلال‌ها و بخار مواد را جذب کنند و باعث تجمع آن‌ها در محل قرنیه شوند؛ همچنین ممکن است مانع خروج اشک شوند</td>
+</tr>
+<tr>
+<td>استفاده از لنز تماسی در این بخش‌ها</td>
+<td>توصیه می‌شود کارکنان از آن خودداری کنند، مگر اینکه عینک حفاظ‌دار یا محافظ صورت به کار ببرند</td>
+</tr>
+</tbody></table>
+<h3 id="heading-24">لباس کارکنان</h3>
+<table>
+<thead>
+<tr>
+<th>نوع پوشش</th>
+<th>ویژگی یا کاربرد ذکرشده</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>پوشش تعیین‌شده از سوی مسئول آزمایشگاه</td>
+<td>باید تمیز، مرتب و دارای کیفیت مناسب باشد و از لباس‌های دیگر در برابر آلودگی و کثیفی محافظت کند</td>
+</tr>
+<tr>
+<td>گان، کت آزمایشگاهی، پیش‌بند، شنل یا لباس مشابه</td>
+<td>از پوشش‌های قابل‌استفاده در آزمایشگاه</td>
+</tr>
+<tr>
+<td>روپوش</td>
+<td>باید آستین‌بلند باشد و جلوی آن کاملاً بسته شود</td>
+</tr>
+<tr>
+<td>کت آزمایشگاهی</td>
+<td>باید بلند و آستین‌بلند باشد و سرآستین‌های آن کاملاً بسته باشد</td>
+</tr>
+<tr>
+<td>پیش‌بند پلاستیکی یک‌بارمصرف یا روپوش یک‌بارمصرفِ غیرقابل‌نفوذ به مایعات</td>
+<td>برای کار با مواد بسیار خطرناک و آلوده؛ حفاظت در برابر ترشح خون و مواد شیمیایی</td>
+</tr>
+<tr>
+<td>محافظ‌های آستین‌دار</td>
+<td>در صورت استفاده از پیش‌بندها، برای حفاظت از بازو قابل‌استفاده‌اند</td>
+</tr>
+</tbody></table>
+<table>
+<thead>
+<tr>
+<th>موقعیت یا نوع لباس</th>
+<th>دستور ذکرشده</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>نمونه‌گیری و خون‌گیری</td>
+<td>پوشیدن روپوش آزمایشگاهی الزامی است</td>
+</tr>
+<tr>
+<td>وظایف خارج از آزمایشگاه، از جمله کار با بیماران</td>
+<td>بسته به نوع کار ممکن است به کت، روپوش آزمایشگاهی یا پوشش دیگری نیاز باشد</td>
+</tr>
+<tr>
+<td>ترک محل‌های فنی، به‌ویژه رفتن به فضاهای عمومی مانند آبدارخانه</td>
+<td>روپوش باید از تن خارج شود</td>
+</tr>
+<tr>
+<td>تعویض روپوش</td>
+<td>در فاصله‌های زمانی مناسب</td>
+</tr>
+<tr>
+<td>آلودگی لباس با مواد خطرناک</td>
+<td>تعویض فوری</td>
+</tr>
+<tr>
+<td>کت آزمایشگاهی، گان و پوشش آلوده</td>
+<td>قرار دادن در کیسه‌های مشخص و مناسبِ غیرقابل‌نفوذ و شستن برای مدتی کافی و در دمای مناسب</td>
+</tr>
+<tr>
+<td>پوشش یک‌بارمصرف</td>
+<td>تعویض بلافاصله پس از استفاده</td>
+</tr>
+<tr>
+<td>شست‌وشوی لباس‌های آزمایشگاهی</td>
+<td>نباید لباس‌ها برای شست‌وشو از آزمایشگاه خارج شوند؛ از جمله نباید به منزل یا خشک‌شویی برده شوند</td>
+</tr>
+<tr>
+<td>لباس‌های بیرونی</td>
+<td>نگهداری در کمدهای شخصی مخصوص، بیرون از نواحی آزمایشگاه</td>
+</tr>
+</tbody></table>
+</section>
+
+<section class="noteSection keyTermsSection">
+    <h2 id="heading-25">۴. اصطلاحات و تعاریف</h2>
+</section>
+
+<section class="noteSection selfAssessmentSection">
+    <h2 id="heading-26">۵. خود‌ارزیابی</h2>
+<h3 id="heading-27">سوالات تشریحی</h3>
+<div class="questionBox questionBox--essay" data-question="essay" data-question-number="1"><div class="questionBoxHeader">سؤال 1</div><div class="questionBoxPrompt"><p>خطرات مختلف آزمایشگاه را بر اساس مطالب فصل نام ببرید و توضیح دهید چرا کارکنان باید همه نمونه‌های ارسالی را آلوده فرض کنند.</p></div><div class="questionBoxAnswer questionBoxAnswer--hidden" hidden=""><p>خطرات آزمایشگاه شامل عوامل بیماری‌زای بیولوژیک با منشأ خون، مایعات بدن و منابع دیگر، مواد عفونی، مواد رادیواکتیو، شیمیایی، آتش‌زا و سرطان‌زا، جریان الکتریسیته، وسایل مکانیکی و پسماندهای خطرناک است. کارکنان باید همه نمونه‌های ارسالی را آلوده به ویروس HIV یا دیگر عوامل بیماری‌زای دارای منشأ خونی فرض کنند.</p></div><button type="button" class="questionAnswerToggle" aria-expanded="false">نمایش پاسخ</button></div>
+<div class="questionBox questionBox--essay" data-question="essay" data-question-number="2"><div class="questionBoxHeader">سؤال 2</div><div class="questionBoxPrompt"><p>اصول جداسازی بخش‌های مختلف آزمایشگاه و جایگاه آبدارخانه را شرح دهید.</p></div><div class="questionBoxAnswer questionBoxAnswer--hidden" hidden=""><p>بخش‌های اداری باید کاملاً از بخش‌های آزمایشگاهی جدا باشند؛ مسیر دسترسی افراد نباید آن‌ها را ناچار به عبور از بخش‌های دیگر آزمایشگاه کند؛ محل پذیرش و نمونه‌گیری باید فضای کاملاً جداگانه‌ای داشته باشد؛ و آبدارخانه باید با فاصله مناسب از قسمت‌های آزمایشگاهی قرار گیرد. یخچال مخصوص مواد غذایی نیز باید در فضای آبدارخانه باشد تا مواد غذایی و نمونه‌های آزمایشگاهی در یک یخچال نگهداری نشوند.</p></div><button type="button" class="questionAnswerToggle" aria-expanded="false">نمایش پاسخ</button></div>
+<div class="questionBox questionBox--essay" data-question="essay" data-question-number="3"><div class="questionBoxHeader">سؤال 3</div><div class="questionBoxPrompt"><p>زمان‌ها و موقعیت‌های اصلی استفاده از دستکش را بیان کنید و تفاوت توصیه مربوط به دستکش استریل را توضیح دهید.</p></div><div class="questionBoxAnswer questionBoxAnswer--hidden" hidden=""><p>هنگام نمونه‌گیری، جابه‌جایی نمونه‌ها و انجام مراحل آزمایش، هنگام تماس دست با مواد، سطوح یا وسایل آلوده، و هنگام تماس با بافت، خون و مایعات بدنی فهرست‌شده که ممکن است به خون آلوده باشند، استفاده از دستکش الزامی است. طبق توصیه CDC، برای تماس با نواحی از بدن بیمار که به‌طور طبیعی استریل هستند باید از دستکش استریل استفاده شود؛ اما در تماس با مخاط یا فعالیت‌های آزمایشگاهی، دستکش استریل ضروری نیست. هنگام جابه‌جایی بین بیماران جدید نیز باید دستکش‌ها تعویض شوند.</p></div><button type="button" class="questionAnswerToggle" aria-expanded="false">نمایش پاسخ</button></div>
+<div class="questionBox questionBox--essay" data-question="essay" data-question-number="4"><div class="questionBoxHeader">سؤال 4</div><div class="questionBoxPrompt"><p>چه اقدام‌هایی برای شست‌وشوی دست پس از تماس اتفاقی با آلودگی یا پاره‌شدن دستکش باید انجام شود؟ چند زمان دیگر را که شست‌وشوی دست در آن‌ها الزامی است نام ببرید.</p></div><div class="questionBoxAnswer questionBoxAnswer--hidden" hidden=""><p>پس از تماس اتفاقی پوست با خون، مایعات بدن یا بافت، دست‌ها یا ناحیه دیگر پوست باید فوراً ضدعفونی و شسته شود. اگر آلودگی در اثر پاره‌شدن دستکش رخ دهد، دستکش‌ها باید بلافاصله بیرون آورده شوند و دست‌ها کاملاً شسته شوند. شست‌وشوی دست پیش و پس از تماس با بیمار یا نمونه، پس از پایان کار و پیش از ترک آزمایشگاه، پس از درآوردن دستکش و پیش از پوشیدن دستکش جدید، پیش از خوردن یا آشامیدن، پیش و پس از رفتن به توالت، و پیش از فعالیتی که دست با مخاط چشم یا خراش پوستی تماس پیدا می‌کند الزامی است.</p></div><button type="button" class="questionAnswerToggle" aria-expanded="false">نمایش پاسخ</button></div>
+<div class="questionBox questionBox--essay" data-question="essay" data-question-number="5"><div class="questionBoxHeader">سؤال 5</div><div class="questionBoxPrompt"><p>اصول استفاده و نگهداری از روپوش و پوشش‌های آلوده را توضیح دهید.</p></div><div class="questionBoxAnswer questionBoxAnswer--hidden" hidden=""><p>هنگام نمونه‌گیری و خون‌گیری پوشیدن روپوش آزمایشگاهی الزامی است. هنگام ترک محل‌های فنی، به‌ویژه رفتن به فضاهای عمومی مانند آبدارخانه، باید روپوش را از تن خارج کرد. روپوش‌ها باید در فاصله‌های زمانی مناسب تعویض شوند و در صورت آلودگی با مواد خطرناک، بلافاصله تعویض شوند. کت‌ها، گان‌ها و پوشش‌های آلوده باید در کیسه‌های مشخص و مناسبِ غیرقابل‌نفوذ قرار گیرند و برای مدتی کافی و در دمای مناسب شسته شوند. پوشش یک‌بارمصرف بلافاصله پس از استفاده تعویض می‌شود و لباس‌های آزمایشگاهی نباید برای شست‌وشو از آزمایشگاه خارج شوند.</p></div><button type="button" class="questionAnswerToggle" aria-expanded="false">نمایش پاسخ</button></div>
+<h3 id="heading-28">سوالات تستی</h3>
+<div class="questionBox questionBox--mcq" data-question="mcq" data-question-number="1"><div class="questionBoxHeader">سؤال 1</div><div class="questionBoxPrompt"><p>کدام گزاره درباره طراحی فضاهای آزمایشگاه با مطالب فصل مطابقت دارد؟</p></div><button type="button" class="questionOption" data-option="A"><span class="questionOptionLetter">A</span><span class="questionOptionText">مسیر دسترسی افراد باید آن‌ها را از بخش‌های دیگر آزمایشگاه عبور دهد.</span></button><button type="button" class="questionOption" data-option="B"><span class="questionOptionLetter">B</span><span class="questionOptionText">محل پذیرش و نمونه‌گیری باید فضای کاملاً جداگانه‌ای داشته باشد.</span></button><button type="button" class="questionOption" data-option="C"><span class="questionOptionLetter">C</span><span class="questionOptionText">بخش‌های اداری و آزمایشگاهی باید در یک فضای مشترک قرار گیرند.</span></button><button type="button" class="questionOption" data-option="D"><span class="questionOptionLetter">D</span><span class="questionOptionText">آبدارخانه باید در قسمت آزمایشگاهی قرار گیرد.</span></button><div class="questionBoxAnswer questionBoxAnswer--hidden" hidden=""><p>محل پذیرش و نمونه‌گیری باید فضای کاملاً جداگانه‌ای داشته باشد؛ همچنین بخش‌های اداری باید از بخش‌های آزمایشگاهی جدا باشند و آبدارخانه با فاصله مناسب قرار گیرد.</p><div class="questionCorrect" data-correct="B"><span class="questionCorrectLabel">پاسخ صحیح:</span><strong>B</strong></div></div></div>
+<div class="questionBox questionBox--mcq" data-question="mcq" data-question-number="2"><div class="questionBoxHeader">سؤال 2</div><div class="questionBoxPrompt"><p>چرا نگهداری مواد غذایی در یخچال‌های بخش‌های آزمایشگاه ممنوع است؟</p></div><button type="button" class="questionOption" data-option="A"><span class="questionOptionLetter">A</span><span class="questionOptionText">چون نمونه‌های آزمایشگاهی هرگز در یخچال نگهداری نمی‌شوند.</span></button><button type="button" class="questionOption" data-option="B"><span class="questionOptionLetter">B</span><span class="questionOptionText">چون مواد غذایی ممکن است با نمونه‌هایی مانند خون، ادرار، مدفوع و خلط آلوده شوند.</span></button><button type="button" class="questionOption" data-option="C"><span class="questionOptionLetter">C</span><span class="questionOptionText">چون مواد غذایی باید در محل پذیرش نمونه‌گیری نگهداری شوند.</span></button><button type="button" class="questionOption" data-option="D"><span class="questionOptionLetter">D</span><span class="questionOptionText">چون یخچال‌های آزمایشگاه فقط برای مواد شیمیایی ساخته شده‌اند.</span></button><div class="questionBoxAnswer questionBoxAnswer--hidden" hidden=""><p>نمونه‌های آزمایشگاهی ممکن است حامل عوامل بیماری‌زا باشند و منبع آلودگی مواد غذایی و آشامیدنی شوند؛ یخچال مخصوص مواد غذایی باید در آبدارخانه باشد.</p><div class="questionCorrect" data-correct="B"><span class="questionCorrectLabel">پاسخ صحیح:</span><strong>B</strong></div></div></div>
+<div class="questionBox questionBox--mcq" data-question="mcq" data-question-number="3"><div class="questionBoxHeader">سؤال 3</div><div class="questionBoxPrompt"><p>کدام دستکش برای کار با وسایل داغ یا کارهای سنگین در متن توصیه شده است؟</p></div><button type="button" class="questionOption" data-option="A"><span class="questionOptionLetter">A</span><span class="questionOptionText">دستکش الاستیکی یا چرمی</span></button><button type="button" class="questionOption" data-option="B"><span class="questionOptionLetter">B</span><span class="questionOptionText">دستکش جراحی (لاتکس)</span></button><button type="button" class="questionOption" data-option="C"><span class="questionOptionLetter">C</span><span class="questionOptionText">دستکش پلاستیکی یک‌بارمصرف</span></button><button type="button" class="questionOption" data-option="D"><span class="questionOptionLetter">D</span><span class="questionOptionText">دستکش نخی</span></button><div class="questionBoxAnswer questionBoxAnswer--hidden" hidden=""><p>دستکش‌های الاستیکی یا چرمی برای کارهای سنگین و کار با وسایل داغ به کار می‌روند.</p><div class="questionCorrect" data-correct="A"><span class="questionCorrectLabel">پاسخ صحیح:</span><strong>A</strong></div></div></div>
+<div class="questionBox questionBox--mcq" data-question="mcq" data-question-number="4"><div class="questionBoxHeader">سؤال 4</div><div class="questionBoxPrompt"><p>طبق توصیه CDC که در فصل آمده، در کدام موقعیت استفاده از دستکش استریل لازم است؟</p></div><button type="button" class="questionOption" data-option="A"><span class="questionOptionLetter">A</span><span class="questionOptionText">هنگام تماس با مخاط</span></button><button type="button" class="questionOption" data-option="B"><span class="questionOptionLetter">B</span><span class="questionOptionText">هنگام هر فعالیت آزمایشگاهی</span></button><button type="button" class="questionOption" data-option="C"><span class="questionOptionLetter">C</span><span class="questionOptionText">هنگام تماس با نواحی از بدن بیمار که به‌طور طبیعی استریل هستند</span></button><button type="button" class="questionOption" data-option="D"><span class="questionOptionLetter">D</span><span class="questionOptionText">هنگام جابه‌جایی بین بیماران جدید، بدون توجه به نوع تماس</span></button><div class="questionBoxAnswer questionBoxAnswer--hidden" hidden=""><p>طبق توصیه CDC، تماس با نواحی از بدن بیمار که به‌طور طبیعی استریل هستند، نیازمند دستکش استریل است؛ در تماس با مخاط یا فعالیت‌های آزمایشگاهی، دستکش استریل ضروری نیست.</p><div class="questionCorrect" data-correct="C"><span class="questionCorrectLabel">پاسخ صحیح:</span><strong>C</strong></div></div></div>
+<div class="questionBox questionBox--mcq" data-question="mcq" data-question-number="5"><div class="questionBoxHeader">سؤال 5</div><div class="questionBoxPrompt"><p>کدام مورد از دلایل منع شستن و استفاده مجدد از دستکش‌ها در فصل ذکر شده است؟</p></div><button type="button" class="questionOption" data-option="A"><span class="questionOptionLetter">A</span><span class="questionOptionText">شستن دستکش همیشه اندازه آن را افزایش می‌دهد.</span></button><button type="button" class="questionOption" data-option="B"><span class="questionOptionLetter">B</span><span class="questionOptionText">مواد شوینده ممکن است نفوذ مایعات از سوراخ‌های نامرئی را افزایش دهند.</span></button><button type="button" class="questionOption" data-option="C"><span class="questionOptionLetter">C</span><span class="questionOptionText">شستن دستکش مانع بررسی نقص‌های قابل‌مشاهده می‌شود.</span></button><button type="button" class="questionOption" data-option="D"><span class="questionOptionLetter">D</span><span class="questionOptionText">دستکش شسته‌شده فقط در برابر حلال‌های آلی آسیب می‌بیند.</span></button><div class="questionBoxAnswer questionBoxAnswer--hidden" hidden=""><p>شستن دستکش برای استفاده مجدد با مواد شوینده ممکن است نفوذ مایعات از سوراخ‌های نامرئی را افزایش دهد؛ مواد ضدعفونی‌کننده نیز ممکن است به دستکش آسیب برسانند.</p><div class="questionCorrect" data-correct="B"><span class="questionCorrectLabel">پاسخ صحیح:</span><strong>B</strong></div></div></div>
+<div class="questionBox questionBox--mcq" data-question="mcq" data-question-number="6"><div class="questionBoxHeader">سؤال 6</div><div class="questionBoxPrompt"><p>کدام گزینه با توصیه فصل درباره پیشگیری از تماس با پروتئین‌های لاتکس سازگار است؟</p></div><button type="button" class="questionOption" data-option="A"><span class="questionOptionLetter">A</span><span class="questionOptionText">استفاده از دستکش‌های لاتکسِ پودردار</span></button><button type="button" class="questionOption" data-option="B"><span class="questionOptionLetter">B</span><span class="questionOptionText">استفاده از دستکش‌های کم‌پروتئین یا بدون پودر</span></button><button type="button" class="questionOption" data-option="C"><span class="questionOptionLetter">C</span><span class="questionOptionText">شستن دستکش لاتکس و استفاده مجدد از آن</span></button><button type="button" class="questionOption" data-option="D"><span class="questionOptionLetter">D</span><span class="questionOptionText">استفاده از دستکش وینیل نازک‌شده در برابر وسایل تیز</span></button><div class="questionBoxAnswer questionBoxAnswer--hidden" hidden=""><p>برای پیشگیری از تماس با پروتئین‌های لاتکس، دستکش‌های کم‌پروتئین، بدون پودر یا ساخته‌شده از نیتریل، پلی‌اتیلن یا مواد دیگر ذکر شده‌اند.</p><div class="questionCorrect" data-correct="B"><span class="questionCorrectLabel">پاسخ صحیح:</span><strong>B</strong></div></div></div>
+<div class="questionBox questionBox--mcq" data-question="mcq" data-question-number="7"><div class="questionBoxHeader">سؤال 7</div><div class="questionBoxPrompt"><p>اگر دستکش پاره شود و آلودگی رخ دهد، کدام اقدام ذکرشده درست است؟</p></div><button type="button" class="questionOption" data-option="A"><span class="questionOptionLetter">A</span><span class="questionOptionText">دستکش را تا پایان کار نگه دارند و بعد دست‌ها را بشویند.</span></button><button type="button" class="questionOption" data-option="B"><span class="questionOptionLetter">B</span><span class="questionOptionText">دستکش را بلافاصله بیرون آورند و دست‌ها را کاملاً بشویند.</span></button><button type="button" class="questionOption" data-option="C"><span class="questionOptionLetter">C</span><span class="questionOptionText">فقط دستکش را با ماده شوینده بشویند.</span></button><button type="button" class="questionOption" data-option="D"><span class="questionOptionLetter">D</span><span class="questionOptionText">دستکش را عوض کنند، اما دست‌ها را نشویند.</span></button><div class="questionBoxAnswer questionBoxAnswer--hidden" hidden=""><p>در صورت آلودگی ناشی از پاره‌شدن دستکش، باید دستکش‌ها را بلافاصله بیرون آورد و دست‌ها را کاملاً شست.</p><div class="questionCorrect" data-correct="B"><span class="questionCorrectLabel">پاسخ صحیح:</span><strong>B</strong></div></div></div>
+<div class="questionBox questionBox--mcq" data-question="mcq" data-question-number="8"><div class="questionBoxHeader">سؤال 8</div><div class="questionBoxPrompt"><p>عملکرد وسایل شست‌وشوی چشم باید با چه فاصله‌ای بررسی شود؟</p></div><button type="button" class="questionOption" data-option="A"><span class="questionOptionLetter">A</span><span class="questionOptionText">هر روز</span></button><button type="button" class="questionOption" data-option="B"><span class="questionOptionLetter">B</span><span class="questionOptionText">هر هفته</span></button><button type="button" class="questionOption" data-option="C"><span class="questionOptionLetter">C</span><span class="questionOptionText">هر ماه</span></button><button type="button" class="questionOption" data-option="D"><span class="questionOptionLetter">D</span><span class="questionOptionText">فقط پس از استفاده</span></button><div class="questionBoxAnswer questionBoxAnswer--hidden" hidden=""><p>عملکرد وسایل شست‌وشوی چشم باید هر هفته بررسی شود تا از کارکرد درست و پاشش آب اطمینان حاصل شود.</p><div class="questionCorrect" data-correct="B"><span class="questionCorrectLabel">پاسخ صحیح:</span><strong>B</strong></div></div></div>
+<div class="questionBox questionBox--mcq" data-question="mcq" data-question-number="9"><div class="questionBoxHeader">سؤال 9</div><div class="questionBoxPrompt"><p>هنگام کار با مواد شیمیایی خطرناک، کدام نوع عینک در فصل ترجیح داده شده است؟</p></div><button type="button" class="questionOption" data-option="A"><span class="questionOptionLetter">A</span><span class="questionOptionText">عینک محافظی که روی عینک معمولی قرار می‌گیرد</span></button><button type="button" class="questionOption" data-option="B"><span class="questionOptionLetter">B</span><span class="questionOptionText">عینک‌های حفاظ‌دار</span></button><button type="button" class="questionOption" data-option="C"><span class="questionOptionLetter">C</span><span class="questionOptionText">لنز تماسی نرم</span></button><button type="button" class="questionOption" data-option="D"><span class="questionOptionLetter">D</span><span class="questionOptionText">محافظ آستین‌دار</span></button><div class="questionBoxAnswer questionBoxAnswer--hidden" hidden=""><p>هنگام کار با مواد شیمیایی خطرناک، عینک‌های حفاظ‌دار به عینک‌های محافظی که روی عینک معمولی قرار می‌گیرند ترجیح داده می‌شوند.</p><div class="questionCorrect" data-correct="B"><span class="questionCorrectLabel">پاسخ صحیح:</span><strong>B</strong></div></div></div>
+<div class="questionBox questionBox--mcq" data-question="mcq" data-question-number="10"><div class="questionBoxHeader">سؤال 10</div><div class="questionBoxPrompt"><p>هنگام ترک محل‌های فنی، به‌ویژه برای رفتن به آبدارخانه، کارکنان باید چه کنند؟</p></div><button type="button" class="questionOption" data-option="A"><span class="questionOptionLetter">A</span><span class="questionOptionText">روپوش را از تن خارج کنند.</span></button><button type="button" class="questionOption" data-option="B"><span class="questionOptionLetter">B</span><span class="questionOptionText">روپوش را فقط در صورت آلودگی با مواد خطرناک عوض کنند.</span></button><button type="button" class="questionOption" data-option="C"><span class="questionOptionLetter">C</span><span class="questionOptionText">روپوش را برای شست‌وشو به منزل ببرند.</span></button><button type="button" class="questionOption" data-option="D"><span class="questionOptionLetter">D</span><span class="questionOptionText">لباس بیرونی را در ناحیه آزمایشگاه نگهداری کنند.</span></button><div class="questionBoxAnswer questionBoxAnswer--hidden" hidden=""><p>هنگام ترک محل‌های فنی، به‌ویژه هنگام رفتن به فضاهای عمومی مانند آبدارخانه، باید روپوش را از تن خارج کرد.</p><div class="questionCorrect" data-correct="A"><span class="questionCorrectLabel">پاسخ صحیح:</span><strong>A</strong></div></div></div>
+</section>
+
+<section class="noteSection reviewSection">
+    <h2 id="heading-29">۶. موارد نیازمند بررسی</h2>
+<div class="calloutBox calloutBox--review" data-box="review"><div class="calloutBoxTitle">نیازمند بررسی</div><div class="calloutBoxContent"><strong>نقش حفاظتی دستکش‌های پلاستیکی یک‌بارمصرف</strong>
+اسلاید این دستکش‌ها را فاقد نقش حفاظتی در برابر میکروارگانیسم‌ها معرفی می‌کند؛ درستی این بیان یا منظور دقیق از نوع دستکش مشخص نیست.
+<strong>وضعیت:</strong> نیازمند بررسی</div></div>
+</section>
+
+<section class="noteSection editorAndSourcesSection">
+    <h2 id="heading-30">۷. ادیتور و منابع استفاده‌شده</h2>
+<p><strong>ادیتور:</strong> ویرایش آکادمیک خودکار (Layer 5)</p>
+<p><strong>منابع استفاده‌شده:</strong></p>
+<ul>
+<li>صوت درس</li>
+<li>محتوای اسلاید ارائه‌شده (نام فایل نامشخص است)</li>
+</ul>
+</section>
+
+<section class="noteSection completionSection">
+    <h2 id="heading-31">۸. گزارش تکمیل بودن محتوا</h2>
+<p><strong>برآورد تقریبی تکمیل محتوا:</strong> حدود ۹۵٪</p>
+<ul>
+<li>✓ پوشش مطالب موجود در اسلاید و محتوای ارائه‌شده: انجام شد.</li>
+<li>✓ پوشش محتوای صوت درسِ منعکس‌شده در متن ورودی: انجام شد.</li>
+<li>⚠ مورد حل‌نشده: نقش حفاظتی دستکش‌های پلاستیکی یک‌بارمصرف در برابر میکروارگانیسم‌ها نیازمند بررسی است.</li>
+<li>⚠ نام فایل اسلاید و اطلاعات استاد و تاریخ جلسه در اطلاعات موجود مشخص نشده‌اند.</li>
+</ul>
+</section>
+
+    </main>
+
+
+    <button
+        class="backToTop"
+        type="button"
+        aria-label="بازگشت به ابتدای صفحه"
+    >
+        <i data-lucide="arrow-up"></i>
+    </button>
+
+
+    <script src="../src/themeSwitcher.js"></script>
+    <script src="../src/fontSizeSwitcher.js"></script>
+    <script src="../src/aboutModal.js"></script>
+    <script src="../src/quickNavigation.js"></script>
+    <script src="../src/print.js"></script>
+    <script src="../src/search.js"></script>
+    <script src="../src/highlight.js"></script>
+    <script src="../src/stickyNotes.js"></script>
+    <script src="../src/viewPersistence.js"></script>
+    <script src="../src/questionInteractions.js"></script>
+    <script src="../src/fontSwitcher.js"></script>
+    <script>
+        lucide.createIcons();
+    </script>
+
+<script>
+    const sidebar = document.querySelector(".sidebar");
+    const sidebarToggle = document.querySelector(".sidebarToggle");
+    const sidebarBackdrop = document.querySelector(".sidebarBackdrop");
+
+    function openSidebar() {
+        if (!sidebar || !sidebarToggle || !sidebarBackdrop) {
+            return;
+        }
+
+        sidebar.classList.add("isOpen");
+        sidebarBackdrop.classList.add("isVisible");
+
+        sidebarToggle.setAttribute("aria-expanded", "true");
+        sidebar.setAttribute("aria-hidden", "false");
+    }
+
+    function closeSidebar() {
+        if (!sidebar || !sidebarToggle || !sidebarBackdrop) {
+            return;
+        }
+
+        sidebar.classList.remove("isOpen");
+        sidebarBackdrop.classList.remove("isVisible");
+
+        sidebarToggle.setAttribute("aria-expanded", "false");
+        sidebar.setAttribute("aria-hidden", "true");
+    }
+
+    if (sidebarToggle) {
+        sidebarToggle.addEventListener("click", () => {
+            if (sidebar.classList.contains("isOpen")) {
+                closeSidebar();
+            } else {
+                openSidebar();
+            }
+        });
+    }
+
+    if (sidebarBackdrop) {
+        sidebarBackdrop.addEventListener("click", closeSidebar);
+    }
+
+    document.addEventListener("keydown", (event) => {
+        if (event.key === "Escape") {
+            closeSidebar();
+        }
+    });
+
+    document.querySelectorAll(".tocItem").forEach((item) => {
+        item.addEventListener("click", closeSidebar);
+    });
+</script>
+
+</body>
+
+</html>
