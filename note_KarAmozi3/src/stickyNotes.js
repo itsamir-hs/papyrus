@@ -34,8 +34,16 @@ const stickyNoteContainer = document.querySelector(
     ".noteContainer"
 );
 
+const stickyNotesGeneratedDateElement =
+    document.querySelector(".generatedDate");
+
+const stickyNotesGeneratedDate =
+    stickyNotesGeneratedDateElement?.textContent.trim();
+
 const stickyNotesStorageKey =
-    "stickyNotes";
+    stickyNotesGeneratedDate
+        ? `stickyNotes:${stickyNotesGeneratedDate}`
+        : `stickyNotes:${window.location.pathname}`;
 
 let stickyNotes = [];
 

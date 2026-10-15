@@ -19,92 +19,107 @@ const noteContainer = document.querySelector(".noteContainer");
 
 let searchResults = [];
 let currentResultIndex = -1;
-let originalContent = "";
 
 
 function openSearch() {
     searchPanel.classList.add("isOpen");
-
-    searchPanel.setAttribute(
-        "aria-hidden",
-        "false"
-    );
-
-    searchButton.setAttribute(
-        "aria-expanded",
-        "true"
-    );
-
+    searchPanel.setAttribute("aria-hidden", "false");
+    searchButton.setAttribute("aria-expanded", "true");
     searchInput.focus();
 }
 
 
 function closeSearch() {
     searchPanel.classList.remove("isOpen");
-
-    searchPanel.setAttribute(
-        "aria-hidden",
-        "true"
-    );
-
-    searchButton.setAttribute(
-        "aria-expanded",
-        "false"
-    );
+    searchPanel.setAttribute("aria-hidden", "true");
+    searchButton.setAttribute("aria-expanded", "false");
 }
 
 
 function clearSearch() {
     searchInput.value = "";
-
     restoreContent();
-
-    searchResults = [];
-    currentResultIndex = -1;
-
     updateSearchInfo();
 }
 
 
 function escapeRegExp(value) {
-    return value.replace(
-        /[.*+?^${}()|[\]\\]/g,
-        "\\$&"
+    const specialCharacters = [
+        ".", "*", "+", "?", "^", "$", "{", "}",
+        "(", ")", "|", "[", "]", "\\"
+    ];
+
+    let escapedValue = "";
+
+    for (const character of value) {
+        if (specialCharacters.includes(character)) {
+            escapedValue += "\\";
+        }
+
+        escapedValue += character;
+    }
+
+    return escapedValue;
+}
+
+function restoreContent() {
+    noteContainer
+        .querySelectorAll("mark.searchMatch")
+        .forEach((mark) => {
+            mark.replaceWith(
+                document.createTextNode(mark.textContent)
+            );
+        });
+
+    searchResults = [];
+    currentResultIndex = -1;
+}
+
+
+function isExcludedTextNode(node) {
+    const parent = node.parentElement;
+
+    return !parent || Boolean(
+        parent.closest(
+            "script, style, .searchPanel, .stickyNotesLayer"
+        )
     );
 }
 
 
-function escapeHtml(value) {
-    return value
-        .replace(/&/g, "&amp;")
-        .replace(/</g, "&lt;")
-        .replace(/>/g, "&gt;")
-        .replace(/"/g, "&quot;")
-        .replace(/'/g, "&#039;");
-}
+function getSearchBlock(node) {
+    let element = node.parentElement;
 
+    while (element && element !== noteContainer) {
+        const display = window.getComputedStyle(element).display;
 
-function restoreContent() {
-    noteContainer.innerHTML = originalContent;
+        if (
+            display === "block" ||
+            display === "flow-root" ||
+            display === "flex" ||
+            display === "grid" ||
+            display === "list-item" ||
+            display === "table-cell"
+        ) {
+            return element;
+        }
 
-    if (window.lucide) {
-        lucide.createIcons();
+        element = element.parentElement;
     }
+
+    return noteContainer;
 }
 
 
 function searchContent(query) {
     restoreContent();
 
-    searchResults = [];
-    currentResultIndex = -1;
+    const trimmedQuery = query.trim();
 
-    if (!query.trim()) {
+    if (!trimmedQuery) {
         updateSearchInfo();
         return;
     }
-
-    const escapedQuery = escapeRegExp(query.trim());
 
     const walker = document.createTreeWalker(
         noteContainer,
@@ -112,73 +127,139 @@ function searchContent(query) {
     );
 
     const textNodes = [];
-
+    let combinedText = "";
+    let previousBlock = null;
     let node;
 
     while ((node = walker.nextNode())) {
-        if (
-            node.parentElement.closest(
-                "script, style, .searchPanel"
-            )
-        ) {
+        if (isExcludedTextNode(node)) {
             continue;
         }
 
-        textNodes.push(node);
+        const block = getSearchBlock(node);
+
+        if (previousBlock !== null && block !== previousBlock) {
+            combinedText += "\n";
+        }
+
+        const start = combinedText.length;
+        combinedText += node.nodeValue;
+
+        textNodes.push({
+            node,
+            start,
+            end: combinedText.length
+        });
+
+        previousBlock = block;
+    }
+
+    const regex = new RegExp(
+        escapeRegExp(trimmedQuery),
+        "gi"
+    );
+
+    const matches = [];
+    let match;
+
+    while ((match = regex.exec(combinedText)) !== null) {
+        matches.push({
+            start: match.index,
+            end: match.index + match[0].length,
+            marks: []
+        });
+
+        if (match[0].length === 0) {
+            regex.lastIndex++;
+        }
+    }
+
+    if (matches.length === 0) {
+        updateSearchInfo();
+        return;
     }
 
 
-    textNodes.forEach((textNode) => {
+let matchIndex = 0;
 
-        const text = textNode.nodeValue;
+textNodes.forEach((entry) => {
+    const { node, start, end } = entry;
 
-        if (!new RegExp(escapedQuery, "i").test(text)) {
+    while (
+        matchIndex < matches.length &&
+        matches[matchIndex].end <= start
+    ) {
+        matchIndex++;
+    }
+
+    const intervals = [];
+
+    for (
+        let i = matchIndex;
+        i < matches.length && matches[i].start < end;
+        i++
+    ) {
+        const result = matches[i];
+
+        const overlapStart = Math.max(start, result.start);
+        const overlapEnd = Math.min(end, result.end);
+
+        if (overlapStart < overlapEnd) {
+            intervals.push({
+                start: overlapStart - start,
+                end: overlapEnd - start,
+                resultIndex: i
+            });
+        }
+    }
+
+    if (intervals.length === 0) {
+        return;
+    }
+
+    const text = node.nodeValue;
+    const fragment = document.createDocumentFragment();
+    let lastIndex = 0;
+
+    intervals.forEach((interval) => {
+        if (interval.start < lastIndex) {
             return;
         }
 
-        const fragment = document.createDocumentFragment();
-
-        let lastIndex = 0;
-
-        const regex = new RegExp(
-            escapedQuery,
-            "gi"
-        );
-
-        let match;
-
-        while ((match = regex.exec(text)) !== null) {
-
+        if (interval.start > lastIndex) {
             fragment.appendChild(
                 document.createTextNode(
-                    text.slice(lastIndex, match.index)
+                    text.slice(lastIndex, interval.start)
                 )
             );
-
-            const mark = document.createElement("mark");
-
-            mark.className = "searchMatch";
-            mark.textContent = match[0];
-
-            fragment.appendChild(mark);
-
-            searchResults.push(mark);
-
-            lastIndex = match.index + match[0].length;
         }
 
-        fragment.appendChild(
-            document.createTextNode(
-                text.slice(lastIndex)
-            )
+        const mark = document.createElement("mark");
+        mark.className = "searchMatch";
+        mark.textContent = text.slice(
+            interval.start,
+            interval.end
         );
 
-        textNode.parentNode.replaceChild(
-            fragment,
-            textNode
-        );
+        fragment.appendChild(mark);
+        matches[interval.resultIndex].marks.push(mark);
+
+        lastIndex = interval.end;
     });
 
+    if (lastIndex < text.length) {
+        fragment.appendChild(
+            document.createTextNode(text.slice(lastIndex))
+        );
+    }
+
+    node.parentNode.replaceChild(fragment, node);
+});
+
+
+    searchResults = matches.filter(
+        (result) => result.marks.length > 0
+    );
 
     if (searchResults.length > 0) {
         currentResultIndex = 0;
@@ -191,23 +272,26 @@ function searchContent(query) {
 
 function activateCurrentResult() {
     searchResults.forEach((result) => {
-        result.classList.remove("isCurrent");
+        result.marks.forEach((mark) => {
+            mark.classList.remove("isCurrent");
+        });
     });
 
     if (currentResultIndex < 0) {
         return;
     }
 
-    const currentResult =
-        searchResults[currentResultIndex];
+    const currentResult = searchResults[currentResultIndex];
 
-    if (!currentResult) {
+    if (!currentResult || currentResult.marks.length === 0) {
         return;
     }
 
-    currentResult.classList.add("isCurrent");
+    currentResult.marks.forEach((mark) => {
+        mark.classList.add("isCurrent");
+    });
 
-    currentResult.scrollIntoView({
+    currentResult.marks[0].scrollIntoView({
         behavior: "smooth",
         block: "center"
     });
@@ -220,8 +304,7 @@ function goToNextResult() {
     }
 
     currentResultIndex =
-        (currentResultIndex + 1) %
-        searchResults.length;
+        (currentResultIndex + 1) % searchResults.length;
 
     activateCurrentResult();
     updateSearchInfo();
@@ -246,7 +329,6 @@ function updateSearchInfo() {
     const totalResults = searchResults.length;
 
     if (totalResults === 0) {
-
         searchResultsCount.textContent =
             searchInput.value.trim()
                 ? "۰ نتیجه"
@@ -266,101 +348,59 @@ function updateSearchInfo() {
 }
 
 
-searchButton.addEventListener(
-    "click",
-    () => {
+searchButton.addEventListener("click", () => {
+    if (searchPanel.classList.contains("isOpen")) {
+        closeSearch();
+    } else {
+        openSearch();
+    }
+});
 
-        if (
-            searchPanel.classList.contains("isOpen")
-        ) {
-            closeSearch();
+
+searchInput.addEventListener("input", () => {
+    searchContent(searchInput.value);
+});
+
+
+searchClearButton.addEventListener("click", clearSearch);
+
+searchNextButton.addEventListener("click", goToNextResult);
+
+searchPreviousButton.addEventListener("click", goToPreviousResult);
+
+
+searchInput.addEventListener("keydown", (event) => {
+    if (event.key === "Enter") {
+        if (event.shiftKey) {
+            goToPreviousResult();
         } else {
-            openSearch();
+            goToNextResult();
         }
-
     }
-);
 
-
-searchInput.addEventListener(
-    "input",
-    () => {
-        searchContent(searchInput.value);
+    if (event.key === "Escape") {
+        closeSearch();
     }
-);
+});
 
 
-searchClearButton.addEventListener(
-    "click",
-    clearSearch
-);
-
-
-searchNextButton.addEventListener(
-    "click",
-    goToNextResult
-);
-
-
-searchPreviousButton.addEventListener(
-    "click",
-    goToPreviousResult
-);
-
-
-searchInput.addEventListener(
-    "keydown",
-    (event) => {
-
-        if (event.key === "Enter") {
-
-            if (event.shiftKey) {
-                goToPreviousResult();
-            } else {
-                goToNextResult();
-            }
-
-        }
-
-        if (event.key === "Escape") {
-            closeSearch();
-        }
-
+document.addEventListener("keydown", (event) => {
+    if (
+        (event.ctrlKey || event.metaKey) &&
+        event.key.toLowerCase() === "f"
+    ) {
+        event.preventDefault();
+        openSearch();
     }
-);
+});
 
 
-document.addEventListener(
-    "keydown",
-    (event) => {
-
-        if (
-            (event.ctrlKey || event.metaKey) &&
-            event.key.toLowerCase() === "f"
-        ) {
-            event.preventDefault();
-
-            openSearch();
-        }
-
+document.addEventListener("click", (event) => {
+    if (
+        searchPanel.classList.contains("isOpen") &&
+        !searchPanel.contains(event.target) &&
+        !searchButton.contains(event.target)
+    ) {
+        closeSearch();
     }
-);
-
-
-document.addEventListener(
-    "click",
-    (event) => {
-
-        if (
-            searchPanel.classList.contains("isOpen") &&
-            !searchPanel.contains(event.target) &&
-            !searchButton.contains(event.target)
-        ) {
-            closeSearch();
-        }
-
-    }
-);
-
-
-originalContent = noteContainer.innerHTML;
+});

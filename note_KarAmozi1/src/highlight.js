@@ -1,1289 +1,832 @@
-const highlightSwitcher =
-    document.querySelector(".highlightSwitcher");
 
-const highlightToggle =
-    document.querySelector(".highlightToggle");
+/*
+ * Papyrus Highlight System — optimized rewrite
+ *
+ * Goals:
+ * - Keep persisted offsets independent of DOM node structure.
+ * - Build a text index once per user operation, not once per highlight.
+ * - Store offsets directly; never recalculate every Range when saving.
+ * - Erase by cached interval overlap instead of building a Range per highlight.
+ * - Restore all stored highlights in one text-node pass.
+ * - Keep existing controls, storage keys, colors, mouse/touch behavior.
+ */
 
-const highlightOptions =
-    document.querySelector(".highlightOptions");
+(() => {
+    "use strict";
 
-const highlightColors =
-    document.querySelectorAll(".highlightColor");
+    const highlightSwitcher = document.querySelector(".highlightSwitcher");
+    const highlightToggle = document.querySelector(".highlightToggle");
+    const highlightOptions = document.querySelector(".highlightOptions");
+    const highlightColors = document.querySelectorAll(".highlightColor");
+    const highlightColorInput = document.querySelector(".highlightColorInput");
+    const highlightEraser = document.querySelector(".highlightEraser");
+    const highlightPowerToggle = document.querySelector(".highlightPowerToggle");
+    const highlightContainer = document.querySelector(".noteContainer");
 
-const highlightColorInput =
-    document.querySelector(".highlightColorInput");
+    if (!highlightContainer) return;
 
-const highlightEraser =
-    document.querySelector(".highlightEraser");
+    let selectedColor = "#fff176";
+    let isEraserActive = false;
+    let highlightCounter = 0;
+    const highlights = new Map();
 
-const highlightPowerToggle =
-    document.querySelector(".highlightPowerToggle");
+    const generatedDateElement = document.querySelector(".generatedDate");
+    const generatedDate = generatedDateElement?.textContent.trim();
 
-const highlightContainer =
-    document.querySelector(".noteContainer");
-
-
-/* =========================================================
-   State
-   ========================================================= */
-
-let selectedColor = "#fff176";
-
-let isEraserActive = false;
-
-let highlightCounter = 0;
-
-const highlights = new Map();
-
-const generatedDateElement =
-    document.querySelector(".generatedDate");
-
-const generatedDate =
-    generatedDateElement?.textContent.trim();
-
-const highlightStorageKey =
-    generatedDate
+    const highlightStorageKey = generatedDate
         ? `noteHighlights:${generatedDate}`
         : `noteHighlights:${window.location.pathname}`;
 
-const highlightPowerStorageKey =
-    "highlightEnabled";
+    const highlightPowerStorageKey = "highlightEnabled";
 
-let isHighlightEnabled =
-    localStorage.getItem(
-        highlightPowerStorageKey
-    ) !== "false";
+    let isHighlightEnabled = true;
 
-
-/* =========================================================
-   Highlight Element
-   ========================================================= */
-
-function isHighlightElement(node) {
-    return (
-        node &&
-        node.nodeType === Node.ELEMENT_NODE &&
-        node.classList.contains("textHighlight")
-    );
-}
-
-
-/* =========================================================
-   Text Position Utilities
-   ========================================================= */
-
-/*
- * Returns the character offset of a DOM point relative
- * to the beginning of .noteContainer text content.
- *
- * This is much more stable than storing DOM node paths,
- * because highlight spans can change the DOM structure.
- */
-
-function getTextOffset(container, node, offset) {
-    if (!container || !node) {
-        return null;
+    try {
+        isHighlightEnabled =
+            localStorage.getItem(highlightPowerStorageKey) !== "false";
+    } catch (error) {
+        console.warn("Highlight preference could not be read:", error);
     }
 
-    let totalOffset = 0;
+    const DEFAULT_COLOR = "#fff176";
 
-    const walker =
-        document.createTreeWalker(
-            container,
-            NodeFilter.SHOW_TEXT
-        );
+    function isHighlightElement(node) {
+        return node instanceof Element &&
+            node.classList.contains("textHighlight");
+    }
 
-    let currentNode;
+    function isInsideStickyNotes(node) {
+        const element = node?.nodeType === Node.ELEMENT_NODE
+            ? node
+            : node?.parentElement;
 
-    while (
-        (currentNode = walker.nextNode())
-    ) {
-        if (currentNode === node) {
-            return (
-                totalOffset +
-                Math.min(
-                    offset,
-                    currentNode.textContent.length
-                )
-            );
-        }
-
-        totalOffset +=
-            currentNode.textContent.length;
+        return Boolean(element?.closest(".stickyNotesLayer"));
     }
 
     /*
-     * Selection boundaries can occasionally point to
-     * an element instead of a text node.
-     *
-     * In that case calculate the text length before
-     * the boundary.
+     * Creates one index for the current text DOM.
+     * Sticky-note text is excluded, while text inside existing
+     * highlight spans remains part of the document's text offsets.
      */
+    function buildTextIndex(container = highlightContainer) {
+        const textNodes = [];
+        const starts = new Map();
+        const ends = new Map();
 
-    try {
-        const range =
-            document.createRange();
+        let totalLength = 0;
 
-        range.selectNodeContents(container);
+        function visit(node) {
+            starts.set(node, totalLength);
 
-        range.setEnd(
-            node,
-            Math.min(
-                offset,
-                node.childNodes
-                    ? node.childNodes.length
-                    : 0
-            )
-        );
+            if (
+                node.nodeType === Node.ELEMENT_NODE &&
+                node.matches(".stickyNotesLayer")
+            ) {
+                ends.set(node, totalLength);
+                return;
+            }
 
-        return range.toString().length;
-    } catch {
-        return null;
-    }
-}
+            if (node.nodeType === Node.TEXT_NODE) {
+                const length = node.nodeValue?.length || 0;
 
+                textNodes.push({
+                    node,
+                    start: totalLength,
+                    end: totalLength + length
+                });
 
-function getRangeTextOffsets(range) {
-    if (!highlightContainer) {
-        return null;
-    }
+                totalLength += length;
+                ends.set(node, totalLength);
+                return;
+            }
 
-    const startOffset =
-        getTextOffset(
-            highlightContainer,
-            range.startContainer,
-            range.startOffset
-        );
+            for (const child of node.childNodes || []) {
+                visit(child);
+            }
 
-    const endOffset =
-        getTextOffset(
-            highlightContainer,
-            range.endContainer,
-            range.endOffset
-        );
+            ends.set(node, totalLength);
+        }
 
-    if (
-        startOffset === null ||
-        endOffset === null
-    ) {
-        return null;
-    }
+        visit(container);
 
-    return {
-        start: Math.min(
-            startOffset,
-            endOffset
-        ),
+        function pointOffset(node, offset) {
+            if (
+                !node ||
+                !starts.has(node) ||
+                isInsideStickyNotes(node)
+            ) {
+                return null;
+            }
 
-        end: Math.max(
-            startOffset,
-            endOffset
-        )
-    };
-}
+            if (node.nodeType === Node.TEXT_NODE) {
+                const length = node.nodeValue?.length || 0;
 
+                return starts.get(node) +
+                    Math.max(0, Math.min(offset, length));
+            }
 
-/* =========================================================
-   Restore Range From Text Offsets
-   ========================================================= */
+            if (
+                node.nodeType === Node.ELEMENT_NODE ||
+                node.nodeType === Node.DOCUMENT_FRAGMENT_NODE
+            ) {
+                const children = node.childNodes || [];
 
-function getDomPointAtTextOffset(
-    container,
-    targetOffset
-) {
-    const walker =
-        document.createTreeWalker(
-            container,
-            NodeFilter.SHOW_TEXT
-        );
+                const childLimit = Math.max(
+                    0,
+                    Math.min(offset, children.length)
+                );
 
-    let currentNode;
-    let currentOffset = 0;
+                if (childLimit === 0) {
+                    return starts.get(node);
+                }
 
-    while (
-        (currentNode = walker.nextNode())
-    ) {
-        const nodeLength =
-            currentNode.textContent.length;
+                return ends.get(children[childLimit - 1]) ??
+                    starts.get(node);
+            }
 
-        if (
-            targetOffset <=
-            currentOffset + nodeLength
-        ) {
+            return null;
+        }
+
+        function pointAt(targetOffset) {
+            if (!textNodes.length) return null;
+
+            const target = Math.max(
+                0,
+                Math.min(targetOffset, totalLength)
+            );
+
+            let low = 0;
+            let high = textNodes.length - 1;
+
+            while (low <= high) {
+                const mid = (low + high) >> 1;
+                const item = textNodes[mid];
+
+                if (target < item.start) {
+                    high = mid - 1;
+                } else if (target > item.end) {
+                    low = mid + 1;
+                } else {
+                    return {
+                        node: item.node,
+                        offset: target - item.start
+                    };
+                }
+            }
+
+            const last = textNodes[textNodes.length - 1];
+
             return {
-                node: currentNode,
-
-                offset:
-                    targetOffset -
-                    currentOffset
+                node: last.node,
+                offset: last.end - last.start
             };
         }
 
-        currentOffset += nodeLength;
-    }
+        function rangeOffsets(range) {
+            if (!range) return null;
 
-    /*
-     * If the offset is exactly at the end
-     * of the container, use the final text node.
-     */
+            const start = pointOffset(
+                range.startContainer,
+                range.startOffset
+            );
 
-    let lastTextNode = null;
+            const end = pointOffset(
+                range.endContainer,
+                range.endOffset
+            );
 
-    const finalWalker =
-        document.createTreeWalker(
-            container,
-            NodeFilter.SHOW_TEXT
-        );
+            if (start === null || end === null) return null;
 
-    while (
-        (currentNode = finalWalker.nextNode())
-    ) {
-        lastTextNode = currentNode;
-    }
+            return {
+                start: Math.min(start, end),
+                end: Math.max(start, end)
+            };
+        }
 
-    if (lastTextNode) {
         return {
-            node: lastTextNode,
-            offset: lastTextNode.textContent.length
+            container,
+            textNodes,
+            starts,
+            ends,
+            totalLength,
+            pointOffset,
+            pointAt,
+            rangeOffsets
         };
     }
 
-    return null;
-}
+    function getHighlightTextColor(color) {
+        const match = /^#([0-9a-f]{6})$/i.exec(color || "");
 
+        if (!match) return "#1A1A1A";
 
-function restoreHighlightRange(
-    rangeData
-) {
-    if (
-        !highlightContainer ||
-        !rangeData
-    ) {
-        return null;
-    }
+        const hex = match[1];
 
-    if (
-        typeof rangeData.start !== "number" ||
-        typeof rangeData.end !== "number"
-    ) {
-        return null;
-    }
+        const red = parseInt(hex.slice(0, 2), 16);
+        const green = parseInt(hex.slice(2, 4), 16);
+        const blue = parseInt(hex.slice(4, 6), 16);
 
-    const startPoint =
-        getDomPointAtTextOffset(
-            highlightContainer,
-            rangeData.start
-        );
-
-    const endPoint =
-        getDomPointAtTextOffset(
-            highlightContainer,
-            rangeData.end
-        );
-
-    if (
-        !startPoint ||
-        !endPoint
-    ) {
-        return null;
-    }
-
-    try {
-        const range =
-            document.createRange();
-
-        range.setStart(
-            startPoint.node,
-            startPoint.offset
-        );
-
-        range.setEnd(
-            endPoint.node,
-            endPoint.offset
-        );
-
-        return range;
-
-    } catch {
-        return null;
-    }
-}
-
-
-/* =========================================================
-   Highlight Persistence
-   ========================================================= */
-
-function serializeHighlightRange(
-    range
-) {
-    const offsets =
-        getRangeTextOffsets(range);
-
-    if (!offsets) {
-        return null;
-    }
-
-    return offsets;
-}
-
-
-function saveHighlights() {
-    const storedHighlights = [];
-
-    highlights.forEach(
-        (highlightData) => {
-            const rangeData =
-                serializeHighlightRange(
-                    highlightData.range
-                );
-
-            if (!rangeData) {
-                return;
-            }
-
-            storedHighlights.push({
-                range: rangeData,
-
-                color:
-                    highlightData.color
-            });
-        }
-    );
-
-    localStorage.setItem(
-        highlightStorageKey,
-        JSON.stringify(
-            storedHighlights
-        )
-    );
-}
-
-
-/* =========================================================
-   Highlight Span Styling
-   ========================================================= */
-
-function getHighlightTextColor(color) {
-    const hex =
-        color.replace("#", "");
-
-    if (hex.length !== 6) {
-        return "#1A1A1A";
-    }
-
-    const red =
-        parseInt(
-            hex.slice(0, 2),
-            16
-        );
-
-    const green =
-        parseInt(
-            hex.slice(2, 4),
-            16
-        );
-
-    const blue =
-        parseInt(
-            hex.slice(4, 6),
-            16
-        );
-
-    const luminance =
-        (
+        const luminance =
             0.299 * red +
             0.587 * green +
-            0.114 * blue
-        );
+            0.114 * blue;
 
-    return luminance >= 150
-        ? "#171717"
-        : "#F8FAFC";
-}
-
-
-function applyHighlightStyle(
-    element,
-    color
-) {
-    element.style.backgroundColor =
-        color;
-
-    element.style.color =
-        getHighlightTextColor(color);
-
-element.style.borderRadius =
-    "3px";
-
-element.style.boxDecorationBreak =
-    "clone";
-
-element.style.webkitBoxDecorationBreak =
-    "clone";
-
-element.style.boxShadow =
-    "none";
-
-element.style.textShadow =
-    "none";
-}
-
-
-/* =========================================================
-   Text Node Collection
-   ========================================================= */
-
-function getTextNodesInRange(
-    range
-) {
-    if (!highlightContainer) {
-        return [];
+        return luminance >= 150 ? "#171717" : "#F8FAFC";
     }
 
-    const walker =
-        document.createTreeWalker(
-            highlightContainer,
-            NodeFilter.SHOW_TEXT
-        );
-
-    const nodes = [];
-
-    let currentNode;
-
-    while (
-        (currentNode = walker.nextNode())
-    ) {
-        try {
-            if (
-                range.intersectsNode(
-                    currentNode
-                )
-            ) {
-                nodes.push(currentNode);
-            }
-        } catch {
-            // Ignore invalid nodes.
-        }
+    function applyHighlightStyle(element, color) {
+        element.style.backgroundColor = color;
+        element.style.color = getHighlightTextColor(color);
+        element.style.borderRadius = "3px";
+        element.style.boxDecorationBreak = "clone";
+        element.style.webkitBoxDecorationBreak = "clone";
+        element.style.boxShadow = "none";
+        element.style.textShadow = "none";
     }
 
-    return nodes;
-}
-
-
-/* =========================================================
-   Wrap Text Node Portion
-   ========================================================= */
-
-function wrapTextNode(
-    textNode,
-    startOffset,
-    endOffset,
-    color
-) {
-    if (
-        !textNode ||
-        startOffset >= endOffset
-    ) {
-        return null;
+    function normalizeColor(color) {
+        return typeof color === "string" &&
+            /^#[0-9a-f]{6}$/i.test(color)
+            ? color
+            : DEFAULT_COLOR;
     }
 
-    const text =
-        textNode.textContent;
+    function createSpan(color, start, end) {
+        const span = document.createElement("span");
 
-    const beforeText =
-        text.slice(
-            0,
-            startOffset
-        );
+        span.className = "textHighlight";
+        span.dataset.highlightColor = color;
+        span.dataset.highlightStart = String(start);
+        span.dataset.highlightEnd = String(end);
 
-    const selectedText =
-        text.slice(
-            startOffset,
-            endOffset
-        );
+        applyHighlightStyle(span, color);
 
-    const afterText =
-        text.slice(
-            endOffset
-        );
-
-    const fragment =
-        document.createDocumentFragment();
-
-    if (beforeText) {
-        fragment.appendChild(
-            document.createTextNode(
-                beforeText
-            )
-        );
+        return span;
     }
 
-    const highlight =
-        document.createElement("span");
+    function registerHighlight(element, color, start, end) {
+        const id = `noteHighlight${++highlightCounter}`;
 
-    highlight.className =
-        "textHighlight";
+        element.dataset.highlightId = id;
+        element.dataset.highlightStart = String(start);
+        element.dataset.highlightEnd = String(end);
+        element.dataset.highlightColor = color;
 
-    highlight.dataset.highlightColor =
-        color;
-
-    applyHighlightStyle(
-        highlight,
-        color
-    );
-
-    highlight.textContent =
-        selectedText;
-
-    fragment.appendChild(
-        highlight
-    );
-
-    if (afterText) {
-        fragment.appendChild(
-            document.createTextNode(
-                afterText
-            )
-        );
-    }
-
-    textNode.parentNode.replaceChild(
-        fragment,
-        textNode
-    );
-
-    return highlight;
-}
-
-
-/* =========================================================
-   Create Highlight Spans
-   ========================================================= */
-
-function wrapRangeWithHighlight(
-    range,
-    color
-) {
-    const textNodes =
-        getTextNodesInRange(range);
-
-    if (textNodes.length === 0) {
-        return [];
-    }
-
-    const createdHighlights = [];
-
-    /*
-     * Calculate the range offsets before modifying
-     * the DOM.
-     */
-
-    const rangeStart =
-        getTextOffset(
-            highlightContainer,
-            range.startContainer,
-            range.startOffset
-        );
-
-    const rangeEnd =
-        getTextOffset(
-            highlightContainer,
-            range.endContainer,
-            range.endOffset
-        );
-
-    if (
-        rangeStart === null ||
-        rangeEnd === null
-    ) {
-        return [];
-    }
-
-    const start =
-        Math.min(
-            rangeStart,
-            rangeEnd
-        );
-
-    const end =
-        Math.max(
-            rangeStart,
-            rangeEnd
-        );
-
-    let textPosition = 0;
-
-    /*
-     * Process nodes from the end toward the beginning.
-     * This prevents earlier DOM changes from invalidating
-     * the nodes that still need to be processed.
-     */
-
-    for (
-        let i = textNodes.length - 1;
-        i >= 0;
-        i--
-    ) {
-        const textNode =
-            textNodes[i];
-
-        const nodeText =
-            textNode.textContent;
-
-        const nodeStart =
-            textPosition +
-            getTextLengthBeforeNode(
-                textNode,
-                highlightContainer
-            );
-
-        const nodeEnd =
-            nodeStart +
-            nodeText.length;
-
-        const selectionStart =
-            Math.max(
-                start,
-                nodeStart
-            );
-
-        const selectionEnd =
-            Math.min(
-                end,
-                nodeEnd
-            );
-
-        if (
-            selectionStart <
-            selectionEnd
-        ) {
-            const localStart =
-                selectionStart -
-                nodeStart;
-
-            const localEnd =
-                selectionEnd -
-                nodeStart;
-
-            const highlight =
-                wrapTextNode(
-                    textNode,
-                    localStart,
-                    localEnd,
-                    color
-                );
-
-            if (highlight) {
-                createdHighlights.push(
-                    highlight
-                );
-            }
-        }
-    }
-
-    return createdHighlights;
-}
-
-
-/*
- * Returns the number of characters appearing
- * before the supplied text node.
- */
-
-function getTextLengthBeforeNode(
-    targetNode,
-    container
-) {
-    let total = 0;
-
-    const walker =
-        document.createTreeWalker(
-            container,
-            NodeFilter.SHOW_TEXT
-        );
-
-    let currentNode;
-
-    while (
-        (currentNode = walker.nextNode())
-    ) {
-        if (
-            currentNode === targetNode
-        ) {
-            break;
-        }
-
-        total +=
-            currentNode.textContent.length;
-    }
-
-    return total;
-}
-
-
-/* =========================================================
-   Highlight Registration
-   ========================================================= */
-
-function registerHighlight(
-    element,
-    color
-) {
-    highlightCounter++;
-
-    const highlightId =
-        `noteHighlight${highlightCounter}`;
-
-    element.dataset.highlightId =
-        highlightId;
-
-    const range =
-        document.createRange();
-
-    range.selectNodeContents(
-        element
-    );
-
-    highlights.set(
-        highlightId,
-        {
+        highlights.set(id, {
+            id,
             element,
             color,
-            range
-        }
-    );
+            start,
+            end
+        });
 
-    return highlightId;
-}
-
-/* =========================================================
-   Create Highlight
-   ========================================================= */
-
-function createHighlightFromRange(
-    highlightRange,
-    color
-) {
-    if (
-        !highlightContainer ||
-        highlightRange.collapsed
-    ) {
-        return;
+        return id;
     }
 
-    const rangeData =
-        serializeHighlightRange(
-            highlightRange
-        );
+    /*
+     * Save cached offsets directly.
+     * No document traversal or Range calculation is needed here.
+     */
+    function saveHighlights() {
+        const stored = [];
 
-    if (!rangeData) {
-        return;
-    }
+        for (const item of highlights.values()) {
+            if (item.end <= item.start) continue;
 
-    const createdHighlights =
-        wrapRangeWithHighlight(
-            highlightRange,
-            color
-        );
-
-    createdHighlights.forEach(
-        (element) => {
-            registerHighlight(
-                element,
-                color
-            );
-        }
-    );
-}
-
-
-function createHighlight(
-    highlightRange
-) {
-    createHighlightFromRange(
-        highlightRange,
-        selectedColor
-    );
-
-    saveHighlights();
-}
-
-
-/* =========================================================
-   Highlight Removal Helpers
-   ========================================================= */
-
-function unwrapHighlight(
-    element
-) {
-    if (!isHighlightElement(element)) {
-        return;
-    }
-
-    const parent =
-        element.parentNode;
-
-    if (!parent) {
-        return;
-    }
-
-    while (
-        element.firstChild
-    ) {
-        parent.insertBefore(
-            element.firstChild,
-            element
-        );
-    }
-
-    parent.removeChild(
-        element
-    );
-
-    parent.normalize();
-}
-
-
-/* =========================================================
-   Remove Highlight
-   ========================================================= */
-
-function removeHighlight(
-    selectionRange
-) {
-    if (!highlightContainer) {
-        return;
-    }
-
-    const selectionOffsets =
-        getRangeTextOffsets(
-            selectionRange
-        );
-
-    if (!selectionOffsets) {
-        return;
-    }
-
-    const highlightsToRemove = [];
-
-    highlights.forEach(
-        (
-            highlightData,
-            highlightId
-        ) => {
-            const element =
-                highlightData.element;
-
-            if (!element || !element.isConnected) {
-                highlightsToRemove.push(
-                    highlightId
-                );
-
-                return;
-            }
-
-            const highlightRange =
-                document.createRange();
-
-            highlightRange.selectNodeContents(
-                element
-            );
-
-            const highlightOffsets =
-                getRangeTextOffsets(
-                    highlightRange
-                );
-
-            if (!highlightOffsets) {
-                return;
-            }
-
-            const intersects =
-                (
-                    highlightOffsets.start <
-                    selectionOffsets.end
-                ) &&
-                (
-                    highlightOffsets.end >
-                    selectionOffsets.start
-                );
-
-            if (intersects) {
-                highlightsToRemove.push(
-                    highlightId
-                );
-            }
-        }
-    );
-
-    highlightsToRemove.forEach(
-        (highlightId) => {
-            const highlightData =
-                highlights.get(
-                    highlightId
-                );
-
-            if (!highlightData) {
-                return;
-            }
-
-            if (
-                highlightData.element
-            ) {
-                unwrapHighlight(
-                    highlightData.element
-                );
-            }
-
-            highlights.delete(
-                highlightId
-            );
-        }
-    );
-
-    saveHighlights();
-}
-
-
-/* =========================================================
-   Selection
-   ========================================================= */
-
-function getHighlightSelection() {
-    const highlightSelection =
-        window.getSelection();
-
-    if (
-        !highlightSelection ||
-        highlightSelection.rangeCount === 0 ||
-        highlightSelection.isCollapsed
-    ) {
-        return null;
-    }
-
-    const highlightRange =
-        highlightSelection.getRangeAt(0);
-
-    if (!highlightContainer) {
-        return null;
-    }
-
-    const startInsideNote =
-        highlightContainer.contains(
-            highlightRange.startContainer
-        );
-
-    const endInsideNote =
-        highlightContainer.contains(
-            highlightRange.endContainer
-        );
-
-    if (
-        !startInsideNote ||
-        !endInsideNote
-    ) {
-        return null;
-    }
-
-    return highlightRange.cloneRange();
-}
-
-
-/* =========================================================
-   Load Highlights
-   ========================================================= */
-
-function loadHighlights() {
-    if (!highlightContainer) {
-        return;
-    }
-
-    try {
-        const storedHighlights =
-            localStorage.getItem(
-                highlightStorageKey
-            );
-
-        if (!storedHighlights) {
-            return;
+            stored.push({
+                range: {
+                    start: item.start,
+                    end: item.end
+                },
+                color: item.color
+            });
         }
 
-        const parsedHighlights =
-            JSON.parse(
-                storedHighlights
+        try {
+            localStorage.setItem(
+                highlightStorageKey,
+                JSON.stringify(stored)
             );
+        } catch (error) {
+            console.error("Failed to save highlights:", error);
+        }
+    }
+
+    function getHighlightSelection() {
+        const selection = window.getSelection();
 
         if (
-            !Array.isArray(
-                parsedHighlights
-            )
+            !selection ||
+            selection.rangeCount === 0 ||
+            selection.isCollapsed
+        ) {
+            return null;
+        }
+
+        const range = selection.getRangeAt(0);
+
+        if (
+            !highlightContainer.contains(range.startContainer) ||
+            !highlightContainer.contains(range.endContainer) ||
+            isInsideStickyNotes(range.startContainer) ||
+            isInsideStickyNotes(range.endContainer)
+        ) {
+            return null;
+        }
+
+        return range.cloneRange();
+    }
+
+    function wrapTextNodePortion(
+        item,
+        absoluteStart,
+        absoluteEnd,
+        color
+    ) {
+        const { node } = item;
+
+        if (
+            !node.parentNode ||
+            node.nodeType !== Node.TEXT_NODE
+        ) {
+            return null;
+        }
+
+        const localStart = Math.max(
+            0,
+            absoluteStart - item.start
+        );
+
+        const localEnd = Math.min(
+            item.end - item.start,
+            absoluteEnd - item.start
+        );
+
+        if (localStart >= localEnd) return null;
+
+        const value = node.nodeValue || "";
+        const fragment = document.createDocumentFragment();
+
+        if (localStart > 0) {
+            fragment.appendChild(
+                document.createTextNode(value.slice(0, localStart))
+            );
+        }
+
+        const span = createSpan(
+            color,
+            absoluteStart,
+            absoluteEnd
+        );
+
+        span.textContent = value.slice(localStart, localEnd);
+        fragment.appendChild(span);
+
+        if (localEnd < value.length) {
+            fragment.appendChild(
+                document.createTextNode(value.slice(localEnd))
+            );
+        }
+
+        node.parentNode.replaceChild(fragment, node);
+
+        registerHighlight(
+            span,
+            color,
+            absoluteStart,
+            absoluteEnd
+        );
+
+        return span;
+    }
+
+    function createHighlightFromOffsets(index, start, end, color) {
+        if (start >= end) return;
+
+        const safeColor = normalizeColor(color);
+
+        const affected = index.textNodes.filter(
+            item => item.start < end && item.end > start
+        );
+
+        /*
+         * Work backwards so mutations to later text nodes
+         * cannot invalidate earlier node references.
+         */
+        for (let i = affected.length - 1; i >= 0; i--) {
+            const item = affected[i];
+
+            const segmentStart = Math.max(start, item.start);
+            const segmentEnd = Math.min(end, item.end);
+
+            wrapTextNodePortion(
+                item,
+                segmentStart,
+                segmentEnd,
+                safeColor
+            );
+        }
+    }
+
+    function createHighlight(range) {
+        const index = buildTextIndex();
+        const offsets = index.rangeOffsets(range);
+
+        if (!offsets || offsets.start >= offsets.end) return;
+
+        createHighlightFromOffsets(
+            index,
+            offsets.start,
+            offsets.end,
+            selectedColor
+        );
+
+        saveHighlights();
+    }
+
+    function unwrapHighlight(element) {
+        if (
+            !isHighlightElement(element) ||
+            !element.parentNode
         ) {
             return;
         }
 
+        const parent = element.parentNode;
+        const fragment = document.createDocumentFragment();
+
+        while (element.firstChild) {
+            fragment.appendChild(element.firstChild);
+        }
+
+        parent.replaceChild(fragment, element);
+
         /*
-         * New format:
-         *
-         * {
-         *   range: {
-         *      start: number,
-         *      end: number
-         *   },
-         *   color: string
-         * }
+         * Do not normalize after every removal.
+         * Repeated normalize() calls can be expensive.
          */
+    }
 
-        parsedHighlights.forEach(
-            (storedHighlight) => {
-                const range =
-                    restoreHighlightRange(
-                        storedHighlight.range
-                    );
+    function getElementDepth(element) {
+        let depth = 0;
 
-                if (!range) {
-                    return;
-                }
+        for (
+            let node = element;
+            node && node !== highlightContainer;
+            node = node.parentElement
+        ) {
+            depth++;
+        }
 
-                const color =
-                    storedHighlight.color ||
-                    "#fff176";
+        return depth;
+    }
 
-                createHighlightFromRange(
-                    range,
-                    color
-                );
+    function removeHighlight(selectionRange) {
+        const index = buildTextIndex();
+        const selectionOffsets = index.rangeOffsets(selectionRange);
+
+        if (
+            !selectionOffsets ||
+            selectionOffsets.start >= selectionOffsets.end
+        ) {
+            return;
+        }
+
+        const toRemove = [];
+
+        for (const item of highlights.values()) {
+            if (
+                item.end > selectionOffsets.start &&
+                item.start < selectionOffsets.end
+            ) {
+                toRemove.push(item);
             }
+        }
+
+        /*
+         * Remove deepest spans first to handle nested highlights safely.
+         * Existing behavior is preserved: an intersecting highlight span
+         * is removed in full, rather than partially erased.
+         */
+        toRemove.sort(
+            (a, b) =>
+                getElementDepth(b.element) -
+                getElementDepth(a.element)
         );
 
-        /*
-         * Re-save using the new text-offset format.
-         */
+        for (const item of toRemove) {
+            if (item.element?.isConnected) {
+                unwrapHighlight(item.element);
+            }
+
+            highlights.delete(item.id);
+        }
 
         saveHighlights();
-
-    } catch (error) {
-        console.error(
-            "Failed to load highlights:",
-            error
-        );
-    }
-}
-
-
-/* =========================================================
-   Highlight Power
-   ========================================================= */
-
-function updateHighlightPowerToggle() {
-    if (!highlightPowerToggle) {
-        return;
     }
 
-    highlightPowerToggle.classList.toggle(
-        "isActive",
-        isHighlightEnabled
-    );
+    /*
+     * Restore saved highlights using one initial text index.
+     * Overlapping intervals are rebuilt as nested spans.
+     */
+    function restoreAllHighlights(records) {
+        const index = buildTextIndex();
 
-    highlightPowerToggle.setAttribute(
-        "aria-pressed",
-        String(isHighlightEnabled)
-    );
+        const valid = records
+            .map((record, order) => {
+                const range = record?.range;
 
-    const label =
-        highlightPowerToggle.querySelector(
-            "span"
-        );
+                if (
+                    !range ||
+                    !Number.isFinite(range.start) ||
+                    !Number.isFinite(range.end)
+                ) {
+                    return null;
+                }
 
-    if (label) {
-        label.textContent =
+                const start = Math.max(
+                    0,
+                    Math.min(index.totalLength, Math.trunc(range.start))
+                );
+
+                const end = Math.max(
+                    0,
+                    Math.min(index.totalLength, Math.trunc(range.end))
+                );
+
+                if (start >= end) return null;
+
+                return {
+                    start,
+                    end,
+                    color: normalizeColor(record.color),
+                    order
+                };
+            })
+            .filter(Boolean);
+
+        /*
+         * Process text nodes in reverse order so DOM mutations
+         * do not affect references to text nodes still to process.
+         */
+        for (
+            let nodeIndex = index.textNodes.length - 1;
+            nodeIndex >= 0;
+            nodeIndex--
+        ) {
+            const item = index.textNodes[nodeIndex];
+
+            if (
+                !item.node.parentNode ||
+                item.start === item.end
+            ) {
+                continue;
+            }
+
+            const boundaries = new Set([
+                item.start,
+                item.end
+            ]);
+
+            const overlapping = [];
+
+            for (const record of valid) {
+                if (
+                    record.start < item.end &&
+                    record.end > item.start
+                ) {
+                    overlapping.push(record);
+
+                    boundaries.add(
+                        Math.max(item.start, record.start)
+                    );
+
+                    boundaries.add(
+                        Math.min(item.end, record.end)
+                    );
+                }
+            }
+
+            if (!overlapping.length) continue;
+
+            const cuts = [...boundaries].sort((a, b) => a - b);
+            const fragment = document.createDocumentFragment();
+            const created = [];
+            const originalText = item.node.nodeValue || "";
+
+            for (let i = 0; i < cuts.length - 1; i++) {
+                const segmentStart = cuts[i];
+                const segmentEnd = cuts[i + 1];
+
+                if (segmentStart >= segmentEnd) continue;
+
+                let inner = document.createTextNode(
+                    originalText.slice(
+                        segmentStart - item.start,
+                        segmentEnd - item.start
+                    )
+                );
+
+                const active = overlapping
+                    .filter(
+                        record =>
+                            record.start <= segmentStart &&
+                            record.end >= segmentEnd
+                    )
+                    .sort((a, b) => a.order - b.order);
+
+                for (let j = active.length - 1; j >= 0; j--) {
+                    const record = active[j];
+
+                    const span = createSpan(
+                        record.color,
+                        segmentStart,
+                        segmentEnd
+                    );
+
+                    span.appendChild(inner);
+                    inner = span;
+
+                    created.push({
+                        span,
+                        record,
+                        start: segmentStart,
+                        end: segmentEnd
+                    });
+                }
+
+                fragment.appendChild(inner);
+            }
+
+            item.node.parentNode.replaceChild(
+                fragment,
+                item.node
+            );
+
+            for (const entry of created) {
+                registerHighlight(
+                    entry.span,
+                    entry.record.color,
+                    entry.start,
+                    entry.end
+                );
+            }
+        }
+    }
+
+    function loadHighlights() {
+        let stored = null;
+
+        try {
+            stored = localStorage.getItem(highlightStorageKey);
+        } catch (error) {
+            console.error("Failed to read highlights:", error);
+            return;
+        }
+
+        if (!stored) return;
+
+        try {
+            const parsed = JSON.parse(stored);
+
+            if (!Array.isArray(parsed)) return;
+
+            restoreAllHighlights(parsed);
+
+            /*
+             * Save the restored intervals in the optimized format.
+             */
+            saveHighlights();
+        } catch (error) {
+            console.error("Failed to load highlights:", error);
+        }
+    }
+
+    function updateHighlightPowerToggle() {
+        if (!highlightPowerToggle) return;
+
+        highlightPowerToggle.classList.toggle(
+            "isActive",
             isHighlightEnabled
+        );
+
+        highlightPowerToggle.setAttribute(
+            "aria-pressed",
+            String(isHighlightEnabled)
+        );
+
+        const label = highlightPowerToggle.querySelector("span");
+
+        if (label) {
+            label.textContent = isHighlightEnabled
                 ? "هایلایت روشن"
                 : "هایلایت خاموش";
-    }
-}
-
-
-function toggleHighlightPower() {
-    isHighlightEnabled =
-        !isHighlightEnabled;
-
-    localStorage.setItem(
-        highlightPowerStorageKey,
-        String(isHighlightEnabled)
-    );
-
-    updateHighlightPowerToggle();
-}
-
-
-/* =========================================================
-   Highlight Mode
-   ========================================================= */
-
-function setHighlightMode(
-    color
-) {
-    selectedColor = color;
-
-    isEraserActive = false;
-
-    if (highlightEraser) {
-        highlightEraser.classList.remove(
-            "isActive"
-        );
+        }
     }
 
-    highlightColors.forEach(
-        (button) => {
+    function toggleHighlightPower() {
+        isHighlightEnabled = !isHighlightEnabled;
+
+        try {
+            localStorage.setItem(
+                highlightPowerStorageKey,
+                String(isHighlightEnabled)
+            );
+        } catch (error) {
+            console.warn(
+                "Highlight preference could not be saved:",
+                error
+            );
+        }
+
+        updateHighlightPowerToggle();
+    }
+
+    function setHighlightMode(color) {
+        selectedColor = normalizeColor(color);
+        isEraserActive = false;
+
+        if (highlightEraser) {
+            highlightEraser.classList.remove("isActive");
+        }
+
+        highlightColors.forEach(button => {
             button.classList.toggle(
                 "isActive",
-                button.dataset
-                    .highlightColor === color
+                button.dataset.highlightColor === selectedColor
             );
+        });
+    }
+
+    function setEraserMode() {
+        isEraserActive = true;
+
+        if (highlightEraser) {
+            highlightEraser.classList.add("isActive");
         }
-    );
-}
 
-
-function setEraserMode() {
-    isEraserActive = true;
-
-    if (highlightEraser) {
-        highlightEraser.classList.add(
-            "isActive"
-        );
+        highlightColors.forEach(button => {
+            button.classList.remove("isActive");
+        });
     }
 
-    highlightColors.forEach(
-        (button) => {
-            button.classList.remove(
-                "isActive"
-            );
+    function applyHighlight() {
+        if (!isHighlightEnabled) return;
+
+        const range = getHighlightSelection();
+
+        if (!range) return;
+
+        if (isEraserActive) {
+            removeHighlight(range);
+        } else {
+            createHighlight(range);
         }
-    );
-}
 
-
-/* =========================================================
-   Apply Highlight
-   ========================================================= */
-
-function applyHighlight() {
-    if (!isHighlightEnabled) {
-        return;
+        window.getSelection()?.removeAllRanges();
     }
 
-    const highlightRange =
-        getHighlightSelection();
+    let highlightSelectionTimer = null;
 
-    if (!highlightRange) {
-        return;
-    }
+    function scheduleHighlightApplication(delay = 0) {
+        clearTimeout(highlightSelectionTimer);
 
-    if (isEraserActive) {
-        removeHighlight(
-            highlightRange
-        );
-    } else {
-        createHighlight(
-            highlightRange
-        );
-    }
-
-    const selection =
-        window.getSelection();
-
-    if (selection) {
-        selection.removeAllRanges();
-    }
-}
-
-
-/* =========================================================
-   Selection Events
-   ========================================================= */
-
-let highlightSelectionTimer = null;
-
-
-function scheduleHighlightApplication(
-    delay = 0
-) {
-    clearTimeout(
-        highlightSelectionTimer
-    );
-
-    highlightSelectionTimer =
-        setTimeout(
-            () => {
-                applyHighlight();
-            },
+        highlightSelectionTimer = setTimeout(
+            applyHighlight,
             delay
         );
-}
+    }
 
-
-/* =========================================================
-   Desktop — Mouse Selection
-   ========================================================= */
-
-document.addEventListener(
-    "mouseup",
-    (event) => {
+    document.addEventListener("mouseup", event => {
         if (
-            event.target.closest(
-                ".highlightSwitcher"
-            )
+            event.target instanceof Element &&
+            event.target.closest(".highlightSwitcher")
         ) {
             return;
         }
 
         scheduleHighlightApplication(0);
-    }
-);
+    });
 
+    document.addEventListener(
+        "touchend",
+        event => {
+            if (
+                event.target instanceof Element &&
+                event.target.closest(".highlightSwitcher")
+            ) {
+                return;
+            }
 
-/* =========================================================
-   Mobile — Touch Selection
-   ========================================================= */
+            scheduleHighlightApplication(120);
+        },
+        { passive: true }
+    );
 
-document.addEventListener(
-    "touchend",
-    (event) => {
-        if (
-            event.target.closest(
-                ".highlightSwitcher"
-            )
-        ) {
-            return;
-        }
-
-        /*
-         * Give the browser time to finish native
-         * text selection before reading Selection.
-         */
-
-        scheduleHighlightApplication(120);
-    },
-    {
-        passive: true
-    }
-);
-
-
-/* =========================================================
-   Highlight Menu
-   ========================================================= */
-
-if (highlightToggle) {
-    highlightToggle.addEventListener(
-        "click",
-        () => {
+    if (highlightToggle) {
+        highlightToggle.addEventListener("click", () => {
             const isOpen =
-                highlightSwitcher.classList.toggle(
-                    "isOpen"
-                );
+                highlightSwitcher?.classList.toggle("isOpen") ?? false;
 
             highlightToggle.setAttribute(
                 "aria-expanded",
@@ -1296,84 +839,33 @@ if (highlightToggle) {
                     String(!isOpen)
                 );
             }
-        }
-    );
-}
-
-
-/* =========================================================
-   Highlight Power Toggle
-   ========================================================= */
-
-if (highlightPowerToggle) {
-    highlightPowerToggle.addEventListener(
-        "click",
-        (event) => {
-            event.stopPropagation();
-
-            toggleHighlightPower();
-        }
-    );
-}
-
-
-/* =========================================================
-   Preset Colors
-   ========================================================= */
-
-highlightColors.forEach(
-    (button) => {
-        button.addEventListener(
-            "click",
-            () => {
-                setHighlightMode(
-                    button.dataset
-                        .highlightColor
-                );
-            }
-        );
+        });
     }
-);
 
+    if (highlightPowerToggle) {
+        highlightPowerToggle.addEventListener("click", event => {
+            event.stopPropagation();
+            toggleHighlightPower();
+        });
+    }
 
-/* =========================================================
-   Custom Color
-   ========================================================= */
+    highlightColors.forEach(button => {
+        button.addEventListener("click", () => {
+            setHighlightMode(button.dataset.highlightColor);
+        });
+    });
 
-if (highlightColorInput) {
-    highlightColorInput.addEventListener(
-        "input",
-        (event) => {
-            setHighlightMode(
-                event.target.value
-            );
-        }
-    );
-}
+    if (highlightColorInput) {
+        highlightColorInput.addEventListener("input", event => {
+            setHighlightMode(event.target.value);
+        });
+    }
 
+    if (highlightEraser) {
+        highlightEraser.addEventListener("click", setEraserMode);
+    }
 
-/* =========================================================
-   Eraser
-   ========================================================= */
-
-if (highlightEraser) {
-    highlightEraser.addEventListener(
-        "click",
-        () => {
-            setEraserMode();
-        }
-    );
-}
-
-
-/* =========================================================
-   Initial State
-   ========================================================= */
-
-setHighlightMode(
-    selectedColor
-);
-
-updateHighlightPowerToggle();
-
-loadHighlights();
+    setHighlightMode(selectedColor);
+    updateHighlightPowerToggle();
+    loadHighlights();
+})();
