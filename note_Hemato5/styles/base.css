@@ -1,4 +1,4 @@
-/* =========================================================
+w/* =========================================================
    Note Renderer — Light Mode
    ========================================================= */
 
@@ -1049,6 +1049,19 @@ a {
     margin: 0 0 20px;
 }
 
+/* Keep images and image wrappers inside the content area */
+.noteContainer .noteSection img,
+.noteContainer .mainSection img,
+.noteContainer figure,
+.noteContainer picture {
+    box-sizing: border-box;
+    max-width: 100%;
+}
+
+.noteContainer .noteSection img,
+.noteContainer .mainSection img {
+    height: auto;
+}
 
 .mainSection img {
     display: block;
