@@ -123,6 +123,7 @@ body {
     background: var(--pageBackground);
     color: var(--textPrimary);
     min-height: 100vh;
+    min-height: 100dvh; /* mobile: 100vh includes the hidden browser bar and causes phantom scroll */
     transition: background 0.25s ease, color 0.25s ease;
 }
 
@@ -341,6 +342,7 @@ body {
     position: relative;
     width: min(100%, 620px);
     max-height: calc(100vh - 64px);
+    max-height: calc(100dvh - 64px);
     overflow-y: auto;
     padding: 42px;
     background: var(--surfaceBackground);
@@ -459,13 +461,50 @@ body {
    Notes Grid
    ========================================================= */
 
+.notesContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 36px;
+    padding: 32px 24px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.categorySection {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.categoryTitle {
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+    padding-inline-start: 12px;
+    border-inline-start: 4px solid var(--accentColor);
+    font-size: 20px;
+    font-weight: 700;
+    line-height: 1.5;
+    color: var(--textPrimary);
+}
+
+.categoryCount {
+    font-size: 13px;
+    font-weight: 400;
+    color: var(--textMuted);
+}
+
+.categoryTitle mark {
+    background: var(--accentSoft);
+    color: var(--accentColor);
+    border-radius: 3px;
+    padding: 0 2px;
+}
+
 .notesGrid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
     gap: 20px;
-    padding: 32px 24px;
-    max-width: 1200px;
-    margin: 0 auto;
 }
 
 .noteCard {
@@ -529,6 +568,10 @@ body {
     color: var(--textMuted);
 }
 
+.emptyState[hidden] {
+    display: none;
+}
+
 .emptyState svg {
     width: 48px;
     height: 48px;
@@ -556,8 +599,12 @@ body {
         flex: 1;
     }
 
-    .notesGrid {
+    .notesContainer {
         padding: 20px 16px;
+        gap: 28px;
+    }
+
+    .notesGrid {
         grid-template-columns: 1fr;
     }
 }
