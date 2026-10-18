@@ -2,7 +2,7 @@ const themeSwitcher = document.querySelector(".themeSwitcher");
 const themeToggle = document.querySelector(".themeToggle");
 const themeButtons = document.querySelectorAll(".themeButton");
 const searchInput = document.getElementById("searchInput");
-const notesGrid = document.getElementById("notesGrid");
+const notesContainer = document.getElementById("notesContainer");
 const emptyState = document.getElementById("emptyState");
 
 const themeStorageKey = "noteTheme";
@@ -64,30 +64,81 @@ function highlightText(text, query) {
     );
 }
 
+const uncategorizedLabel = "بدون دسته‌بندی";
+
+function createNoteCard(note, q) {
+    const card = document.createElement("a");
+    card.className = "noteCard";
+    card.href = note.path;
+    card.innerHTML = `
+        <span class="noteCardTitle">${highlightText(note.title, q)}</span>
+        <span class="noteCardPath">${escapeHtml(note.path)}</span>
+    `;
+    return card;
+}
+
+function createGrid(list, q) {
+    const grid = document.createElement("div");
+    grid.className = "notesGrid";
+    list.forEach((note) => grid.appendChild(createNoteCard(note, q)));
+    return grid;
+}
+
 function renderNotes(query = "") {
     const q = query.trim().toLowerCase();
     const filtered = q
-        ? notes.filter((n) => n.title.toLowerCase().includes(q))
+        ? notes.filter(
+              (n) =>
+                  n.title.toLowerCase().includes(q) ||
+                  (n.category || "").toLowerCase().includes(q)
+          )
         : notes;
 
-    notesGrid.innerHTML = "";
+    notesContainer.innerHTML = "";
 
     if (filtered.length === 0) {
-        emptyState.style.display = "flex";
+        emptyState.hidden = false;
         return;
     }
 
-    emptyState.style.display = "none";
+    emptyState.hidden = true;
+
+    // Group by category, keeping the manifest order; uncategorized goes last
+    const groups = new Map();
+    const uncategorized = [];
 
     filtered.forEach((note) => {
-        const card = document.createElement("a");
-        card.className = "noteCard";
-        card.href = note.path;
-        card.innerHTML = `
-            <span class="noteCardTitle">${highlightText(note.title, q)}</span>
-            <span class="noteCardPath">${escapeHtml(note.path)}</span>
+        if (!note.category) {
+            uncategorized.push(note);
+            return;
+        }
+        if (!groups.has(note.category)) groups.set(note.category, []);
+        groups.get(note.category).push(note);
+    });
+
+    // No categories at all: plain grid, no headings
+    if (groups.size === 0) {
+        notesContainer.appendChild(createGrid(uncategorized, q));
+        return;
+    }
+
+    const sections = [...groups.entries()];
+    if (uncategorized.length) sections.push([null, uncategorized]);
+
+    sections.forEach(([category, list]) => {
+        const section = document.createElement("section");
+        section.className = "categorySection";
+
+        const title = document.createElement("h2");
+        title.className = "categoryTitle";
+        title.innerHTML = `
+            <span>${category ? highlightText(category, q) : uncategorizedLabel}</span>
+            <span class="categoryCount">${list.length.toLocaleString("fa-IR")}</span>
         `;
-        notesGrid.appendChild(card);
+
+        section.appendChild(title);
+        section.appendChild(createGrid(list, q));
+        notesContainer.appendChild(section);
     });
 }
 
