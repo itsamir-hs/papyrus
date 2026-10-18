@@ -31,14 +31,14 @@
       "category": "کارآموزی"
     },
     {
-      "path": "cat_میکروب/note_Microbe2/output/index.html",
+      "path": "cat_میکروبیولوژی/note_Microbe2/output/index.html",
       "title": "میکروبیولوژی - دیوارهٔ سلولی باکتری‌ها، پپتیدوگلیکان و رنگ‌آمیزی گرم - جلسه دوم",
-      "category": "میکروب"
+      "category": "میکروبیولوژی"
     },
     {
-      "path": "cat_میکروب/note_Microbe1/output/index.html",
+      "path": "cat_میکروبیولوژی/note_Microbe1/output/index.html",
       "title": "میکروبیولوژی - شکل، اندازه و ساختار باکتری‌ها؛ از اجزای داخل‌سلولی تا سیستم‌های ترشحی-جلسه اول",
-      "category": "میکروب"
+      "category": "میکروبیولوژی"
     },
     {
       "path": "cat_هماتولوژی/note_Hemato2/output/index.html",
@@ -58,6 +58,11 @@
     {
       "path": "cat_هماتولوژی/note_Hemato3/output/index.html",
       "title": "هماتولوژی-گلبول قرمز، بررسی CBC و morphology گلبول قرمز-جلسه ۳ کلاس",
+      "category": "هماتولوژی"
+    },
+    {
+      "path": "cat_هماتولوژی/note_Hemato4/output/index.html",
+      "title": "hematopoiesis 3-جلسه چهارم",
       "category": "هماتولوژی"
     }
   ]
