@@ -57,6 +57,16 @@
       "added": "2026-10-18T20:55:26.000Z"
     },
     {
+      "id": "note_Brucellosis3",
+      "path": "cat_Immuno/note_Brucellosis3/output/index.html",
+      "title": "آز ایمونولوژی - بروسلوز (Brucellosis) - جلسه سوم",
+      "category": "Immuno",
+      "course": "آز ایمونولوژی",
+      "session": "جلسه سوم",
+      "sessionNumber": 3,
+      "added": "2026-10-22T13:41:02.864Z"
+    },
+    {
       "id": "note_ImmunoLabTheory",
       "path": "cat_Immuno/note_ImmunoLabTheory/output/index.html",
       "title": "آزمایشگاه ایمونولوژی- تئوری برهم‌کنش‌های آنتی‌ژن و آنتی‌بادی - جلسه ۱",
@@ -69,8 +79,11 @@
     {
       "id": "note_Immuno3",
       "path": "cat_Immuno/note_Immuno3/output/index.html",
-      "title": "اندام‌های لنفاوی اولیه، بلوغ لنفوسیت‌ها و تیموس",
+      "title": "ایمونولوژی - اندام‌های لنفاوی اولیه، بلوغ لنفوسیت‌ها و تیموس - جلسه سوم",
       "category": "Immuno",
+      "course": "ایمونولوژی",
+      "session": "جلسه سوم",
+      "sessionNumber": 3,
       "added": "2026-10-22T13:41:02.864Z"
     },
     {
@@ -92,13 +105,6 @@
       "session": "جلسه دوم",
       "sessionNumber": 2,
       "added": "2026-10-15T22:02:49.000Z"
-    },
-    {
-      "id": "note_Brucellosis3",
-      "path": "cat_Immuno/note_Brucellosis3/output/index.html",
-      "title": "بروسلوز (Brucellosis)",
-      "category": "Immuno",
-      "added": "2026-10-22T13:41:02.864Z"
     },
     {
       "id": "note_KarAmozi1",
