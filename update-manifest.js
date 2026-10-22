@@ -270,8 +270,12 @@ function categoryDisplayName(folderName) {
     return folderName.slice("cat_".length).replace(/_/g, " ").trim();
 }
 
+// Folders that look like a note (note_*) but are working copies, not notes.
+const ignoredNoteFolders = new Set(["note_rendererRef"]);
+
 for (const entry of fs.readdirSync(root, { withFileTypes: true })) {
     if (!entry.isDirectory()) continue;
+    if (ignoredNoteFolders.has(entry.name)) continue;
 
     if (entry.name.startsWith("note_")) {
         readNote(path.join(root, entry.name), entry.name, null);
