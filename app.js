@@ -66,14 +66,182 @@ function highlightText(text, query) {
 
 const uncategorizedLabel = "بدون دسته‌بندی";
 
+/* ---------- sorting + "new" tag ---------- */
+
+const sortStorageKey = "papyrusSortV2";
+const legacySortStorageKey = "papyrusSort"; // settings of the previous version
+const sortKeys = ["newest", "session", "title"];
+const newNoteHours = 24; // how long the "جدید" tag stays on a note
+const seenStorageKey = "papyrusSeenNotes";
+const collator = new Intl.Collator("fa", { numeric: true });
+const sortButtons = document.querySelectorAll(".sortButton[data-sort]");
+const toggleButtons = document.querySelectorAll(".sortButton[data-toggle]");
+
+let sortKey = "newest";
+let groupByCategory = false;
+let reverseSort = false;
+
+try {
+    const saved = JSON.parse(localStorage.getItem(sortStorageKey));
+    if (saved && typeof saved === "object") {
+        if (sortKeys.includes(saved.key)) sortKey = saved.key;
+        groupByCategory = saved.group === true;
+        reverseSort = saved.reverse === true;
+    } else {
+        const legacy = localStorage.getItem(legacySortStorageKey);
+        if (legacy === "category") {
+            sortKey = "session";
+            groupByCategory = true;
+        } else if (sortKeys.includes(legacy)) {
+            sortKey = legacy;
+        }
+    }
+} catch (_) {
+    /* storage unavailable */
+}
+
+// Notes the person already opened on this device (their tag is gone for good)
+function loadSeenNotes() {
+    try {
+        const saved = JSON.parse(localStorage.getItem(seenStorageKey));
+        return new Set(Array.isArray(saved) ? saved : []);
+    } catch (_) {
+        return new Set();
+    }
+}
+
+const seenNotes = loadSeenNotes();
+
+function saveSeenNotes() {
+    try {
+        localStorage.setItem(seenStorageKey, JSON.stringify([...seenNotes]));
+    } catch (_) {
+        /* storage unavailable */
+    }
+}
+
+function noteKey(note) {
+    return note.id || note.path;
+}
+
+function isNewNote(note) {
+    return (
+        note.timestamp > 0 &&
+        Date.now() - note.timestamp < newNoteHours * 60 * 60 * 1000 &&
+        !seenNotes.has(noteKey(note))
+    );
+}
+
+function markNoteSeen(note, card) {
+    if (!isNewNote(note)) return;
+    seenNotes.add(noteKey(note));
+    saveSeenNotes();
+    const badge = card.querySelector(".newBadge");
+    if (badge) badge.remove();
+}
+
+function compareByTitle(a, b) {
+    return collator.compare(a.title, b.title);
+}
+
+// Comparator for a sort key, optionally reversed.
+//   newest  - most recent first (reversed: oldest first)
+//   session - session number only (all "session 1" notes, then all "session 2" ...),
+//             ties by course, then title; notes without a session number always last
+//   title   - alphabetical
+function buildComparator(key, reverse) {
+    const dir = reverse ? -1 : 1;
+
+    if (key === "newest") {
+        return (a, b) => dir * (b.timestamp - a.timestamp || compareByTitle(a, b));
+    }
+
+    if (key === "title") {
+        return (a, b) => dir * compareByTitle(a, b);
+    }
+
+    return (a, b) => {
+        const aHasSession = a.sessionNumber != null;
+        const bHasSession = b.sessionNumber != null;
+        if (aHasSession !== bHasSession) return aHasSession ? -1 : 1;
+        if (aHasSession && a.sessionNumber !== b.sessionNumber) {
+            return dir * (a.sessionNumber - b.sessionNumber);
+        }
+
+        if (!a.course !== !b.course) return a.course ? -1 : 1;
+        const byCourse = collator.compare(a.course || "", b.course || "");
+        if (byCourse) return dir * byCourse;
+
+        return dir * compareByTitle(a, b);
+    };
+}
+
+function updateSortButtons() {
+    sortButtons.forEach((button) => {
+        button.setAttribute("aria-pressed", String(button.dataset.sort === sortKey));
+
+        // "جدیدترین" becomes "قدیمی‌ترین" when reversed
+        if (button.dataset.label) {
+            button.textContent =
+                reverseSort && button.dataset.reverseLabel
+                    ? button.dataset.reverseLabel
+                    : button.dataset.label;
+        }
+    });
+
+    toggleButtons.forEach((button) => {
+        const active = button.dataset.toggle === "group" ? groupByCategory : reverseSort;
+        button.setAttribute("aria-pressed", String(active));
+    });
+}
+
+function applySortChange() {
+    try {
+        localStorage.setItem(
+            sortStorageKey,
+            JSON.stringify({ key: sortKey, group: groupByCategory, reverse: reverseSort })
+        );
+    } catch (_) {
+        /* storage unavailable */
+    }
+    updateSortButtons();
+    renderNotes(searchInput.value);
+}
+
+sortButtons.forEach((button) => {
+    button.addEventListener("click", () => {
+        sortKey = button.dataset.sort;
+        applySortChange();
+    });
+});
+
+toggleButtons.forEach((button) => {
+    button.addEventListener("click", () => {
+        if (button.dataset.toggle === "group") groupByCategory = !groupByCategory;
+        else reverseSort = !reverseSort;
+        applySortChange();
+    });
+});
+
+updateSortButtons();
+
+/* ---------- rendering ---------- */
+
 function createNoteCard(note, q) {
     const card = document.createElement("a");
     card.className = "noteCard";
-    card.href = note.path;
+    card.href = note.path.split("/").map(encodeURIComponent).join("/");
     card.innerHTML = `
-        <span class="noteCardTitle">${highlightText(note.title, q)}</span>
-        <span class="noteCardPath">${escapeHtml(note.path)}</span>
+        <span class="noteCardHead">
+            <span class="noteCardTitle">${highlightText(note.title, q)}</span>
+            ${isNewNote(note) ? '<span class="newBadge">جدید</span>' : ""}
+        </span>
     `;
+
+    const markAsSeen = () => markNoteSeen(note, card);
+    card.addEventListener("click", markAsSeen);
+    card.addEventListener("auxclick", markAsSeen); // middle-click / new tab
+
     return card;
 }
 
@@ -103,7 +271,16 @@ function renderNotes(query = "") {
 
     emptyState.hidden = true;
 
-    // Group by category, keeping the manifest order; uncategorized goes last
+    const compare = buildComparator(sortKey, reverseSort);
+
+    // Not grouped: one flat list, categories play no role
+    if (!groupByCategory) {
+        notesContainer.appendChild(createGrid([...filtered].sort(compare), q));
+        return;
+    }
+
+    // Grouped: one section per category (alphabetical, flipped when reversed),
+    // notes inside each section follow the chosen sort. Uncategorized stays last.
     const groups = new Map();
     const uncategorized = [];
 
@@ -116,23 +293,23 @@ function renderNotes(query = "") {
         groups.get(note.category).push(note);
     });
 
-    // No categories at all: plain grid, no headings
-    if (groups.size === 0) {
-        notesContainer.appendChild(createGrid(uncategorized, q));
-        return;
+    const dir = reverseSort ? -1 : 1;
+    const sections = [...groups.entries()]
+        .sort(([a], [b]) => dir * collator.compare(a, b))
+        .map(([name, list]) => ({ name, list: list.sort(compare) }));
+
+    if (uncategorized.length) {
+        sections.push({ name: null, list: uncategorized.sort(compare) });
     }
 
-    const sections = [...groups.entries()];
-    if (uncategorized.length) sections.push([null, uncategorized]);
-
-    sections.forEach(([category, list]) => {
+    sections.forEach(({ name, list }) => {
         const section = document.createElement("section");
         section.className = "categorySection";
 
         const title = document.createElement("h2");
         title.className = "categoryTitle";
         title.innerHTML = `
-            <span>${category ? highlightText(category, q) : uncategorizedLabel}</span>
+            <span>${name ? highlightText(name, q) : uncategorizedLabel}</span>
             <span class="categoryCount">${list.length.toLocaleString("fa-IR")}</span>
         `;
 
@@ -146,11 +323,22 @@ searchInput.addEventListener("input", (e) => {
     renderNotes(e.target.value);
 });
 
-fetch("notes.json")
+fetch("notes.json", { cache: "no-cache" })
     .then((res) => res.json())
     .then((data) => {
-        notes = data.notes || [];
-        renderNotes();
+        notes = (data.notes || []).map((note) => ({
+            ...note,
+            timestamp: Date.parse(note.added) || 0,
+        }));
+
+        // Forget "seen" entries of notes that no longer exist
+        const knownKeys = new Set(notes.map(noteKey));
+        [...seenNotes].forEach((key) => {
+            if (!knownKeys.has(key)) seenNotes.delete(key);
+        });
+        saveSeenNotes();
+
+        renderNotes(searchInput.value);
     })
     .catch(() => {
         notes = [];

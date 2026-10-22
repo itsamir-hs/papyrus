@@ -1,5 +1,5 @@
 /* =========================================================
-   Note Gallery — Themes (matching note_renderer)
+   Papyrus — Themes
    ========================================================= */
 
 :root {
@@ -118,12 +118,19 @@
     box-sizing: border-box;
 }
 
+html {
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+    overflow-x: hidden;
+}
+
+/* No min-height on body: the page is exactly as tall as its content,
+   so it can never scroll when there is nothing to scroll to. The body
+   background still fills the whole screen (it propagates to the canvas). */
 body {
     font-family: Vazirmatn, Tahoma, sans-serif;
     background: var(--pageBackground);
     color: var(--textPrimary);
-    min-height: 100vh;
-    min-height: 100dvh; /* mobile: 100vh includes the hidden browser bar and causes phantom scroll */
     transition: background 0.25s ease, color 0.25s ease;
 }
 
@@ -135,12 +142,13 @@ body {
     position: sticky;
     top: 0;
     z-index: 100;
-    height: var(--headerHeight);
+    min-height: var(--headerHeight);
+    flex-wrap: wrap;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: 16px;
-    padding: 0 24px;
+    gap: 8px 16px;
+    padding: 8px clamp(12px, 4vw, 24px);
     background: var(--surfaceBackground);
     border-bottom: 1px solid var(--borderColor);
     box-shadow: var(--shadowSmall);
@@ -154,6 +162,7 @@ body {
 }
 
 .headerControls {
+    min-width: 0;
     display: flex;
     align-items: center;
     gap: 12px;
@@ -171,7 +180,9 @@ body {
     border: 1px solid var(--borderColor);
     border-radius: var(--radiusMedium);
     padding: 8px 14px;
-    min-width: 260px;
+    flex: 1 1 260px;
+    min-width: 0;
+    max-width: 320px;
     transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
@@ -202,7 +213,7 @@ body {
 }
 
 /* =========================================================
-   Theme Switcher (identical to note_renderer)
+   Theme Switcher
    ========================================================= */
 
 .themeSwitcher {
@@ -464,8 +475,8 @@ body {
 .notesContainer {
     display: flex;
     flex-direction: column;
-    gap: 36px;
-    padding: 32px 24px;
+    gap: clamp(24px, 5vw, 36px);
+    padding: clamp(20px, 4vw, 32px) clamp(16px, 3vw, 24px);
     max-width: 1200px;
     margin: 0 auto;
 }
@@ -482,7 +493,7 @@ body {
     gap: 10px;
     padding-inline-start: 12px;
     border-inline-start: 4px solid var(--accentColor);
-    font-size: 20px;
+    font-size: clamp(17px, 2.4vw, 20px);
     font-weight: 700;
     line-height: 1.5;
     color: var(--textPrimary);
@@ -503,15 +514,15 @@ body {
 
 .notesGrid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-    gap: 20px;
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 260px), 1fr));
+    gap: clamp(12px, 2.5vw, 20px);
 }
 
 .noteCard {
     display: flex;
     flex-direction: column;
     gap: 12px;
-    padding: 20px;
+    padding: clamp(14px, 3vw, 20px);
     background: var(--surfaceBackground);
     border: 1px solid var(--borderColor);
     border-radius: var(--radiusLarge);
@@ -540,19 +551,99 @@ body {
     color: var(--textPrimary);
 }
 
-.noteCardPath {
-    font-size: 13px;
-    color: var(--textMuted);
-    direction: ltr;
-    text-align: right;
-    word-break: break-all;
-}
-
 .noteCard mark {
     background: var(--accentSoft);
     color: var(--accentColor);
     border-radius: 3px;
     padding: 0 2px;
+}
+
+/* =========================================================
+   Sort Toolbar
+   ========================================================= */
+
+.toolbar {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 8px 12px;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: clamp(16px, 3vw, 24px) clamp(16px, 3vw, 24px) 0;
+}
+
+.toolbar + .notesContainer {
+    padding-top: clamp(12px, 2vw, 16px);
+}
+
+.toolbarLabel {
+    font-size: 14px;
+    color: var(--textMuted);
+}
+
+.segmented {
+    display: inline-flex;
+    flex-wrap: wrap;
+    gap: 2px;
+    padding: 3px;
+    background: var(--surfaceMuted);
+    border: 1px solid var(--borderColor);
+    border-radius: var(--radiusMedium);
+}
+
+.sortButton {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 14px;
+    border: none;
+    border-radius: var(--radiusSmall);
+    background: transparent;
+    color: var(--textSecondary);
+    font-family: inherit;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background 0.15s ease, color 0.15s ease;
+}
+
+.sortButton:hover {
+    background: var(--surfaceSoft);
+    color: var(--textPrimary);
+}
+
+.sortButton[aria-pressed="true"] {
+    background: var(--accentSoft);
+    color: var(--accentColor);
+    font-weight: 600;
+}
+
+.sortButton:focus-visible {
+    outline: 2px solid var(--accentColor);
+    outline-offset: 1px;
+}
+
+/* "New" tag on cards */
+
+.noteCardHead {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+}
+
+.noteCardHead .noteCardTitle {
+    flex: 1;
+    min-width: 0;
+}
+
+.newBadge {
+    flex-shrink: 0;
+    padding: 2px 9px;
+    border-radius: 999px;
+    background: var(--accentColor);
+    color: var(--surfaceBackground);
+    font-size: 12px;
+    font-weight: 700;
+    line-height: 1.7;
 }
 
 /* =========================================================
@@ -564,7 +655,7 @@ body {
     flex-direction: column;
     align-items: center;
     gap: 12px;
-    padding: 80px 24px;
+    padding: clamp(40px, 12vh, 80px) 24px;
     color: var(--textMuted);
 }
 
@@ -587,16 +678,15 @@ body {
 
 @media (max-width: 640px) {
     .appHeader {
-        padding: 0 16px;
-        flex-wrap: wrap;
-        height: auto;
-        padding-top: 12px;
-        padding-bottom: 12px;
+        padding: 10px 16px;
+    }
+
+    .headerControls {
+        width: 100%;
     }
 
     .searchBox {
-        min-width: 0;
-        flex: 1;
+        max-width: none;
     }
 
     .notesContainer {
