@@ -325,7 +325,7 @@ export function renderNoteHtml(markdownContent, options = {}) {
 
 async function renderNote() {
     const markdownContent = await readFile(
-        "./data/input/note.md",
+        "./data/input/edited/note.md",
         "utf8"
     );
 
