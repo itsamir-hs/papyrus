@@ -77,8 +77,9 @@ const collator = new Intl.Collator("fa", { numeric: true });
 const sortButtons = document.querySelectorAll(".sortButton[data-sort]");
 const toggleButtons = document.querySelectorAll(".sortButton[data-toggle]");
 
-let sortKey = "newest";
-let groupByCategory = false;
+// Defaults: sorted by session number, grouped by category
+let sortKey = "session";
+let groupByCategory = true;
 let reverseSort = false;
 
 try {
