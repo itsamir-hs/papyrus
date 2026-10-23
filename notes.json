@@ -2,11 +2,21 @@
   "schema": 2,
   "notes": [
     {
+<<<<<<< HEAD
       "id": "note_Hemato8",
       "path": "cat_Hematology/note_Hemato8/output/index.html",
       "title": "اریتروپوئزیس، هموگلوبین و سنتز Heme",
       "category": "Hematology",
       "added": "2026-10-23T14:51:44.169Z"
+=======
+      "id": "note_Hemato1",
+      "path": "cat_Hematology/note_Hemato1/output/index.html",
+      "title": "آزمایشگاه هماتولوژی-سرعت رسوب گلبول‌های قرمز (ESR)، شمارش رتیکولوسیت، اندازه‌گیری هموگلوبین تام و هماتوکریت-جلسه3 کلاس",
+      "category": "Hematology",
+      "session": "جلسه3 کلاس",
+      "sessionNumber": 3,
+      "added": "2026-10-23T17:31:06.960Z"
+>>>>>>> 442ec6c (added new note)
     },
     {
       "id": "note_Hemato2",
