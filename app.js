@@ -226,6 +226,58 @@ toggleButtons.forEach((button) => {
 
 updateSortButtons();
 
+/* ---------- view toggle: edited notes / unedited notes (folders ending in _NE) ---------- */
+
+const tabStorageKey = "papyrusTab";
+const tabs = ["edited", "unedited"];
+const viewToggle = document.getElementById("viewToggle");
+const viewNames = { edited: "جزوه های ادیت شده", unedited: "خروجی پاپیروس" };
+
+let activeTab = "edited";
+try {
+    const savedTab = localStorage.getItem(tabStorageKey);
+    if (tabs.includes(savedTab)) activeTab = savedTab;
+} catch (_) {
+    /* storage unavailable */
+}
+
+function noteTab(note) {
+    return note.unedited ? "unedited" : "edited";
+}
+
+// The button always shows the view that is open right now; clicking it opens the other one.
+// counts: how many notes each view holds for the current search
+function updateTabButtons(counts) {
+    if (!viewToggle) return;
+
+    const other = activeTab === "edited" ? "unedited" : "edited";
+    viewToggle.querySelector(".viewName").textContent = viewNames[activeTab];
+    viewToggle.setAttribute("aria-label", `${viewNames[activeTab]} - برای نمایش ${viewNames[other]} کلیک کنید`);
+    viewToggle.title = `نمایش ${viewNames[other]}`;
+
+    const count = viewToggle.querySelector(".tabCount");
+    if (count && counts) count.textContent = counts[activeTab].toLocaleString("fa-IR");
+}
+
+function setActiveTab(tab) {
+    if (!tabs.includes(tab)) return;
+    activeTab = tab;
+    try {
+        localStorage.setItem(tabStorageKey, tab);
+    } catch (_) {
+        /* storage unavailable */
+    }
+    renderNotes(searchInput.value);
+}
+
+if (viewToggle) {
+    viewToggle.addEventListener("click", () =>
+        setActiveTab(activeTab === "edited" ? "unedited" : "edited")
+    );
+}
+
+updateTabButtons();
+
 /* ---------- rendering ---------- */
 
 function createNoteCard(note, q) {
@@ -255,13 +307,20 @@ function createGrid(list, q) {
 
 function renderNotes(query = "") {
     const q = query.trim().toLowerCase();
-    const filtered = q
+    const matches = q
         ? notes.filter(
               (n) =>
                   n.title.toLowerCase().includes(q) ||
                   (n.category || "").toLowerCase().includes(q)
           )
         : notes;
+
+    // Each tab shows only its own notes; the tab counts follow the search
+    const counts = { edited: 0, unedited: 0 };
+    matches.forEach((n) => counts[noteTab(n)]++);
+    updateTabButtons(counts);
+
+    const filtered = matches.filter((n) => noteTab(n) === activeTab);
 
     notesContainer.innerHTML = "";
 

@@ -39,6 +39,7 @@
             پاپیروس
         </div>
 
+
         <div class="headerControls">
 
             <div class="searchBox">
@@ -126,7 +127,14 @@
 
     </header>
 
-    <div class="toolbar" role="group" aria-label="مرتب‌سازی">
+    <div class="toolbar" role="group" aria-label="نمایش و مرتب‌سازی">
+        <div class="segmented viewGroup">
+            <button class="sortButton viewToggleButton" id="viewToggle" type="button" aria-label="جزوه های ادیت شده">
+                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m16 3 4 4-4 4"/><path d="M20 7H4"/><path d="m8 21-4-4 4-4"/><path d="M4 17h16"/></svg>
+                <span class="viewName">جزوه های ادیت شده</span>
+                <span class="tabCount"></span>
+            </button>
+        </div>
         <span class="toolbarLabel">مرتب‌سازی:</span>
         <div class="segmented">
             <button class="sortButton" type="button" data-sort="newest" data-label="جدیدترین" data-reverse-label="قدیمی‌ترین" aria-pressed="false">جدیدترین</button>

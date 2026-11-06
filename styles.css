@@ -559,6 +559,40 @@ body {
 }
 
 /* =========================================================
+   View toggle (edited / unedited notes): one button, shows the current view
+   ========================================================= */
+
+.sortButton.viewToggleButton {
+    min-width: 11.5rem; /* both names fit, so the row does not jump when it flips */
+    justify-content: center;
+    background: var(--accentSoft);
+    color: var(--accentColor);
+    font-weight: 600;
+}
+
+.sortButton.viewToggleButton:hover {
+    background: var(--accentSoft);
+    color: var(--accentColor);
+}
+
+@media (max-width: 640px) {
+    /* phone: the view button gets its own full-width row above the sort buttons */
+    .viewGroup {
+        flex: 1 0 100%;
+    }
+
+    .sortButton.viewToggleButton {
+        flex: 1;
+    }
+}
+
+.tabCount {
+    font-size: 12px;
+    font-weight: 400;
+    opacity: 0.8;
+}
+
+/* =========================================================
    Sort Toolbar
    ========================================================= */
 
@@ -680,6 +714,7 @@ body {
     .appHeader {
         padding: 10px 16px;
     }
+
 
     .headerControls {
         width: 100%;
